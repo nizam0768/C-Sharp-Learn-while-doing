@@ -23,6 +23,27 @@
             {
                 Console.WriteLine(name);
             }
+
+            Console.WriteLine("----ToUpper()--------");
+
+            var upperNames = names.Select(names => names.ToUpper());
+            foreach(var name in upperNames)
+            {
+                Console.WriteLine(name);
+            }
+
+            Console.WriteLine("--------------groupBy------------");
+
+            var words = new List<string>() { "cat", "car", "bat", "ball", "rat", "run", "rackon", "beer","bull", "Horse", "Hippo", "Tiger" };
+            var group = words.GroupBy(w => w[0]);
+            foreach(var g in group)
+            {
+                Console.WriteLine($"Words starting with {g.Key}:");
+                foreach(var w in g)
+                {
+                    Console.WriteLine(w);
+                }
+            }
         }
     }
 }
