@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissingNumber", "MissingNum
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseLinkedList", "ReverseLinkedList\ReverseLinkedList.csproj", "{5A5AEA1F-8EC7-4879-ABA0-3FD4F8606CAC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseString", "ReverseString\ReverseString.csproj", "{E28FA15B-28DD-48C6-B708-F4127814FC66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondHighestSalaryUsingLinQ", "SecondHighestSalaryUsingLinQ\SecondHighestSalaryUsingLinQ.csproj", "{55E51096-8BDB-475E-98B4-B9D6B9712FBE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{5A5AEA1F-8EC7-4879-ABA0-3FD4F8606CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A5AEA1F-8EC7-4879-ABA0-3FD4F8606CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A5AEA1F-8EC7-4879-ABA0-3FD4F8606CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E28FA15B-28DD-48C6-B708-F4127814FC66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E28FA15B-28DD-48C6-B708-F4127814FC66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E28FA15B-28DD-48C6-B708-F4127814FC66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E28FA15B-28DD-48C6-B708-F4127814FC66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
