@@ -5,6 +5,10 @@ VisualStudioVersion = 17.14.36221.1 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C# Learn", "C# Learn\C# Learn.csproj", "{BE09B000-23B2-4EAC-9969-1D7F5319C580}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQ", "LINQ\LINQ.csproj", "{B2F90ED9-7CCF-4CCC-ACEF-B5CA69287E45}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MissingNumber", "MissingNumber\MissingNumber.csproj", "{CEEEB3BB-BD2A-4DC3-AFD5-AF3283CCFC49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{BE09B000-23B2-4EAC-9969-1D7F5319C580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE09B000-23B2-4EAC-9969-1D7F5319C580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE09B000-23B2-4EAC-9969-1D7F5319C580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2F90ED9-7CCF-4CCC-ACEF-B5CA69287E45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2F90ED9-7CCF-4CCC-ACEF-B5CA69287E45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2F90ED9-7CCF-4CCC-ACEF-B5CA69287E45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2F90ED9-7CCF-4CCC-ACEF-B5CA69287E45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEEEB3BB-BD2A-4DC3-AFD5-AF3283CCFC49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEEEB3BB-BD2A-4DC3-AFD5-AF3283CCFC49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEEEB3BB-BD2A-4DC3-AFD5-AF3283CCFC49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEEEB3BB-BD2A-4DC3-AFD5-AF3283CCFC49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
