@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C# Learn", "C# Learn\C# Learn.csproj", "{BE09B000-23B2-4EAC-9969-1D7F5319C580}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseString", "ReverseString\ReverseString.csproj", "{E28FA15B-28DD-48C6-B708-F4127814FC66}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondHighestSalaryUsingLinQ", "SecondHighestSalaryUsingLinQ\SecondHighestSalaryUsingLinQ.csproj", "{55E51096-8BDB-475E-98B4-B9D6B9712FBE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find_Median", "Find_Median\Find_Median.csproj", "{E78516E5-6847-43A9-9C21-61CF4944F65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55E51096-8BDB-475E-98B4-B9D6B9712FBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
