@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondHighestSalaryUsingLin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find_Median", "Find_Median\Find_Median.csproj", "{E78516E5-6847-43A9-9C21-61CF4944F65D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Container_With_Most_Water", "Container_With_Most_Water\Container_With_Most_Water.csproj", "{9F1B3F71-9FAC-4441-8D96-73078DB2607E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E78516E5-6847-43A9-9C21-61CF4944F65D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1B3F71-9FAC-4441-8D96-73078DB2607E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1B3F71-9FAC-4441-8D96-73078DB2607E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1B3F71-9FAC-4441-8D96-73078DB2607E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1B3F71-9FAC-4441-8D96-73078DB2607E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
