@@ -10,6 +10,7 @@
 9. [What is the Purpose of the sealed Modifier in C sharp?](#What-is-the-Purpose-of-the-sealed-Modifier-in-C-sharp?)
 10. [What is the Purpose of the params Keyword in C sharp?](#What-is-the-Purpose-of-the-params-Keyword-in-C-sharp)
 11. [Difference Between a Class and a Struct in C sharp?](#Difference-Between-a-Class-and-a-Struct-in-C-sharp)
+12. [What does the new keyword do?](#What-does-the-new-keyword-do)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -375,6 +376,36 @@ This keyword enhances method design by allowing variable-length input in a clean
 > Understanding these differences is critical in designing efficient and maintainable C# applications.
 
 ---
+
+### What Does the new Keyword Do in C sharp?
+
+- The `new` keyword is used to **create instances of types**, typically objects of classes or arrays.
+- It **allocates memory** on the **heap** for reference types and calls the constructor to initialize the object.
+- For value types (structs), using `new` initializes the instance by calling the default constructor, but memory allocation might happen on the stack or inlined depending on scope.
+- Without `new`, reference type variables only hold a null reference and do **not** point to an object.
+- `new` is **mandatory** when creating objects of classes in C# to properly allocate memory and initialize the object.
+- It distinguishes **object instantiation** from variable declaration.
+
+  ### Example:
+    ```csharp
+       // Declaration without 'new' - reference is null
+      Car car1;
+      
+      // Using 'new' to create an instance, allocates memory and calls constructor
+      Car car2 = new Car();
+      
+      // For structs, 'new' initializes all fields
+      Point p = new Point();
+  
+### Key Points:
+- `new` signals that a **new object** or **array** is created with allocated memory.
+- It’s essential for **reference types**, optional but recommended for **value types**.
+- Enables constructor invocation and ensures objects are properly initialized.
+
+> In summary, `new` is the operator that creates and initializes objects allowing the program to use them safely.
+
+---
+
 
 
 
