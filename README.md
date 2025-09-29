@@ -6,6 +6,10 @@
 5. [What is boxing and unboxing?](#What-is-boxing-and-unboxing)
 6. [What-are-the-three-maintypes-of-errors?](#What-are-the-three-main-types-of-errors)
 7. [How-Are-Exceptions-Handled-in-C-sharp?](#How-Are-Exceptions-Handled-in-C-sharp)
+8. [Types-of-Access-Modifiers-in-C-sharp](#Types-of-Access-Modifiers-in-C-sharp)
+9. [What is the Purpose of the sealed Modifier in C sharp?](#What-is-the-Purpose-of-the-sealed-Modifier-in-C-sharp?)
+10. [What is the Purpose of the params Keyword in C sharp?](#What-is-the-Purpose-of-the-params-Keyword-in-C-sharp)
+11. [Difference Between a Class and a Struct in C sharp?](#Difference-Between-a-Class-and-a-Struct-in-C-sharp)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -200,6 +204,186 @@ Think of **.NET** as the ecosystem (the engine, tools, and libraries) that makes
 This exception handling model promotes writing robust and maintainable C# applications by managing errors gracefully during runtime.
 
 ---
+
+### Types of Access Modifiers in C sharp
+
+- **Public**  
+  The type or member can be used by any other type from **any assembly**.  
+  Accessible everywhere.
+
+- **Internal**  
+  The type or member can be used by any type from the **same assembly** it is defined in.  
+  Not accessible outside this assembly.
+
+- **Protected**  
+  The type or member can be used only in the **same class** or in a **derived class** (no matter which assembly).
+
+- **Protected Internal**  
+  - Within the same assembly, acts like **internal** (accessible to all types).  
+  - Outside the assembly, acts like **protected** (accessible only to derived classes).
+
+- **Private Protected**  
+  - Within the same assembly, acts like **protected** (accessible only in declaring class or derived classes).  
+  - Outside the assembly, this member is **not accessible**, even to derived classes.
+
+- **Private**  
+  The type or member can be used **only within the same class** where it is declared.
+
+---
+
+**Summary Table:**
+
+| Access Modifier      | Same Class | Derived Class | Same Assembly | Other Assemblies |
+|---------------------|------------|---------------|---------------|------------------|
+| Public              | Yes        | Yes           | Yes           | Yes              |
+| Internal            | Yes        | Yes           | Yes           | No               |
+| Protected           | Yes        | Yes           | No            | No               |
+| Protected Internal  | Yes        | Yes           | Yes           | Yes (only derived classes) |
+| Private Protected   | Yes        | Yes (same assembly) | Yes       | No               |
+| Private             | Yes        | No            | No            | No               |
+
+This clear structure helps understand how accessibility varies across different contexts in C# programming.  
+
+---
+
+### What is the Purpose of the sealed Modifier in C sharp?
+
+- The `sealed` modifier in C# is used to **prevent inheritance**.
+- When a class is marked as **sealed**, it **cannot be inherited** by any other class.
+- This is useful to **lock down the class design** and prevent unintended or unauthorized extension.
+- A **sealed method** is a method that **cannot be overridden** by derived classes.
+- Sealed members enforce **strict control** over how classes and methods are extended and modified.
+
+### Why Use `sealed`?
+
+  - To **protect the behavior** and implementation of a class or method.
+  - To **ensure stability** by preventing changes through inheritance.
+  - To allow certain **runtime optimizations** by the compiler.
+  - To **signal clear intent** to other developers that the class or method is not designed for extension.
+
+     ## Example of a Sealed Class:
+       ```csharp
+        sealed class Animal
+        {
+        public void MakeSound()
+        {
+        Console.WriteLine("Generic animal sound");
+        }
+        }
+        
+        // The following will cause a compilation error:
+        // class Dog : Animal {}
+
+   ## Example of a Sealed Method:
+     ```csharp
+      class BaseClass
+      {
+      public virtual void Display()
+      {
+      Console.WriteLine("Base Display");
+      }
+      }
+      
+      class DerivedClass : BaseClass
+      {
+      public sealed override void Display()
+      {
+      Console.WriteLine("Derived Display");
+      }
+      }
+      
+      // Any further override attempts will cause a compilation error.
+
+In summary, the `sealed` modifier is a tool to control inheritance and method overriding, helping maintain code integrity and reliability.
+
+---
+
+### What is the Purpose of the params Keyword in C sharp?
+
+- The `params` keyword allows a method to accept a **variable number of arguments** of the same type.
+- It simplifies method calls by letting you pass multiple arguments without explicitly creating an array.
+- The parameter with `params` must be the **last** parameter in the method signature.
+- The parameter type must be a **single-dimensional array**.
+
+### Benefits
+- Enables flexibility when the number of arguments is unknown or varies.
+- Makes method calls cleaner and more readable.
+- Avoids multiple overloads for methods that accept different numbers of parameters.
+
+  ### Syntax Example
+    ```csharp
+      public void PrintNumbers(params int[] numbers)
+      {
+      foreach (int number in numbers)
+      {
+      Console.WriteLine(number);
+      }
+      }
+    
+     --Usage Example
+    
+      PrintNumbers(1, 2, 3, 4); // Pass multiple arguments without creating an array
+      PrintNumbers(); // Allowed, no arguments passed means an empty array
+      int[] nums = { 5, 6, 7 };
+      PrintNumbers(nums); // Can also pass an array explicitly
+
+### Key Points to Remember
+- Only one `params` keyword is allowed per method.
+- It must be the **last parameter** in the method declaration.
+- If no arguments are passed, the `params` parameter is treated as an **empty array**.
+- Useful for APIs where flexibility in the number of arguments improves usability and code clarity.
+
+This keyword enhances method design by allowing variable-length input in a clean and efficient way.
+
+---
+
+### Difference Between a Class and a Struct in C sharp?
+
+| Aspect                  | Class                                       | Struct                                      |
+|-------------------------|---------------------------------------------|---------------------------------------------|
+| **Type**                | Reference type                              | Value type                                  |
+| **Memory Allocation**   | Allocated on the **heap**                    | Allocated on the **stack**                   |
+| **Inheritance**         | Supports inheritance (can inherit and be inherited) | Does **not** support inheritance            |
+| **Default Constructor** | Has a default constructor                    | Does **not** have a parameterless default constructor |
+| **Instantiation**       | Created using the `new` keyword              | Can be instantiated **with or without** `new` |
+| **Copy Behavior**       | Copies the reference (two variables refer to the same object) | Copies the actual data (each variable has its own copy) |
+| **Nullability**         | Can be `null`                                | Cannot be `null`                            |
+| **Use Case**            | Suitable for complex objects with identity, behavior, and polymorphism | Suitable for small, simple data containers |
+| **Performance**         | Slightly slower due to heap allocation and garbage collection | Faster because of stack allocation and less overhead |
+| **Polymorphism**        | Supports polymorphism (virtual, abstract)   | Does **not** support polymorphism          |
+
+### Summary:
+- **Classes** are for more complex data and behavior, enabling inheritance and usage in larger applications.
+- **Structs** are lightweight, best for small data structures that benefit from high performance and copy-by-value semantics.
+- Choosing between them depends on usage scenarios, performance considerations, and object design.
+
+  ### Example:
+     ```csharp
+        // Class example
+        class Person
+        {
+        public string Name;
+        }
+        
+        // Struct example
+        struct Point
+        {
+        public int X;
+        public int Y;
+        }
+  
+> Understanding these differences is critical in designing efficient and maintainable C# applications.
+
+---
+
+
+
+
+
+
+
+
+
 
 
 
