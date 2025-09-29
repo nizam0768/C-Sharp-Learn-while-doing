@@ -273,24 +273,24 @@ This clear structure helps understand how accessibility varies across different 
         
         // The following will cause a compilation error:
         // class Dog : Animal {}
-
-   ## Example of a Sealed Method:
-     ```csharp
-      class BaseClass
-      {
-      public virtual void Display()
-      {
-      Console.WriteLine("Base Display");
-      }
-      }
-      
-      class DerivedClass : BaseClass
-      {
-      public sealed override void Display()
-      {
-      Console.WriteLine("Derived Display");
-      }
-      }
+       
+        --sealed method
+       
+        class BaseClass
+        {
+        public virtual void Display()
+        {
+        Console.WriteLine("Base Display");
+        }
+        }
+        
+        class DerivedClass : BaseClass
+        {
+        public sealed override void Display()
+        {
+        Console.WriteLine("Derived Display");
+        }
+        }
       
       // Any further override attempts will cause a compilation error.
 
@@ -375,6 +375,7 @@ This keyword enhances method design by allowing variable-length input in a clean
 > Understanding these differences is critical in designing efficient and maintainable C# applications.
 
 ---
+
 
 
 
