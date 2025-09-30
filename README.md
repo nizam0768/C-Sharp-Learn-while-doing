@@ -11,7 +11,7 @@
 10. [What is the Purpose of the params Keyword in C sharp?](#What-is-the-Purpose-of-the-params-Keyword-in-C-sharp)
 11. [Difference Between a Class and a Struct in C sharp?](#Difference-Between-a-Class-and-a-Struct-in-C-sharp)
 12. [What does the new keyword do?](#What-does-the-new-keyword-do)
-13. []
+13. [Concurrency-vs-Multithreading-in-C-sharp?](#Concurrency-vs-Multithreading-in-C-sharp)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -407,7 +407,7 @@ This keyword enhances method design by allowing variable-length input in a clean
 
 ---
 
-# Concurrency vs Multithreading in C#
+### Concurrency vs Multithreading in C sharp?
 
 ## 📌 Concurrency
 - **Definition**: Concurrency means handling multiple tasks at the same time **conceptually**, but not necessarily executing them simultaneously.  
@@ -449,26 +449,6 @@ This keyword enhances method design by allowing variable-length input in a clean
 | **Resource Usage** | More efficient (fewer threads, less memory) | Can be resource-heavy (thread context switching) |
 
 ---
-
-## 💻 Code Examples
-## Concurrency (I/O-bound: `async/await`)
-   ```csharp
-      // Example of concurrency
-      public async Task FetchDataAsync()
-      {
-          var task1 = GetDataFromApiAsync("url1");
-          var task2 = GetDataFromApiAsync("url2");
-      
-          await Task.WhenAll(task1, task2); 
-          // Concurrent but not necessarily multiple threads
-      }
-
----
-
-
-
-
-
 
 
 
