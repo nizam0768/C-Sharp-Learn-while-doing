@@ -11,6 +11,7 @@
 10. [What is the Purpose of the params Keyword in C sharp?](#What-is-the-Purpose-of-the-params-Keyword-in-C-sharp)
 11. [Difference Between a Class and a Struct in C sharp?](#Difference-Between-a-Class-and-a-Struct-in-C-sharp)
 12. [What does the new keyword do?](#What-does-the-new-keyword-do)
+13. []
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -406,6 +407,63 @@ This keyword enhances method design by allowing variable-length input in a clean
 
 ---
 
+# Concurrency vs Multithreading in C#
+
+## 📌 Concurrency
+- **Definition**: Concurrency means handling multiple tasks at the same time **conceptually**, but not necessarily executing them simultaneously.  
+- In C#, concurrency is often achieved with **asynchronous programming** (`async`/`await`, `Task`, `Task<T>`).  
+- It’s about **task switching efficiently** — while one task is waiting (e.g., for I/O), the CPU can work on another.  
+
+**Use Cases:**
+- Making multiple API calls without blocking the main thread.  
+- Reading from a file while also updating the UI.  
+
+👉 Concurrency = *Dealing with lots of things at once.*
+
+---
+
+## 📌 Multithreading
+- **Definition**: Multithreading means executing multiple threads in **parallel** on different CPU cores (or time-sliced on the same core).  
+- In C#, you can create and manage threads using:  
+  - `Thread` class  
+  - `ThreadPool`  
+  - `Task.Run()` (wraps thread-pool threads)  
+- It’s about **parallel execution of code**.  
+
+**Use Cases:**
+- Running CPU-intensive operations like image processing or complex calculations.  
+- Handling multiple clients in a server application simultaneously.  
+
+👉 Multithreading = *Doing lots of things at the same time (true parallelism when hardware allows).*
+
+---
+
+## 🔑 Key Differences
+
+| Aspect | Concurrency | Multithreading |
+|--------|-------------|----------------|
+| **Concept** | Ability to deal with multiple tasks logically at the same time | Actual parallel execution of code on multiple threads |
+| **Execution** | Not necessarily parallel; often task switching | Truly parallel (if multiple cores available) |
+| **C# Mechanism** | `async/await`, `Task`, I/O-bound operations | `Thread`, `ThreadPool`, `Task.Run`, `Parallel.For`, `PLINQ` |
+| **Use Case** | Best for I/O-bound operations (network calls, DB queries, file reads) | Best for CPU-bound operations (math, processing, compression) |
+| **Resource Usage** | More efficient (fewer threads, less memory) | Can be resource-heavy (thread context switching) |
+
+---
+
+## 💻 Code Examples
+## Concurrency (I/O-bound: `async/await`)
+   ```csharp
+      // Example of concurrency
+      public async Task FetchDataAsync()
+      {
+          var task1 = GetDataFromApiAsync("url1");
+          var task2 = GetDataFromApiAsync("url2");
+      
+          await Task.WhenAll(task1, task2); 
+          // Concurrent but not necessarily multiple threads
+      }
+
+---
 
 
 
