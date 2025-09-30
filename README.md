@@ -12,6 +12,7 @@
 11. [Difference Between a Class and a Struct in C sharp?](#Difference-Between-a-Class-and-a-Struct-in-C-sharp)
 12. [What does the new keyword do?](#What-does-the-new-keyword-do)
 13. [Concurrency-vs-Multithreading-in-C-sharp?](#Concurrency-vs-Multithreading-in-C-sharp)
+14. [What is the difference between a class and a struct?](#What-is-the-difference-between-a-class-and-a-struct)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -450,7 +451,78 @@ This keyword enhances method design by allowing variable-length input in a clean
 
 ---
 
+### What is the difference between a class and a struct?
 
+### Brief Summary
+1. Structs are value types, and classes are reference types.  
+2. Structs can only have constructors with parameters, and all fields must be assigned in this constructor.  
+3. Structs cannot have explicit parameterless constructors.  
+4. Structs cannot have destructors (finalizers).  
+
+---
+
+### Key Differences
+
+- **Structs are value types**  
+  - Inherit from `System.ValueType`  
+  - Passed by copy (assignment or parameter passing creates a new copy)  
+  - Sealed (cannot be inherited)  
+  - Stored on the stack  
+
+- **Classes are reference types**  
+  - Inherit from `System.Object`  
+  - Passed by reference (assignment or parameter passing passes the address)  
+  - Can support inheritance (not sealed by default)  
+  - Stored on the heap  
+
+---
+
+### Constructor and Destructor Rules
+- Structs:
+  - Can only have constructors **with parameters**.
+  - Must initialize all fields in the constructor.
+  - Cannot have explicit parameterless constructors.
+  - Cannot have destructors.
+
+- Classes:
+  - Can have parameterless constructors.
+  - Can have destructors (finalizers).
+  - Fields do not need to be initialized in the constructor.
+
+---
+
+### Why Structs Cannot Have Destructors
+Structs are value types, so every copy of a struct is independent.  
+If structs had destructors, each copy created (by method calls, assignments, etc.) would potentially call the destructor and interfere with resources (e.g., closing a database connection). This could invalidate other copies of the struct, leading to unexpected behavior.  
+Hence, **structs do not support destructors**.
+
+---
+
+### When to Use Structs
+Structs are best used when:
+- The type is **logically small** (e.g., represents a single value like `int`, `double`, `bool`).  
+- The size is **small in memory** (less than 16 bytes).  
+- The type is **immutable** (state does not change after creation).  
+- The type is **short-lived**.  
+- The type is commonly **embedded inside other objects**.  
+- You need **value type semantics** (copy on assignment).  
+- The type will **not be frequently boxed**.
+
+If these criteria are not met, you should generally prefer using a **class**.
+
+---
+
+### Common Interview Questions on Struct vs Class
+- **What is the base type for structs?**  
+  `System.ValueType`
+
+- **Can a struct be inherited?**  
+  No, all structs are sealed.
+
+- **How would you represent a point in the Cartesian coordinate system?**  
+  By creating a struct with two `readonly float` properties: `X` and `Y`.
+
+---
 
 
 
