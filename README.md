@@ -13,6 +13,7 @@
 12. [What does the new keyword do?](#What-does-the-new-keyword-do)
 13. [Concurrency-vs-Multithreading-in-C-sharp?](#Concurrency-vs-Multithreading-in-C-sharp)
 14. [What is the difference between a class and a struct?](#What-is-the-difference-between-a-class-and-a-struct)
+15. [What are Partial Classes?](#What-are-Partial-Classes)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -521,6 +522,80 @@ If these criteria are not met, you should generally prefer using a **class**.
 
 - **How would you represent a point in the Cartesian coordinate system?**  
   By creating a struct with two `readonly float` properties: `X` and `Y`.
+
+---
+
+### What are Partial Classes?
+
+### Definition
+A **partial class** in C# allows the definition of a single class to be split across two or more files within the same namespace and assembly. The `partial` keyword is used in each part. At compile time, the compiler combines all parts into a single class.
+
+---
+
+### Key Points
+
+- Declared with the `partial` keyword.
+- All parts must use the same class name and namespace.
+- All parts must have the same accessibility (e.g., `public`, `private`).
+- Used mainly to separate auto-generated code (like UI designer files) from user-written code, making large projects easier to maintain.
+- Supports the definition of fields, methods, properties, events, and nested classes.
+- Cannot be used with enums or delegates.
+- Often used in scenarios with designer-generated code (Windows Forms, ASP.NET, code generators) and when multiple developers collaborate on a class.
+
+---
+
+**File 1: Employee_BusinessLogic.cs**
+  
+    ```csharp
+        public partial class Employee
+        {
+        public void CalculatePay()
+        {
+        // Implementation of pay calculation
+        }
+        }
+---
+
+**File 2: Employee_DataAccess.cs**
+  
+    ```csharp
+    public partial class Employee
+    {
+    public void Load()
+    {
+    // Implementation of data loading
+    }
+    }
+
+At compile-time, both files are merged, resulting in a single `Employee` class with both methods.
+
+---
+
+### Why Use Partial Classes?
+
+- Keep related code separate (e.g., business logic vs. UI logic).
+- Make it easier for teams to work simultaneously on different class features.
+- Avoid modifying generated code files directly — custom code can live in its own file.
+- Reduces merge conflicts and improves code organization.
+
+---
+
+### Limitations
+
+| Limitation                                   | Description                                  |
+|----------------------------------------------|----------------------------------------------|
+| Same assembly & namespace required           | All parts must be in the same assembly/namespace. |
+| Only at compile-time                         | The splitting is only at the source code, not at runtime. |
+| Cannot define the same member in two parts   | Doing so will lead to a compile error.       |
+| Not for enums or delegates                   | Only classes, structs, and interfaces supported. |
+
+---
+
+### Typical Use Cases
+
+- Separating auto-generated code from developer-written code.
+- Large codebases where different features are managed by different teams.
+- Codebases using source generators or tools that scaffold partial classes.
 
 ---
 
