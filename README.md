@@ -14,6 +14,7 @@
 13. [Concurrency-vs-Multithreading-in-C-sharp?](#Concurrency-vs-Multithreading-in-C-sharp)
 14. [What is the difference between a class and a struct?](#What-is-the-difference-between-a-class-and-a-struct)
 15. [What are Partial Classes?](#What-are-Partial-Classes)
+16. [What is the Purpose of the static Keyword?](#What-is-the-Purpose-of-the-static-Keyword)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -599,8 +600,67 @@ At compile-time, both files are merged, resulting in a single `Employee` class w
 
 ---
 
+### What is the Purpose of the static Keyword?
 
+# The `static` Keyword in C#
 
+## 📌 Definition
+The `static` keyword in C# is used to declare **members (fields, methods, properties, constructors, classes, etc.)** that belong to the **type itself** rather than to a specific instance of the type.  
+
+- A **non-static member** belongs to an **object (instance)**.  
+- A **static member** belongs to the **class itself**.  
+
+---
+
+## 📌 Key Points About `static`
+
+1. **Static Members**
+   - Belong to the class, not objects.  
+   - Can be accessed using the **class name** directly.  
+   - Example: `Math.Sqrt(25)`.  
+
+2. **Static Classes**
+   - Declared with the `static` keyword.  
+   - Cannot be instantiated (`new` is not allowed).  
+   - Can only contain static members.  
+   - Examples: `System.Console`, `System.Math`.  
+
+3. **Static Constructors**
+   - Used to initialize static data.  
+   - Executed **only once**, automatically, before the first use of the class.  
+   - Cannot have parameters or access modifiers.  
+
+4. **Restrictions**
+   - Static classes cannot be inherited.  
+   - Static methods cannot access instance members directly (no `this` reference).  
+   - Instance methods **can** access static members.  
+
+---
+
+ ## 💻 Example
+
+    ```csharp
+    public class Calculator
+    {
+        public static double Pi = 3.14159; // static field
+    
+        public static double Square(double number) // static method
+        {
+            return number * number;
+        }
+    }
+    
+    class Program
+    {
+        static void Main()
+        {
+            // Access static members without creating an object
+            Console.WriteLine(Calculator.Pi);        // Output: 3.14159
+            Console.WriteLine(Calculator.Square(5)); // Output: 25
+        }
+    }
+
+---
 
 
 
