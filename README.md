@@ -662,10 +662,62 @@ The `static` keyword in C# is used to declare **members (fields, methods, proper
 
 ---
 
+# Static Class in C#
 
+## 📌 Definition
+A **static class** in C# is a class that is declared with the `static` keyword and **cannot be instantiated**.  
+- It can contain only **static members** (fields, methods, properties, constructors, etc.).  
+- The CLR ensures the class is loaded into memory **only once**.  
 
+---
 
+## 📌 Characteristics of a Static Class
+1. **Cannot be instantiated**  
+   - You cannot use `new` to create an object of a static class.  
+   - Example: `new Math(); // ❌ not allowed`  
 
+2. **Contains only static members**  
+   - All fields, properties, and methods inside must be `static`.  
+
+3. **No inheritance**  
+   - A static class cannot be inherited or serve as a base class.  
+
+4. **Static constructor**  
+   - Can have a static constructor that initializes data **only once** when the class is first accessed.  
+
+5. **Performance**  
+   - Slightly faster access since no object instance is created.  
+
+---
+
+  ## 💻 Example
+
+    ```csharp
+    public static class MathHelper
+    {
+        public static double Pi = 3.14159;
+    
+        public static double Square(double number)
+        {
+            return number * number;
+        }
+    
+        static MathHelper() // Static constructor
+        {
+            Console.WriteLine("Static class initialized!");
+        }
+    }
+    
+    class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine(MathHelper.Pi);        // Output: 3.14159
+            Console.WriteLine(MathHelper.Square(4)); // Output: 16
+        }
+    }
+
+---
 
 
 
