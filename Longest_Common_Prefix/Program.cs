@@ -9,7 +9,7 @@
         {
             while (!str[i].StartsWith(prefix))
             {
-                prefix = str[i].Substring(0, str.Length - 1);
+                prefix = prefix.Substring(0, prefix.Length - 1);
                 if(string.IsNullOrWhiteSpace(prefix))
                 {
                     return "";
@@ -21,7 +21,7 @@
     static void Main(string[] args)
     {
         Program program = new Program();
-        string[] str = { "flower", "flow", "flight" };
+        string[] str = { "dog", "racecar", "car" };
 
         string comm_Prefix = program.LongestCommonPrefix(str);
 
