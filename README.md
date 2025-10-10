@@ -15,6 +15,7 @@
 14. [What is the difference between a class and a struct?](#What-is-the-difference-between-a-class-and-a-struct)
 15. [What are Partial Classes?](#What-are-Partial-Classes)
 16. [What is the Purpose of the static Keyword?](#What-is-the-Purpose-of-the-static-Keyword)
+17. [What is the purpose of the ternary conditional operator?](#What-is-the-purpose-of-the-ternary-conditional-operator)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -719,5 +720,22 @@ A **static class** in C# is a class that is declared with the `static` keyword a
 
 ---
 
+### What is the purpose of the ternary conditional operator?
+
+It's a shorter syntax for the if-else clause. It evaluates a boolean expression and returns the result of one of the two expressions, depending on whether the boolean expression evaluates to true or false
+
+ var value = boolean expression ? value if true : value if false
+
+ This is why this operator is called a ternary operator- because it needs three
+ operands
+
+- "Can a ternary operator always be translated to an if-else statement?"
+ Yes. The ternary operator is just a shorter syntax for if-else statements.
+
+- "Can an if-else statement always be translated to a ternary operator?"
+ No. The ternary operator can only be used with an assignment to a variable, so
+ we can't use it, for example, to call Console.WriteLine method with some
+ argument if the condition is true, and with another, if it is false
+ 
 
 
