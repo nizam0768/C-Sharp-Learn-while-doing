@@ -740,7 +740,7 @@ It's a shorter syntax for the if-else clause. It evaluates a boolean expression 
  
 ---
 
-### What is the purpose of the null coalescing and null conditional operator ?
+### What is the purpose of the null coalescing and null conditional operator?
 
   ## Null coalescing operator and null coalescing assignment operator
     The null coalescing and null conditional operators allow us to perform some operations if a value is null, and others if it's not.
