@@ -16,6 +16,7 @@
 15. [What are Partial Classes?](#What-are-Partial-Classes)
 16. [What is the Purpose of the static Keyword?](#What-is-the-Purpose-of-the-static-Keyword)
 17. [What is the purpose of the ternary conditional operator?](#What-is-the-purpose-of-the-ternary-conditional-operator)
+18. [What is the purpose of the null coalescing and null conditional operator?](#What-is-the-purpose-of-the-null-coalescing-and-null-conditional-operator)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -737,5 +738,16 @@ It's a shorter syntax for the if-else clause. It evaluates a boolean expression 
  we can't use it, for example, to call Console.WriteLine method with some
  argument if the condition is true, and with another, if it is false
  
+---
 
+### What is the purpose of the null coalescing and null conditional operator ?
 
+  ## Null coalescing operator and null coalescing assignment operator
+    The null coalescing and null conditional operators allow us to perform some operations if a value is null, and others if it's not.
+    It is a typical example when we wanttodosomethingifthevalue is not null, and if it is null, we want to do something else - possibly use some kind of default.
+     var result = value ?? Some default is "value" is null
+
+  ## Null conditional operator:
+     It is a typical example when we wanttodosomethingifthevalue is not null, and if it is null, we want to do something else - possibly use some kind of default.
+     The null coalescing operator returns the left-hand operand if its' value is not null, otherwise, it returns the right-hand operand. The general pattern looks like this:
+      var result = value ?? Some default is "value" is null
