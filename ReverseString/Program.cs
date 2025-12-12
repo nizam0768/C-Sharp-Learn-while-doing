@@ -1,5 +1,20 @@
-﻿class Program
+﻿class Program     
 {
+     internal static void ReverseString(string s)
+{
+
+    string[] str = s.ToLower().Split(' ');
+    foreach (string str2 in str) 
+    {
+        char[] charArray = str2.ToCharArray();
+        string rev = "";
+        for (int i = charArray.Length - 1; i >= 0; i--)
+        {
+            rev += charArray[i];
+        }
+        Console.Write(rev);
+    }
+}
     static void Main(string[] args)
     {
         string input = "My Name is Khan";
@@ -27,6 +42,7 @@
         }
         string rev = string.Join(" ", revString);
         Console.WriteLine(rev);
+        ReverseString(input); //Easy way to reverse by word.
     }
     
 }
