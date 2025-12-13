@@ -5,6 +5,7 @@
         static void Main(string[] args)
         {
             List<int> numbers = new List<int>() { 1, 2, 3, 4, 5 };
+
             // Using LINQ to filter even numbers
             var evenNumbers = from n in numbers
                               where n % 2 == 0
@@ -15,6 +16,7 @@
                 Console.WriteLine(n);
             }
             Console.WriteLine("--------------------------------------");
+
 
             List<string> names = new List<string>() { "Ali", "Nizam", "Nancy", "Muskan", "Kriti", "Kathy" };
             var filteredNames = names.Where(name => name.StartsWith("K"));
@@ -43,6 +45,31 @@
                 {
                     Console.WriteLine(w);
                 }
+            }
+
+            Console.WriteLine("---------------------");
+
+            int[] scores = [97, 92, 81, 60];
+            IEnumerable<int> scoreQuery =
+                from score in scores
+                where score > 80
+                select score;
+
+            foreach(var i in scoreQuery)
+            {
+                Console.WriteLine(i + " ");
+            }
+
+            Console.WriteLine("-----------------------------");
+
+            int[] number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+            var numQuery = number
+                           .Where(num => num % 2 == 0 && num * num < 50)
+                           .Select(num => num * num);
+            foreach (var num in numQuery)
+            {
+                Console.Write($"{num} ");
             }
         }
     }
