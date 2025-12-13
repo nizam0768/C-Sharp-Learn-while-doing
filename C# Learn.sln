@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecondLargestNum", "SecondL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomProblem", "RandomProblem\RandomProblem.csproj", "{C7569B3B-2196-43D7-981F-A8945E17E644}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecordInCSharp", "RecordInCSharp\RecordInCSharp.csproj", "{DD2B9479-69BA-492B-95B5-5B9635156444}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,10 @@ Global
 		{C7569B3B-2196-43D7-981F-A8945E17E644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C7569B3B-2196-43D7-981F-A8945E17E644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7569B3B-2196-43D7-981F-A8945E17E644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD2B9479-69BA-492B-95B5-5B9635156444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD2B9479-69BA-492B-95B5-5B9635156444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD2B9479-69BA-492B-95B5-5B9635156444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD2B9479-69BA-492B-95B5-5B9635156444}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
