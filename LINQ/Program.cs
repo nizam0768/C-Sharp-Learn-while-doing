@@ -1,5 +1,10 @@
 ﻿namespace LINQ
 {
+    class Country
+    {
+        public string Name { get; set; }
+        public long Population { get; set; }
+    }
     class Program
     {
         static void Main(string[] args)
@@ -21,7 +26,7 @@
             List<string> names = new List<string>() { "Ali", "Nizam", "Nancy", "Muskan", "Kriti", "Kathy" };
             var filteredNames = names.Where(name => name.StartsWith("K"));
             Console.WriteLine("Names starting with A:");
-            foreach(var name in filteredNames)
+            foreach (var name in filteredNames)
             {
                 Console.WriteLine(name);
             }
@@ -29,19 +34,19 @@
             Console.WriteLine("----ToUpper()--------");
 
             var upperNames = names.Select(names => names.ToUpper());
-            foreach(var name in upperNames)
+            foreach (var name in upperNames)
             {
                 Console.WriteLine(name);
             }
 
             Console.WriteLine("--------------groupBy------------");
 
-            var words = new List<string>() { "cat", "car", "bat", "ball", "rat", "run", "rackon", "beer","bull", "Horse", "Hippo", "Tiger" };
+            var words = new List<string>() { "cat", "car", "bat", "ball", "rat", "run", "rackon", "beer", "bull", "Horse", "Hippo", "Tiger" };
             var group = words.GroupBy(w => w[0]);
-            foreach(var g in group)
+            foreach (var g in group)
             {
                 Console.WriteLine($"Words starting with {g.Key}:");
-                foreach(var w in g)
+                foreach (var w in g)
                 {
                     Console.WriteLine(w);
                 }
@@ -55,7 +60,7 @@
                 where score > 80
                 select score;
 
-            foreach(var i in scoreQuery)
+            foreach (var i in scoreQuery)
             {
                 Console.WriteLine(i + " ");
             }
@@ -70,6 +75,33 @@
             foreach (var num in numQuery)
             {
                 Console.Write($"{num} ");
+            }
+
+            Console.WriteLine("-----------------------------------");
+
+            List<Country> countries = new List<Country>
+           {
+               new Country { Name = "India", Population = 1400000000 },
+               new Country { Name = "Egypt", Population = 4400000000 },
+               new Country { Name = "Pakistan", Population = 400000000 },
+               new Country { Name = "Moraco", Population = 1440000000 },
+               new Country { Name = "Romania", Population = 800000000 },
+               new Country { Name = "Africa", Population = 100000000 },
+               new Country { Name = "United States", Population = 1560000000 },
+               new Country { Name = "Germeny", Population = 1987000000 },
+               new Country { Name = "Spain", Population = 1408900000 },
+               new Country { Name = "Portugul", Population = 146000000 },
+           };
+            var queryNameAndPop =
+                from country in countries
+                select new
+                {
+                    Name = country.Name,
+                    Pop = country.Population
+                };
+            foreach (var item in queryNameAndPop)
+            {
+                Console.WriteLine($"Country: {item.Name}, Population: {item.Pop}");
             }
         }
     }
