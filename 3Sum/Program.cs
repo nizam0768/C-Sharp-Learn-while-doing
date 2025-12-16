@@ -43,7 +43,7 @@
 
     static void Main(string[] args)
     {
-        int[] num = { -1, 0, 1, 2, -1, -4 };
+        int[] num = { -1, 0, 1, 2, -1, -4, 5 };
         Program program = new Program();
         program.ThreeSum(num);
     }
