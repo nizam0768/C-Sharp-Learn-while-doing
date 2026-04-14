@@ -17,6 +17,7 @@
 16. [What is the Purpose of the static Keyword?](#What-is-the-Purpose-of-the-static-Keyword)
 17. [What is the purpose of the ternary conditional operator?](#What-is-the-purpose-of-the-ternary-conditional-operator)
 18. [What is the purpose of the null coalescing and null conditional operator?](#What-is-the-purpose-of-the-null-coalescing-and-null-conditional-operator)
+19. [What is encapsulation?](#What-is-encapsulation)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -751,3 +752,9 @@ It's a shorter syntax for the if-else clause. It evaluates a boolean expression 
      It is a typical example when we wanttodosomethingifthevalue is not null, and if it is null, we want to do something else - possibly use some kind of default.
      The null coalescing operator returns the left-hand operand if its' value is not null, otherwise, it returns the right-hand operand. The general pattern looks like this:
       var result = value ?? Some default is "value" is null
+
+---
+
+### What is encapsulation?
+Encapsulation is one of the fundamental concepts of object-oriented programming. "It means bundling of data with the methods that operate on that data." The term comes from the word "capsule" because we can think of it as the data and the methods are enclosed in a capsule together.
+<img width="497" height="394" alt="image" src="https://github.com/user-attachments/assets/72107fcd-4333-46f2-a211-56393f912edb" />
