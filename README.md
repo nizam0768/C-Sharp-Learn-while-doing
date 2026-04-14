@@ -19,6 +19,7 @@
 18. [What is the purpose of the null coalescing and null conditional operator?](#What-is-the-purpose-of-the-null-coalescing-and-null-conditional-operator)
 19. [What is encapsulation?](#What-is-encapsulation)
 20. [What is LINQ?](#What-is-LINQ)
+21. [What are extension methods?](#What-are-extension-methods)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -770,5 +771,16 @@ LINQ is a set of technologies that allow simple and efficient querying over diff
 <img width="263" height="77" alt="image" src="https://github.com/user-attachments/assets/76bbb199-69c5-4c11-b1bc-5397aee1d018" />
 
 ---
+
+### What are extension methods?
+
+An extension method is a method defined outside a class, that can be called upon this class's objects as a regular member method. Extension methods allow you to add new functionality to a class without modifying it.
+
+<img width="328" height="254" alt="image" src="https://github.com/user-attachments/assets/04790cca-2b82-4a71-848b-1b8c2da75d72" />
+
+---
+
+
+
 
 
