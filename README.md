@@ -18,6 +18,7 @@
 17. [What is the purpose of the ternary conditional operator?](#What-is-the-purpose-of-the-ternary-conditional-operator)
 18. [What is the purpose of the null coalescing and null conditional operator?](#What-is-the-purpose-of-the-null-coalescing-and-null-conditional-operator)
 19. [What is encapsulation?](#What-is-encapsulation)
+20. [What is LINQ?](#What-is-LINQ)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -757,4 +758,15 @@ It's a shorter syntax for the if-else clause. It evaluates a boolean expression 
 
 ### What is encapsulation?
 Encapsulation is one of the fundamental concepts of object-oriented programming. "It means bundling of data with the methods that operate on that data." The term comes from the word "capsule" because we can think of it as the data and the methods are enclosed in a capsule together.
+
 <img width="497" height="394" alt="image" src="https://github.com/user-attachments/assets/72107fcd-4333-46f2-a211-56393f912edb" />
+---
+
+### What is LINQ?
+
+LINQ is a set of technologies that allow simple and efficient querying over different kinds of data.
+
+<img width="263" height="77" alt="image" src="https://github.com/user-attachments/assets/76bbb199-69c5-4c11-b1bc-5397aee1d018" />
+---
+
+
