@@ -20,6 +20,7 @@
 19. [What is encapsulation?](#What-is-encapsulation)
 20. [What is LINQ?](#What-is-LINQ)
 21. [What are extension methods?](#What-are-extension-methods)
+22. [What is IEnumerable?](#What-is-IEnumerable)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -780,6 +781,18 @@ An extension method is a method defined outside a class, that can be called upon
 
 ---
 
+###  What is IEnumerable?
+ IEnumerable is an interface that enables iterating over a collection with a foreach loop.
+ -  It allows looping over collections with a foreach loop.
+ -  t works with LINQ query expressions.
+ -  It allows read-only access to a collection.
+
+ ##  "What is an enumerator?"
+  An enumerator is a mechanism that allows iterating over collection elements.
+  It's a kind of a pointer that points to a "current" element in the collection.
+
+ ##  "Assuming a method returns a collection of some kind, how to best express your intent if you don't want the user to modify this collection?"
+ By returning it as IEnumerable or another readonly collection type.
 
 
 
