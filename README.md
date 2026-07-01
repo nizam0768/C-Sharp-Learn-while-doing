@@ -21,7 +21,7 @@
 20. [What is LINQ?](#What-is-LINQ)
 21. [What are extension methods?](#What-are-extension-methods)
 22. [What is IEnumerable?](#What-is-IEnumerable)
-23. [What is the difference between the equality operator (==) and Equals?](#What-is-the-difference-between-the-equality-operator-(==)-and-Equals)
+23. [What is the difference between the equality operator and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -797,7 +797,7 @@ An extension method is a method defined outside a class, that can be called upon
 
  ---
 
- ### What is the difference between the equality operator (==) and Equals?
+ ### What is the difference between the equality operator and Equals?
  In C#, the difference between == and .Equals() changes slightly because of how the language handles operator overloading.  Here is the precise C# answer:
 
  - The Core Difference
