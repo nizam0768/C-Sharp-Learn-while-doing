@@ -21,6 +21,7 @@
 20. [What is LINQ?](#What-is-LINQ)
 21. [What are extension methods?](#What-are-extension-methods)
 22. [What is IEnumerable?](#What-is-IEnumerable)
+23. [What is the difference between the equality operator (==) and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -793,6 +794,27 @@ An extension method is a method defined outside a class, that can be called upon
 
  ##  "Assuming a method returns a collection of some kind, how to best express your intent if you don't want the user to modify this collection?"
  By returning it as IEnumerable or another readonly collection type.
+
+ ---
+
+ ### What is the difference between the equality operator (==) and Equals?
+ In C#, the difference between == and .Equals() changes slightly because of how the language handles operator overloading.  Here is the precise C# answer:
+
+ - The Core Difference
+   By default, == compares reference identity, while .Equals() compares structural value. However, == can be overloaded to    compare values, whereas .Equals() is a virtual method designed for polymorphic override.
+
+ - The Details That Matter
+   - The == Operator (Reference/Static):
+     - By default for reference types, it checks if both references point to the same object in memory.
+     - Crucial C# Detail: It is a statically bound operator. The compiler decides which == to use based on the compile-    time type, not the runtime type.
+
+ - The .Equals() Method (Value/Dynamic):
+   - By default, it behaves like ==, but it is designed to be overridden in custom classes (like a Customer class) to  compare internal property values.
+   - Crucial C# Detail: It is a virtual method (or implemented via IEquatable<T>). It uses virtual method dispatch, meaning it evaluates the actual runtime type of the object.
+
+The "Must-Know" C# Exceptions
+   - Strings: In C#, the == operator is explicitly overloaded for the string class to compare the text content, making string1 == string2 behave exactly like a value comparison.
+   - Structs (Value Types): You cannot use == on a custom struct unless you explicitly overload the operator. You must use .Equals(), which uses reflection by default (though overriding it is recommended for performance).
 
 
 
