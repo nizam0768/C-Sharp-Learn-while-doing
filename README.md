@@ -21,7 +21,7 @@
 20. [What is LINQ?](#What-is-LINQ)
 21. [What are extension methods?](#What-are-extension-methods)
 22. [What is IEnumerable?](#What-is-IEnumerable)
-23. [What is the difference between the equality operator (==) and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
+23. [What is the difference between the equality operator (==) and Equals?](#What-is-the-difference-between-the-equality-operator-(==)-and-Equals)
 
 ###  What is the Common Intermediate Language CIL?
 
