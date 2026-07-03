@@ -22,6 +22,7 @@
 21. [What are extension methods?](#What-are-extension-methods)
 22. [What is IEnumerable?](#What-is-IEnumerable)
 23. [What is the difference between the equality operator and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
+24. [What is the difference between deep copy and shallow copy?](#What-is-the-difference-between-deep-copy-and-shallow-copy)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -816,6 +817,29 @@ The "Must-Know" C# Exceptions
    - Strings: In C#, the == operator is explicitly overloaded for the string class to compare the text content, making string1 == string2 behave exactly like a value comparison.
    - Structs (Value Types): You cannot use == on a custom struct unless you explicitly overload the operator. You must use .Equals(), which uses reflection by default (though overriding it is recommended for performance).
 
+---
+
+### What is the difference between deep copy and shallow copy?
+- The Core Difference
+  - A shallow copy duplicates the object, but copies the references to its nested objects. A deep copy duplicates the object and all nested objects recursively, creating a completely independent clone.
+- The Details That Matter
+  Shallow Copy (MemberwiseClone):
+   - It creates a new instance of the object.
+   - Value type fields (like int, bool) are copied directly.
+   - Reference type fields (like classes or lists) just have their memory address copied. Both the original and the copy  now point to the exact same nested object in memory.
+   - Modifying a nested object in the copy will change the original object.
+
+- Deep Copy:
+  - It creates a new instance of the object and new instances of all nested reference types.
+  - It untangles the two objects completely.
+  - Modifying any part of the deep copy will not affect the original object.
+- How to Implement It in C#
+  - For Shallow Copy: C# provides a built-in protected method called MemberwiseClone(). You typically wrap this in a custom Clone() method.
+  - For Deep Copy: There is no built-in "magic button." You must implement it yourself. The most common enterprise approaches are:
+    - Manual Cloning: Instantiating new nested objects and mapping properties one by one (best performance).
+    - Serialization: Serializing the object to JSON (using JsonSerializer) and immediately deserializing it back into a new object (easiest to write, slight performance overhead).
+
+---
 
 
 
