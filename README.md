@@ -23,7 +23,7 @@
 22. [What is IEnumerable?](#What-is-IEnumerable)
 23. [What is the difference between the equality operator and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
 24. [What is the difference between deep copy and shallow copy?](#What-is-the-difference-between-deep-copy-and-shallow-copy)
-25. [What is the Garbage Collector?](What-is-the-Garbage-Collector)
+25. [What is the Garbage Collector?](#What-is-the-Garbage-Collector)
 
 ###  What is the Common Intermediate Language CIL?
 
