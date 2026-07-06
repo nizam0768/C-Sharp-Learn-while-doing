@@ -23,6 +23,7 @@
 22. [What is IEnumerable?](#What-is-IEnumerable)
 23. [What is the difference between the equality operator and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
 24. [What is the difference between deep copy and shallow copy?](#What-is-the-difference-between-deep-copy-and-shallow-copy)
+25. [What is the Garbage Collector?](What-is-the-Garbage-Collector)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -840,6 +841,36 @@ The "Must-Know" C# Exceptions
     - Serialization: Serializing the object to JSON (using JsonSerializer) and immediately deserializing it back into a new object (easiest to write, slight performance overhead).
 
 ---
+
+### What is the Garbage Collector?
+
+- The Core Difference
+  - The Garbage Collector (GC) is .NET’s automatic memory management engine. It automatically allocates and releases memory for your application, primarily managed on the Garbage Collected Heap.
+
+- The Details That Matter
+  - How It Works (The 3 Phases):
+    - Marking: The GC traverses the application roots (static variables, local variables currently on the stack, CPU registers) to identify all live objects.
+    - Relocating: It updates the references to the objects that will be moved during compaction.
+    - Compacting: It reclaims the dead memory and shifts the surviving live objects together to eliminate memory fragmentation, updating their pointers accordingly.
+
+- The Generational Pipeline (Performance Optimization):
+The heap is divided into three generations based on the assumption that "newer objects have shorter lifetimes":
+
+  - Generation 0: Holds short-lived objects (e.g., local variables). This is the smallest and most frequently collected generation.
+  - Generation 1: Acts as a buffer between short-lived and long-lived objects.
+  - Generation 2: Holds long-lived objects (e.g., static data, singletons). Collected infrequently because it is performance-heavy.
+  - Note: Large objects (over 85,000 bytes) go directly into a special Large Object Heap (LOH), which is treated as Gen 2 but is rarely compacted due to the high CPU cost of moving large memory blocks.
+
+Key Interview Distinction: Managed vs. Unmanaged Resources
+ - Managed Resources: Memory handled entirely by the GC (e.g., C# class instances, strings, arrays). You do not need to free these manually.
+ - Unmanaged Resources: Resources outside the .NET runtime (e.g., file handles, database connections, network sockets, OS windows). The GC does not know how to clean these up.
+ - The Solution: To prevent leaks, classes holding unmanaged resources must implement the IDisposable interface and its Dispose() method, typically wrapped in a using statement.
+
+Why It Matters (The Impact)
+While the GC prevents classic memory leaks (like dangling pointers in C++), poor coding practices—such as holding onto static references indefinitely or causing frequent Gen 2 collections—can lead to "GC Pauses." This freezes the application threads and degrades system performance.
+
+--- 
+
 
 
 
