@@ -24,6 +24,7 @@
 23. [What is the difference between the equality operator and Equals?](#What-is-the-difference-between-the-equality-operator-and-Equals)
 24. [What is the difference between deep copy and shallow copy?](#What-is-the-difference-between-deep-copy-and-shallow-copy)
 25. [What is the Garbage Collector?](#What-is-the-Garbage-Collector)
+26. [What are nullable types?](#What-are-nullable-types)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -870,6 +871,38 @@ Why It Matters (The Impact)
 While the GC prevents classic memory leaks (like dangling pointers in C++), poor coding practices—such as holding onto static references indefinitely or causing frequent Gen 2 collections—can lead to "GC Pauses." This freezes the application threads and degrades system performance.
 
 --- 
+
+### What are nullable types?
+- The Core Difference
+  - By default, value types (like int or bool) cannot be null. Nullable types allow value types to represent a missing or undefined state. Additionally, modern C# introduces Nullable Reference Types to catch null-pointer exceptions at compile time.
+- The Details That Matter
+  1. Nullable Value Types (Nullable<T> or T?)
+     - Used exclusively for value types (structs, enums, primitives).
+     - Under the hood, int? is syntactic sugar for the System.Nullable<T> struct.
+     - It wraps the value and exposes two key properties:
+       - .HasValue: A bool indicating if a value exists.
+       - .Value: Retrieves the actual value (throws an InvalidOperationException if the value is null).
+     - Often used when mapping database columns that allow NULL to C# variables.
+  2. Nullable Reference Types (NRT)
+     - Reference types (like string or custom classes) are inherently allowed to be null.
+     - However, starting in C# 8, enabling the Nullable Reference Types feature changes how the compiler treats them:
+       - string x; is treated as non-nullable. The compiler will warn you if you try to assign null to it.
+       - string? x; is explicitly marked as nullable.
+     - Crucial Interview Point: This is a compiler-enforced safety feature, not a runtime change. It generates build-time warnings to prevent the dreaded NullReferenceException.
+- Operators You Must Mention
+When working with nullable types, the interviewer will expect you to know these three operators:
+  - Null-coalescing operator (??): Provides a fallback value if the left side is null.
+int result = myNullableInt ?? 0;
+  - Null-coalescing assignment (??=): Assigns a value only if the variable is currently null.
+myClass ??= new MyClass();
+  - Null-conditional operator (?.): Short-circuits and returns null if the object is null, preventing a crash.
+int? length = customer?.Name?.Length;
+
+Why It Matters (The Impact)
+Properly using nullable value types aligns your C# domain models cleanly with relational databases. Simultaneously, adopting Nullable Reference Types shifts the discovery of null bugs from production runtime crashes to compile-time warnings, significantly improving code reliability.
+
+---
+
 
 
 
