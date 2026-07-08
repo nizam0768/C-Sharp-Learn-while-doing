@@ -25,6 +25,7 @@
 24. [What is the difference between deep copy and shallow copy?](#What-is-the-difference-between-deep-copy-and-shallow-copy)
 25. [What is the Garbage Collector?](#What-is-the-Garbage-Collector)
 26. [What are nullable types?](#What-are-nullable-types)
+27. [What is a property?](#What-is-a-property)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -900,6 +901,27 @@ int? length = customer?.Name?.Length;
 
 Why It Matters (The Impact)
 Properly using nullable value types aligns your C# domain models cleanly with relational databases. Simultaneously, adopting Nullable Reference Types shifts the discovery of null bugs from production runtime crashes to compile-time warnings, significantly improving code reliability.
+
+---
+
+### What is a property?
+- The Core Definition
+  - A property is a class member that provides a flexible mechanism to read, write, or compute the value of a private field. It exposes data like a public variable, but under the hood, it uses special methods called "accessors" (get and set) to enforce encapsulation.
+
+- The Details That Matter
+  - The Backing Field: Properties act as wrappers around a private variable, known as the backing field. This allows you to validate or modify data before it enters or leaves the class.
+  - Auto-Implemented Properties: If you don't need custom logic, you use auto-properties (public int Id { get; set; }). The C# compiler automatically creates a hidden private backing field for you at compile time.
+  - Access Modifiers: You can restrict access to individual accessors. For example, public string Name { get; private set; } means anyone can read the name, but only the class itself can change it.
+
+- Key Features to Mention (Show Seniority)
+  - Expression-Bodied Members: For read-only properties that compute a value, use modern expression syntax:
+public string FullName => $"{FirstName} {LastName}";
+  - Init-Only Setters (init): Replaces set to allow a property to be assigned only during object creation (initialization), making the object immutable thereafter: public int Id { get; init; }
+- Why Not Just Use Public Fields? (The Impact)
+An interviewer will often ask, "Why not just use a public variable?" You use properties because:
+  - Validation: You can add logic to a set accessor to reject invalid data (e.g., throwing an exception if Age < 0).
+  - Data Binding: Many framework features (like WPF, EF Core, or Blazor) strictly require properties to bind data to user interfaces or databases; they cannot bind to raw fields.
+  - Future-Proofing: Changing a public field to a property later breaks binary compatibility for external applications relying on your DLL. Starting with a property ensures your API contract remains stable.
 
 ---
 
