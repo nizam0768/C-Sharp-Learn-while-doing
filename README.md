@@ -26,6 +26,7 @@
 25. [What is the Garbage Collector?](#What-is-the-Garbage-Collector)
 26. [What are nullable types?](#What-are-nullable-types)
 27. [What is a property?](#What-is-a-property)
+28. [What are generics?](#What-are-generics)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -925,7 +926,22 @@ An interviewer will often ask, "Why not just use a public variable?" You use pro
 
 ---
 
+### What are generics?
+- The Core Definition
+  - Generics allow you to write classes, interfaces, and methods with a placeholder (parameter) for the data type. This decouples your logic from the specific data type, deferring type specification until the code is actually declared and instantiated.
+- The Details That Matter
+To understand why generics are essential, look at how we handled collections before they existed (e.g., using ArrayList vs. List<T>):
+  - Type Safety: Without generics, an ArrayList stores everything as an object. You can accidentally add an int and a string to the same list, which causes runtime crashes. With generics (List<int>), the compiler enforces that only integers can be added, catching errors at compile time.
+  - Performance (No Boxing/Unboxing): When storing value types (like int or structs) as an object, the runtime must "box" it (move it from the stack to the managed heap). Retrieving it requires "unboxing". Generics eliminate this overhead completely because the CLR generates concrete, type-specific code at runtime.
+- Advanced Concept: Generic Constraints (where)
+Interviewers love to ask how you limit what types can be passed into a generic class or method. In C#, you use the where keyword:
+<img width="1088" height="180" alt="image" src="https://github.com/user-attachments/assets/23ef51fe-66b6-449b-9c67-eaa31851032a" />
+Common constraints include:
+  - where T : struct (Must be a value type)
+  - where T : class (Must be a reference type)
+  - where T : MyBaseClass (Must derive from a specific base class)
 
-
+Why It Matters (The Impact)
+Generics prevent code duplication. Instead of creating an IntegerRepository, a StringRepository, and a CustomerRepository with identical logic, you write a single Repository<T>. This keeps your codebase DRY (Don't Repeat Yourself), highly performant, and completely type-safe.
 
 
