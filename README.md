@@ -936,12 +936,12 @@ To understand why generics are essential, look at how we handled collections bef
 - Advanced Concept: Generic Constraints (where)
 Interviewers love to ask how you limit what types can be passed into a generic class or method. In C#, you use the where keyword:
 <img width="1088" height="180" alt="image" src="https://github.com/user-attachments/assets/23ef51fe-66b6-449b-9c67-eaa31851032a" />
-Common constraints include:
+
+- Common constraints include:
   - where T : struct (Must be a value type)
   - where T : class (Must be a reference type)
   - where T : MyBaseClass (Must derive from a specific base class)
-
-Why It Matters (The Impact)
+- Why It Matters (The Impact)
 Generics prevent code duplication. Instead of creating an IntegerRepository, a StringRepository, and a CustomerRepository with identical logic, you write a single Repository<T>. This keeps your codebase DRY (Don't Repeat Yourself), highly performant, and completely type-safe.
 
 
