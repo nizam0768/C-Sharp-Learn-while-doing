@@ -27,6 +27,7 @@
 26. [What are nullable types?](#What-are-nullable-types)
 27. [What is a property?](#What-is-a-property)
 28. [What are generics?](#What-are-generics)
+29. [What is the difference between the const and the readonly modifiers?](#What-is-the-difference-between-the-const-and-the-readonly-modifiers)
 
 ###  What is the Common Intermediate Language CIL?
 
@@ -943,5 +944,25 @@ Interviewers love to ask how you limit what types can be passed into a generic c
   - where T : MyBaseClass (Must derive from a specific base class)
 - Why It Matters (The Impact)
 Generics prevent code duplication. Instead of creating an IntegerRepository, a StringRepository, and a CustomerRepository with identical logic, you write a single Repository<T>. This keeps your codebase DRY (Don't Repeat Yourself), highly performant, and completely type-safe.
+
+---
+
+### What is the difference between the const and the readonly modifiers?
+const is a compile-time constant whose value is baked directly into the application's IL code, whereas readonly is a runtime constant whose value is evaluated and set when the program executes.
+<img width="532" height="312" alt="image" src="https://github.com/user-attachments/assets/94505da2-930d-42b8-babc-7df9249c9fd4" />
+- The "Version Break" Bug (Show Seniority)
+Interviewers love to ask about the architectural risk of const.
+
+Imagine you build a shared library (DLL) with a const value: public const int MaxUsers = 100;. When another team references your DLL, the compiler grabs that 100 and bakes it directly into their code.
+
+If you update your DLL later to change MaxUsers = 200 and deploy just your DLL, the other team's app will still use 100 until they recompile their code. If you use readonly instead, their app will dynamically fetch the new value from your DLL at runtime without needing a recompile.
+
+- Why It Matters (The Impact)
+  - Use const for unchangeable mathematical constants, configurations, or physics truths (e.g., const double Pi = 3.14159).
+  - Use readonly when the value depends on a runtime condition (like a database connection string from an appsettings.json file) or when dealing with complex object configurations.
+
+---
+
+
 
 
