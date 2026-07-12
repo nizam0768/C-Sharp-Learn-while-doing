@@ -989,7 +989,7 @@ Using ref and out incorrectly can bypass safety guardrails or create rigid code.
 ### What is the difference between an interface and an abstract class?
 - The Core Difference
 An abstract class defines an identity (what an object is), allowing you to share code and state across a single inheritance hierarchy. An interface defines a contract (what an object can do), allowing completely unrelated classes to implement identical behavior.
-<img width="524" height="350" alt="image" src="https://github.com/user-attachments/assets/50684ca3-446e-460b-bfec-b7c30cb3268c" />
+   <img width="524" height="350" alt="image" src="https://github.com/user-attachments/assets/50684ca3-446e-460b-bfec-b7c30cb3268c" />
 
 - Crucial C# Evolution (Show Seniority)
 Interviewers love to check if your knowledge is up-to-date with modern .NET. You must mention Default Interface Methods (DIMs) introduced in C# 8:
