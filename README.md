@@ -29,6 +29,7 @@
 28. [What are generics?](#What-are-generics)
 29. [What is the difference between the const and the readonly modifiers?](#What-is-the-difference-between-the-const-and-the-readonly-modifiers)
 30. [What is the difference between the ref and the out keywords?](#What-is-the-difference-between-the-ref-and-the-out-keywords)
+31. [What is the difference between an interface and an abstract class?](#What-is-the-difference-between-an-interface-and-an-abstract-class)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -984,6 +985,24 @@ Why It Matters (The Impact)
 Using ref and out incorrectly can bypass safety guardrails or create rigid code. Knowing out allows the common .TryParse() pattern (like int.TryParse(input, out int value)) to run completely safely without crashing your application on bad string data.
 
 ---
+
+### What is the difference between an interface and an abstract class?
+- The Core Difference
+An abstract class defines an identity (what an object is), allowing you to share code and state across a single inheritance hierarchy. An interface defines a contract (what an object can do), allowing completely unrelated classes to implement identical behavior.
+<img width="524" height="350" alt="image" src="https://github.com/user-attachments/assets/50684ca3-446e-460b-bfec-b7c30cb3268c" />
+
+- Crucial C# Evolution (Show Seniority)
+Interviewers love to check if your knowledge is up-to-date with modern .NET. You must mention Default Interface Methods (DIMs) introduced in C# 8:
+  - Historically, adding a new method to an interface would break every single class that implemented it.
+  - Now, you can provide a default concrete implementation directly inside an interface:
+    <img width="401" height="89" alt="image" src="https://github.com/user-attachments/assets/287463df-e7d7-4868-9ecb-141f8b149177" />
+  - The Interview Catch: While interfaces can now have behavior like abstract classes, they still cannot hold instance state (fields).
+When to Use Which? (The Impact)
+  - Use an Abstract Class when building a closely related family of objects where you want to provide common, ready-to-use functionality (e.g., a base Shape class with concrete properties like Color and Position, inherited by Circle and Square).
+  - Use an Interface when you want to enforce a specific capability across completely disconnected classes (e.g., ISerializable or IDisposable). A User class and a DatabaseConnection class are completely unrelated, but they can both implement IDisposable.
+
+---
+
 
 
 
