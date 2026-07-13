@@ -30,7 +30,7 @@
 29. [What is the difference between the const and the readonly modifiers?](#What-is-the-difference-between-the-const-and-the-readonly-modifiers)
 30. [What is the difference between the ref and the out keywords?](#What-is-the-difference-between-the-ref-and-the-out-keywords)
 31. [What is the difference between an interface and an abstract class?](#What-is-the-difference-between-an-interface-and-an-abstract-class)
-32. [.What is polymorphism?](#.What-is-polymorphism)
+32. [What is polymorphism?](#What-is-polymorphism)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
