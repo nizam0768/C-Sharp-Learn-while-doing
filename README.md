@@ -30,6 +30,7 @@
 29. [What is the difference between the const and the readonly modifiers?](#What-is-the-difference-between-the-const-and-the-readonly-modifiers)
 30. [What is the difference between the ref and the out keywords?](#What-is-the-difference-between-the-ref-and-the-out-keywords)
 31. [What is the difference between an interface and an abstract class?](#What-is-the-difference-between-an-interface-and-an-abstract-class)
+32. [.What is polymorphism?](#.What-is-polymorphism)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1000,6 +1001,29 @@ Interviewers love to check if your knowledge is up-to-date with modern .NET. You
 When to Use Which? (The Impact)
   - Use an Abstract Class when building a closely related family of objects where you want to provide common, ready-to-use functionality (e.g., a base Shape class with concrete properties like Color and Position, inherited by Circle and Square).
   - Use an Interface when you want to enforce a specific capability across completely disconnected classes (e.g., ISerializable or IDisposable). A User class and a DatabaseConnection class are completely unrelated, but they can both implement IDisposable.
+
+---
+
+### What is polymorphism?
+- The Core Definition
+Polymorphism—meaning "many forms"—is the ability of different classes to respond to the same method call in their own unique way. It allows you to treat derived objects as if they were instances of their parent base type or interface, making code highly extensible.
+
+The Details That Matter
+In C#, polymorphism is split into two primary categories that you must distinguish:
+
+1. Compile-Time Polymorphism (Static Binding)
+   - This is achieved using Method Overloading.
+   - It allows a single class to have multiple methods with the exact same name but different signatures (different parameter types or counts).
+   - Why it's "static": The compiler determines exactly which method overload to execute at compile time based on the arguments you pass in.
+
+2. Runtime Polymorphism (Dynamic Binding)
+   - This is achieved using Method Overriding (via inheritance or interfaces).
+   - A derived class provides a specific implementation of a method that is already defined in its base class using the virtual and override keywords.
+   - Why it's "dynamic": The .NET CLR resolves which method to execute at runtime based on the actual runtime type of the object, using virtual method dispatch.
+   <img width="529" height="257" alt="image" src="https://github.com/user-attachments/assets/b08fa59e-8257-438b-8e84-e93b7b0532c6" />
+   
+- Why It Matters (The Impact)
+Polymorphism allows you to adhere to the Open/Closed Principle (the 'O' in SOLID). You can write high-level code that processes a list of Animal objects without needing to know their specific types. If tomorrow you add a Cat or a Bird class, your existing business logic won't need a single modification to support them; they will inherently execute their own overridden behavior.
 
 ---
 
