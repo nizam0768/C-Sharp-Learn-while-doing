@@ -1028,7 +1028,7 @@ Polymorphism allows you to adhere to the Open/Closed Principle (the 'O' in SOLID
 
 ---
 
-### What's the difference between avirtual method and an abstract method?
+### Whats the difference between avirtual method and an abstract method?
 - The Core Difference
 An abstract method has no implementation and forces all non-abstract derived classes to override it. A virtual method provides a default implementation that derived classes can optionally override if they choose.
 - The Details That Matter
@@ -1043,6 +1043,7 @@ An abstract method has no implementation and forces all non-abstract derived cla
   - Derived classes can choose to completely ignore it, inherit the default behavior as-is, or use the override keyword to customize it.
   - Intent: Providing a sensible default fallback, while keeping the door open for custom overrides.
     <img width="522" height="260" alt="image" src="https://github.com/user-attachments/assets/729f1205-ea8f-4ff1-8d0e-d31e8d7f9d82" />
+    
 - Why It Matters (The Impact)
 Choosing abstract protects your system's design integrity. For example, in an e-commerce engine, ProcessPayment() on a base Order class should be abstract because there is no safe "default" way to process money; every payment type (Credit Card, PayPal) must explicitly define its own rules.
 
