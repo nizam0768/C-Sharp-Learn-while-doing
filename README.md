@@ -31,6 +31,7 @@
 30. [What is the difference between the ref and the out keywords?](#What-is-the-difference-between-the-ref-and-the-out-keywords)
 31. [What is the difference between an interface and an abstract class?](#What-is-the-difference-between-an-interface-and-an-abstract-class)
 32. [What is polymorphism?](#What-is-polymorphism)
+33. [Whats the difference between a virtual method and an abstract method?](#Whats-the-difference-between-a-virtual-method-and-an-abstract-method)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1027,7 +1028,26 @@ Polymorphism allows you to adhere to the Open/Closed Principle (the 'O' in SOLID
 
 ---
 
+### What's the difference between avirtual method and an abstract method?
+- The Core Difference
+An abstract method has no implementation and forces all non-abstract derived classes to override it. A virtual method provides a default implementation that derived classes can optionally override if they choose.
+- The Details That Matter
+  - Abstract Methods (public abstract void DoWork();):
+    - Can only be declared inside an abstract class.
+    - They do not have a body (no { }).
+    - Derived classes must use the override keyword and provide a concrete implementation, or the code will fail to compile.
+    - Intent: Establishing a strict, mandatory requirement that child classes must define for themselves.
+- Virtual Methods (public virtual void DoWork() { ... }):
+  - Can be declared in both abstract and normal (concrete) classes.
+  - They must include a default method body.
+  - Derived classes can choose to completely ignore it, inherit the default behavior as-is, or use the override keyword to customize it.
+  - Intent: Providing a sensible default fallback, while keeping the door open for custom overrides.
+    <img width="522" height="260" alt="image" src="https://github.com/user-attachments/assets/729f1205-ea8f-4ff1-8d0e-d31e8d7f9d82" />
+- Why It Matters (The Impact)
+Choosing abstract protects your system's design integrity. For example, in an e-commerce engine, ProcessPayment() on a base Order class should be abstract because there is no safe "default" way to process money; every payment type (Credit Card, PayPal) must explicitly define its own rules.
 
+On the other hand, LogOrderDetails() can be virtual because writing to a standard text file is a safe default, though a specific order type might want to override it to log to a secure cloud database instead.
 
+---
 
 
