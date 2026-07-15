@@ -1060,6 +1060,7 @@ To overload a method successfully, the compiler must be able to distinguish betw
   - The number of parameters.
   - The data types of the parameters.
   - The order of the parameter types.
+  
     <img width="359" height="179" alt="image" src="https://github.com/user-attachments/assets/bc339354-fce6-4153-b5f4-7516d9ee5c7a" />
     
 - Crucial "Gotchas" Often Asked in Interviews
