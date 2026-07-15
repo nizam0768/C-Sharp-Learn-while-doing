@@ -1060,7 +1060,7 @@ To overload a method successfully, the compiler must be able to distinguish betw
   - The number of parameters.
   - The data types of the parameters.
   - The order of the parameter types.
-    <img width="359" height="179" alt="image" src="https://github.com/user-attachments/assets/bc339354-fce6-4153-b5f4-7516d9ee5c7a" />
+ <img width="359" height="179" alt="image" src="https://github.com/user-attachments/assets/bc339354-fce6-4153-b5f4-7516d9ee5c7a" />
 - Crucial "Gotchas" Often Asked in Interviews
   - Return Types Do Not Count: You cannot overload a method simply by changing its return type. The code below will fail to compile because the parameter signatures are identical:
     <img width="349" height="62" alt="image" src="https://github.com/user-attachments/assets/8fb93629-33d8-4b7e-9615-30192871dc82" />
