@@ -33,6 +33,7 @@
 32. [What is polymorphism?](#What-is-polymorphism)
 33. [Whats the difference between a virtual method and an abstract method?](#Whats-the-difference-between-a-virtual-method-and-an-abstract-method)
 34. [What is the method overloading?](#What-is-the-method-overloading)
+35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1072,6 +1073,28 @@ To overload a method successfully, the compiler must be able to distinguish betw
 Method overloading makes your APIs highly intuitive and readable. Instead of forcing developers to call different methods like PrintInt(int x), PrintString(string s), and PrintDouble(double d), you expose a single, clean Print() method and let the compiler dynamically figure out the correct execution path at compile time.
 
 ---
+
+### What is the difference between method overriding and method hiding?
+- The Core Difference
+  Method overriding implements runtime polymorphism, executing the method version of the actual runtime object via the override keyword. Method hiding implements compile-time hiding, executing the method version based strictly on the compile-time reference type using the new keyword.
+- The Details That Matter
+  - Method Overriding (virtual + override)
+    - How it works: The derived class changes the behavior of the base class method.
+    - Resolution: The .NET runtime uses virtual method dispatch. It looks at the actual object created in memory (the runtime type) to decide which method to run.
+    - Result: Even if you cast the child object to the parent type, the child’s overridden method will still execute.
+   -Method Hiding (new)
+    - How it works: The derived class introduces a brand new method that happens to share the same name as a base class method, effectively masking it.
+    - Resolution: The compiler resolves the method call based strictly on the variable type defined at compile time.
+    - Result: If you cast the child object to the parent type, the parent's method will execute, completely bypassing the hidden child method.
+    
+  <img width="395" height="288" alt="image" src="https://github.com/user-attachments/assets/915a1266-08f1-4a9c-ae32-0341c079d7d2" />
+  
+- Why It Matters (The Impact)
+  - Using method hiding (new) unintentionally breaks polymorphic behavior and introduces fragile, confusing code contracts. It means an object will behave completely differently depending solely on how it is cast or referenced in code.
+  - As a best practice, override is heavily preferred for extending behavior, while new should be reserved for rare scenarios where a derived class needs an entirely independent method that conceptually clashes with an existing third-party base class name.
+
+---
+
 
    
 
