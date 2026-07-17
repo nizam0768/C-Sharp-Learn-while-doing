@@ -34,7 +34,7 @@
 33. [Whats the difference between a virtual method and an abstract method?](#Whats-the-difference-between-a-virtual-method-and-an-abstract-method)
 34. [What is the method overloading?](#What-is-the-method-overloading)
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
-36. [Does-C#-support-multiple-inheritance?](#Does-C#-support-multiple-inheritance)
+36. [Does C# support multiple inheritance?](#Does-C#-support-multiple-inheritance)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
