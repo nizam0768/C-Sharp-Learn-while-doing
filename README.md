@@ -34,7 +34,7 @@
 33. [Whats the difference between a virtual method and an abstract method?](#Whats-the-difference-between-a-virtual-method-and-an-abstract-method)
 34. [What is the method overloading?](#What-is-the-method-overloading)
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
-36. [Does C# support multiple inheritance?](#Does-C#-support-multiple-inheritance)
+36. [Does CSharp support multiple inheritance?](#Does-CSharp-support-multiple-inheritance)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1096,7 +1096,7 @@ Method overloading makes your APIs highly intuitive and readable. Instead of for
 
 ---
 
-### Does C# support multiple inheritance?
+### Does CSharp support multiple inheritance?
 - The Core Answer
 No, C# does not support multiple inheritance of classes. A class can only inherit from a single base class to prevent the architectural complexities of the "Diamond Problem." However, C# fully supports multiple inheritance of interfaces, allowing a class to implement an unlimited number of contracts.
 - The Details That Matter
