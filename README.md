@@ -34,6 +34,7 @@
 33. [Whats the difference between a virtual method and an abstract method?](#Whats-the-difference-between-a-virtual-method-and-an-abstract-method)
 34. [What is the method overloading?](#What-is-the-method-overloading)
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
+36. [Does-C#-support-multiple-inheritance?](#Does-C#-support-multiple-inheritance)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1095,7 +1096,26 @@ Method overloading makes your APIs highly intuitive and readable. Instead of for
 
 ---
 
+### Does C# support multiple inheritance?
+- The Core Answer
+No, C# does not support multiple inheritance of classes. A class can only inherit from a single base class to prevent the architectural complexities of the "Diamond Problem." However, C# fully supports multiple inheritance of interfaces, allowing a class to implement an unlimited number of contracts.
+- The Details That Matter
+  1. Why Class Multiple Inheritance is Banned (The Diamond Problem)
+If Class A has a method called Save(), and Class B and Class C both inherit from Class A and override Save() differently, what happens if Class D tries to inherit from both B and C? If you call D.Save(), the compiler wouldn't know which version to execute. To eliminate this ambiguity and keep the runtime clean, C# restricts class inheritance to a single parent.
+  2. The Solution: Multiple Interface Inheritance
+While a class can only have one parent class, it can implement multiple interfaces. This gives you all the benefits of polymorphic code architecture without the risks of class conflicts:
 
+  <img width="395" height="75" alt="image" src="https://github.com/user-attachments/assets/43fd9223-300c-4c76-a1ff-2cb646b31a93" />
+- Advanced C# Exception: Default Interface Methods (DIMs)
+An advanced interviewer might push back and ask: "Since C# 8 allows Default Interface Methods, doesn't that bring back the Diamond Problem?"
+
+The answer is still no, because of how C# handles interface conflicts:
+    - If a class implements two interfaces that share an identical default method definition, the compiler will fail to build and force you to explicitly resolve the ambiguity by overriding the method inside your class or specifying the target interface directly via an explicit implementation.
+
+Why It Matters (The Impact)
+By enforcing single class inheritance alongside multiple interface compliance, C# keeps your codebase predictable and simple. It forces developers away from deeply tangled, fragile class hierarchies and encourages a cleaner, highly composable architectural design.
+
+---
    
 
 
