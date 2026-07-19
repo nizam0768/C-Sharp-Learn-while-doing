@@ -35,6 +35,8 @@
 34. [What is the method overloading?](#What-is-the-method-overloading)
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
 36. [Does CSharp support multiple inheritance?](#Does-CSharp-support-multiple-inheritance)
+--------------------------------------------MID LEVEL---------------------------------------------------------------
+37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples?)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1116,6 +1118,33 @@ Why It Matters (The Impact)
 By enforcing single class inheritance alongside multiple interface compliance, C# keeps your codebase predictable and simple. It forces developers away from deeply tangled, fragile class hierarchies and encourages a cleaner, highly composable architectural design.
 
 ---
+
+### What is the difference between Tuples and ValueTuples?
+- The Core Difference
+Tuple is a reference type (allocated on the managed heap), whereas ValueTuple is a value type (allocated on the stack). Furthermore, ValueTuple provides built-in language syntax support in modern C#, allowing you to name individual fields directly.
+
+## 📊 Tuple vs ValueTuple in C#
+
+| The Details That Matter | Tuple (System.Tuple) | ValueTuple (System.ValueTuple) |
+|--------------------------|----------------------|--------------------------------|
+| **Type Category**        | Reference Type (Class) | Value Type (Struct) |
+| **Memory Allocation**    | Allocated on the Heap (creates GC pressure) | Allocated on the Stack (highly performant) |
+| **Mutability**           | Immutable. Properties are read-only (`Item1`, `Item2`) | Mutable. Internal fields can be overwritten |
+| **Named Elements**       | No. Forced to use default `Item1`, `Item2` naming | Yes. Fully supports custom variable naming |
+| **C# Syntax Support**    | Requires verbose instantiation (`Tuple.Create()`) | Clean, literal parenthesis syntax: `(int Id, string Name)` |
+
+<img width="363" height="109" alt="image" src="https://github.com/user-attachments/assets/40a91c85-c711-4477-9fa0-dec5a1e74e06" />
+
+- Advanced Nuance: Deconstruction
+ValueTuple seamlessly supports deconstruction, which allows you to unpack a multi-value method return directly into individual variables in a single line of code:
+
+<img width="420" height="34" alt="image" src="https://github.com/user-attachments/assets/351d4a62-27f9-432e-9520-0d3246ded03c" />
+
+- Why It Matters (The Impact)
+Because Tuple is a class, returning thousands of them in a loop triggers rapid heap allocations, causing the Garbage Collector to work harder and slow down your application. ValueTuple completely eliminates this performance bottleneck while drastically improving code readability. In modern enterprise C#, ValueTuple has almost entirely replaced the old Tuple class.
+
+---
+
    
 
 
