@@ -1,4 +1,4 @@
-**NET Interview: Junior Level**
+**NET Interview: Junior Level & Mid Level**
 1. [What is the Common Intermediate Language CIL?](#What-is-the-Common-Intermediate-Language-CIL)
 2. [What is the Common Language Runtime CLR?](#What-is-the-Common-Language-Runtime-CLR)
 3. [What is the difference between C sharp and Dot NET?](#What-is-the-difference-between-C-sharp-and-Dot-NET)
@@ -35,8 +35,7 @@
 34. [What is the method overloading?](#What-is-the-method-overloading)
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
 36. [Does CSharp support multiple inheritance?](#Does-CSharp-support-multiple-inheritance)
---------------------------------------------MID LEVEL---------------------------------------------------------------
-37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples?)
+37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
