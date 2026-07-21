@@ -36,6 +36,7 @@
 35. [What is the difference between method overriding and method hiding?](#What-is-the-difference-between-method-overriding-and-method-hiding)
 36. [Does CSharp support multiple inheritance?](#Does-CSharp-support-multiple-inheritance)
 37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples)
+38. [What is the difference between is and as keywords?](#What-is-the-difference-between-is-and-as-keywords)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1143,6 +1144,40 @@ ValueTuple seamlessly supports deconstruction, which allows you to unpack a mult
 Because Tuple is a class, returning thousands of them in a loop triggers rapid heap allocations, causing the Garbage Collector to work harder and slow down your application. ValueTuple completely eliminates this performance bottleneck while drastically improving code readability. In modern enterprise C#, ValueTuple has almost entirely replaced the old Tuple class.
 
 ---
+
+### What is the difference between is and as keywords?
+- The Core Difference
+The is keyword checks if an object is compatible with a given type and returns a bool (or performs pattern matching), whereas the as keyword attempts to convert an object to a specific reference/nullable type, returning null if the conversion fails.
+- The Details That Matter
+   1. The is Operator (Type Check & Pattern Matching)
+       - Returns: true or false.
+       - Behavior: It checks the runtime type without throwing a casting exception.
+       - Modern C# (Pattern Matching): Since C# 7, is can simultaneously test a type and assign it to a strongly typed variable in a single step:
+         <img width="407" height="70" alt="image" src="https://github.com/user-attachments/assets/93755054-c502-439b-922d-e1272910689f" />
+         
+  2. The as Operator (Safe Casting)
+      - Returns: The converted object if successful, or null if it fails.
+      - Behavior: Performs explicit casting safely, avoiding a runtime InvalidCastException.
+      - Restriction: Can only be used with reference types or nullable types (e.g., string, MyClass, int?). You cannot use as with non-nullable value types like a raw int.
+        <img width="326" height="159" alt="image" src="https://github.com/user-attachments/assets/c9a07469-b8f8-482b-ba39-a423ee740773" />
+
+## Difference between is & as
+
+| Feature              | `is` Keyword                          | `as` Keyword                                      |
+|----------------------|---------------------------------------|---------------------------------------------------|
+| Primary Purpose      | Type checking / Matching              | Type casting / Conversion                         |
+| Return Value         | `bool` (`true` / `false`)             | The typed object, or `null`                       |
+| Supports Value Types?| Yes (`x is int`)                      | No (`x as int` fails to compile; must use `x as int?`) |
+| Throws Exception?    | No                                    | No                                                |
+
+- Why It Matters (The Impact)
+  - Before C# 7, developers used as for performance to avoid double-casting (first checking with is and then casting with explicit (Person)obj).
+  - In modern C#, is with pattern matching (if (obj is Person p)) is the industry standard because it handles type checking, value types, and variable assignment all in one atomic, readable step, leaving fewer chances for NullReferenceException bugs compared to the old as pattern.
+
+---
+
+
+
 
    
 
