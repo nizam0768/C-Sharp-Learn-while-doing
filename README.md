@@ -1161,9 +1161,7 @@ The is keyword checks if an object is compatible with a given type and returns a
       - Behavior: Performs explicit casting safely, avoiding a runtime InvalidCastException.
       - Restriction: Can only be used with reference types or nullable types (e.g., string, MyClass, int?). You cannot use as with non-nullable value types like a raw int.
       
-        <img width="326" height="159" alt="image" src="https://github.com/user-attachments/assets/c9a07469-b8f8-482b-ba39-a423ee740773" />
-
-## Difference between is & as
+        <img width="193" height="75" alt="image" src="https://github.com/user-attachments/assets/fd770d4f-9ceb-46c7-9cbd-f5c0712ade1e" />
 
 | Feature              | `is` Keyword                          | `as` Keyword                                      |
 |----------------------|---------------------------------------|---------------------------------------------------|
