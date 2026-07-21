@@ -1153,12 +1153,14 @@ The is keyword checks if an object is compatible with a given type and returns a
        - Returns: true or false.
        - Behavior: It checks the runtime type without throwing a casting exception.
        - Modern C# (Pattern Matching): Since C# 7, is can simultaneously test a type and assign it to a strongly typed variable in a single step:
+       
          <img width="407" height="70" alt="image" src="https://github.com/user-attachments/assets/93755054-c502-439b-922d-e1272910689f" />
          
   2. The as Operator (Safe Casting)
       - Returns: The converted object if successful, or null if it fails.
       - Behavior: Performs explicit casting safely, avoiding a runtime InvalidCastException.
       - Restriction: Can only be used with reference types or nullable types (e.g., string, MyClass, int?). You cannot use as with non-nullable value types like a raw int.
+      
         <img width="326" height="159" alt="image" src="https://github.com/user-attachments/assets/c9a07469-b8f8-482b-ba39-a423ee740773" />
 
 ## Difference between is & as
