@@ -1193,6 +1193,19 @@ Appears at the top of a code file to import types from another namespace so you 
 - Namespace/Type Aliasing (using Alias)
 Creates a local nickname for a long namespace or complex generic type, preventing naming conflicts.
 
+  <img width="301" height="26" alt="image" src="https://github.com/user-attachments/assets/53ed0bc0-493a-4859-a979-59d6c188b9f9" />
+
+- Advanced C# 10 Feature: Global Usings
+In modern .NET, placing the global modifier before a directive applies that import across your entire project, eliminating the need to repeat common namespaces in every single .cs file:
+
+  <img width="174" height="42" alt="image" src="https://github.com/user-attachments/assets/7af73d2d-5f22-4bc1-a477-88bb275120f5" />
+
+- Why It Matters (The Impact)
+Failing to use using for IDisposable objects leads to memory and resource leaks—such as locked database connections or unclosed file handles—which will rapidly crash high-throughput enterprise applications in production.
+
+---
+
+
   
 
 
