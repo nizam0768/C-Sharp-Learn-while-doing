@@ -1182,11 +1182,23 @@ The is keyword checks if an object is compatible with a given type and returns a
 This is the most critical use case asked about in interviews. It guarantees deterministic cleanup of unmanaged resources (like file streams, database connections, or network sockets).
   - How it works: Any object wrapped in a using statement or declaration must implement the IDisposable interface.
   - Under the Hood: The compiler translates a using block into a try...finally block, automatically invoking .Dispose() inside the finally block—even if an unhandled exception crashes your code.
-    # Modern C# 8+ `using` Declaration
-    ```csharp
-  // Modern C# 8+ "using declaration" syntax
-  using var stream = new FileStream("data.txt", FileMode.Open);
-  // File is automatically disposed when 'stream' goes out of scope here.
+
+    <img width="397" height="55" alt="image" src="https://github.com/user-attachments/assets/40e8b811-f3d7-4962-9fa1-104630cb1341" />
+
+- Importing Namespaces (using Directive)
+Appears at the top of a code file to import types from another namespace so you don't have to write fully qualified class names everywhere.
+
+    <img width="435" height="30" alt="image" src="https://github.com/user-attachments/assets/4c3e0ad6-dd0e-4c02-9e58-451123d1d710" />
+
+- Namespace/Type Aliasing (using Alias)
+Creates a local nickname for a long namespace or complex generic type, preventing naming conflicts.
+
+  
+
+
+
+    
+
 
 
 
