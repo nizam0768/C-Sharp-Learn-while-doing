@@ -37,6 +37,7 @@
 36. [Does CSharp support multiple inheritance?](#Does-CSharp-support-multiple-inheritance)
 37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples)
 38. [What is the difference between is and as keywords?](#What-is-the-difference-between-is-and-as-keywords)
+39. [What is the use of the using keyword?](#What-is-the-use-of-the-using-keyword)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1175,6 +1176,18 @@ The is keyword checks if an object is compatible with a given type and returns a
   - In modern C#, is with pattern matching (if (obj is Person p)) is the industry standard because it handles type checking, value types, and variable assignment all in one atomic, readable step, leaving fewer chances for NullReferenceException bugs compared to the old as pattern.
 
 ---
+
+### What is the use of the using keyword?
+- Resource Management (using Statement / Declaration)
+This is the most critical use case asked about in interviews. It guarantees deterministic cleanup of unmanaged resources (like file streams, database connections, or network sockets).
+  - How it works: Any object wrapped in a using statement or declaration must implement the IDisposable interface.
+  - Under the Hood: The compiler translates a using block into a try...finally block, automatically invoking .Dispose() inside the finally block—even if an unhandled exception crashes your code.
+    # Modern C# 8+ `using` Declaration
+    ```csharp
+  // Modern C# 8+ "using declaration" syntax
+  using var stream = new FileStream("data.txt", FileMode.Open);
+  // File is automatically disposed when 'stream' goes out of scope here.
+
 
 
 
