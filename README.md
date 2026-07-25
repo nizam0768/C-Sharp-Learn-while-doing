@@ -38,6 +38,7 @@
 37. [What is the difference between Tuples and ValueTuples?](#What-is-the-difference-between-Tuples-and-ValueTuples)
 38. [What is the difference between is and as keywords?](#What-is-the-difference-between-is-and-as-keywords)
 39. [What is the use of the using keyword?](#What-is-the-use-of-the-using-keyword)
+40. [What is the purpose of the dynamic keyword?](#What-is-the-purpose-of-the-dynamic-keyword)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1205,6 +1206,36 @@ Failing to use using for IDisposable objects leads to memory and resource leaksâ
 
 ---
 
+### What is the purpose of the dynamic keyword?
+- The Core Concept
+When a variable is declared as dynamic, the compiler turns off static type checking for that object. Instead of verifying at build time whether a property or method exists, the runtime .NET DLR (Dynamic Language Runtime) evaluates the object and resolves member calls on the fly when the code actually executes.
+- Key Details That Matter
+  - Errors Move to Runtime: If you call a method that doesn't exist on a dynamic object, the code will compile cleanly without errors, but it will throw a RuntimeBinderException at runtime when executed.
+  - Under the Hood: A dynamic variable is internally represented as an object decorated with special attributes for the compiler. The runtime uses the Dynamic Language Runtime (DLR) to bind methods and properties dynamically.
+  - Implicit Conversion: You can assign any type to a dynamic variable, and you can assign a dynamic variable back to a strongly typed variable without explicit casting (as long as the underlying object matches at runtime).
+
+    <img width="410" height="77" alt="image" src="https://github.com/user-attachments/assets/8e72f8bc-2e1a-4efd-990c-a9fa0ba40a40" />
+
+- Common Real-World Use Cases
+  - COM Interop: Interacting with legacy Office APIs (like Excel or Word automation) where static type signatures can be nested and verbose.
+  - Consuming Untyped Data: Working with dynamic JSON objects, XML documents, or REST API payloads where the payload schema isn't known ahead of time or changes dynamically.
+  - Reflective Code Simplicity: Writing flexible code that avoids heavy reliance on standard C# Reflection syntax (Type.GetMethod().Invoke()).
+# `var` vs `object` vs `dynamic` in C#
+
+| Feature             | `var`                                   | `object`                                | `dynamic`                                   |
+|---------------------|------------------------------------------|------------------------------------------|---------------------------------------------|
+| **Type Checking**   | Compile-time (Strongly typed)            | Compile-time (Strongly typed)            | Runtime (Bypasses compile checks)           |
+| **Type Determination** | Inferred by compiler from initial assignment | Stored as base `System.Object`           | Resolved dynamically at runtime             |
+| **Explicit Casting**| Not needed                              | Required to access child members         | Not needed (Resolved on the fly)            |
+
+- Why It Matters (The Impact)
+  - While dynamic offers immense flexibility, it comes with two major drawbacks:
+  - Performance Cost: Because the DLR must dynamically look up members at runtime, it is noticeably slower than static C# code.
+  - Loss of Developer Safety: You lose IDE features like IntelliSense, auto-completion, and static refactoring tools.
+
+As a general rule, stick to strongly typed C# (var, generic classes, or concrete types) and reserve dynamic exclusively for dynamic data payloads, interop calls, or edge-case runtime scenarios.
+
+---
 
   
 
