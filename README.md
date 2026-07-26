@@ -39,6 +39,7 @@
 38. [What is the difference between is and as keywords?](#What-is-the-difference-between-is-and-as-keywords)
 39. [What is the use of the using keyword?](#What-is-the-use-of-the-using-keyword)
 40. [What is the purpose of the dynamic keyword?](#What-is-the-purpose-of-the-dynamic-keyword)
+41. [What are expression bodied members?](#What-are-expression-bodied-members)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1236,6 +1237,43 @@ When a variable is declared as dynamic, the compiler turns off static type check
 As a general rule, stick to strongly typed C# (var, generic classes, or concrete types) and reserve dynamic exclusively for dynamic data payloads, interop calls, or edge-case runtime scenarios.
 
 ---
+
+### What are expression bodied members?
+- The Core Concept
+If a method or member consists of only a single statement or expression, you can replace the traditional code block ({ return ...; }) with the => operator.
+
+It doesn't change how your code executes at runtime—it simply reduces boilerplate code and improves readability.
+
+Key Details That Matter
+Expression-bodied syntax can be applied across several different class members:
+
+1. Methods
+
+   <img width="283" height="125" alt="image" src="https://github.com/user-attachments/assets/12ecbf67-6fcb-41c2-8c8f-614f5d0b4a5a" />
+
+2. Read-Only Properties
+
+  <img width="314" height="122" alt="image" src="https://github.com/user-attachments/assets/d454db95-c335-4758-b6b3-18a5941cfc02" />
+
+3. Property Getters and Setters (C# 7+)
+
+  <img width="278" height="114" alt="image" src="https://github.com/user-attachments/assets/59e2dad9-a75e-4783-b035-09ec0c1c6b46" />
+
+4. Constructors & Destructors (C# 7+)
+
+  <img width="432" height="107" alt="image" src="https://github.com/user-attachments/assets/576f1910-4c79-402d-a227-e903e9570be0" />
+
+Crucial Limitations
+  - Single Expression Only: You cannot use expression-bodied syntax if the method contains multiple statements, complex loops (foreach), or multi-step logic.
+  - No return Keyword: The return keyword is implicit when returning a value. Adding an explicit return keyword will cause a compilation error.
+
+Why It Matters (The Impact)
+Expression-bodied members keep your C# domain models and APIs concise and highly readable. By eliminating unnecessary curly braces and return statements for simple one-line operations, your code stays clean and focused on actual business logic.
+
+---
+
+
+
 
   
 
