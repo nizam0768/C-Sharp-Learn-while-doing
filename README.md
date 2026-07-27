@@ -40,6 +40,7 @@
 39. [What is the use of the using keyword?](#What-is-the-use-of-the-using-keyword)
 40. [What is the purpose of the dynamic keyword?](#What-is-the-purpose-of-the-dynamic-keyword)
 41. [What are expression bodied members?](#What-are-expression-bodied-members)
+42. [What-are-Funcs-and-lambda-expressions?](#What-are-Funcs-and-lambda-expressions?)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1269,6 +1270,43 @@ Crucial Limitations
 
 Why It Matters (The Impact)
 Expression-bodied members keep your C# domain models and APIs concise and highly readable. By eliminating unnecessary curly braces and return statements for simple one-line operations, your code stays clean and focused on actual business logic.
+
+---
+
+### What are Funcs and lambda expressions?
+1. What is a Lambda Expression?
+A lambda expression is an anonymous function—a lightweight snippet of code—that you can pass around as data without having to formally define a full class method.
+  - Syntax: (input-parameters) => expression-or-statement-block
+  - The => Operator: Read as "goes to". It separates the input parameters on the left from the logic/return value on the right.
+  
+  <img width="369" height="47" alt="image" src="https://github.com/user-attachments/assets/5d8d90c4-f1bd-46fe-95e5-8c292af66b81" />
+
+2. What is Func?
+Func is a built-in generic delegate provided by .NET.
+
+Before generic delegates existed, you had to manually declare custom delegate types whenever you wanted to pass a method as a parameter. Func solves this by giving you a pre-packaged delegate that returns a value.
+  - Type Arguments: Func<T1, ..., T2, TResult>
+  - Rule: The last type parameter in the angle brackets is always the return type. All preceding parameters are the input parameters.
+  
+    <img width="351" height="71" alt="image" src="https://github.com/user-attachments/assets/4eea0f1d-bf75-491e-9cd4-b53af7bb650d" />
+
+How They Work Together
+Lambda expressions provide the code implementation, while Func provides the type definition so C# knows how to store and execute that lambda.
+
+  <img width="369" height="61" alt="image" src="https://github.com/user-attachments/assets/31ceffd9-ab38-46a9-b4ed-6cf2f8c1110d" />
+
+# Func vs Action in C#
+
+| Feature            | Func<...>                               | Action<...>                                      |
+|--------------------|-------------------------------------------|--------------------------------------------------|
+| Returns a Value?   | Yes (mandatory)                           | No (returns void)                                |
+| Example Signature  | `Func<int, bool>`                         | `Action<string>`                                 |
+| Usage              | Takes an int, returns a bool              | Takes a string, returns void (e.g., logging)     |
+
+Why They Matter (The Impact)
+Func and lambda expressions are the core driving engine behind LINQ (Language Integrated Query).
+
+When you write numbers.Where(x => x > 5), the .Where() method accepts a Func<int, bool> predicate. Without lambdas and Func, querying data collections in C# would require writing verbose custom methods and loops for every simple filter.
 
 ---
 
