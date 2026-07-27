@@ -40,7 +40,7 @@
 39. [What is the use of the using keyword?](#What-is-the-use-of-the-using-keyword)
 40. [What is the purpose of the dynamic keyword?](#What-is-the-purpose-of-the-dynamic-keyword)
 41. [What are expression bodied members?](#What-are-expression-bodied-members)
-42. [What are Funcs and lambda expressions?](#What-are-Funcs-and-lambda-expressions?)
+42. [What are Funcs and lambda expressions?](#What-are-Funcs-and-lambda-expressions)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
