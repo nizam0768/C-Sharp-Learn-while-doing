@@ -41,6 +41,7 @@
 40. [What is the purpose of the dynamic keyword?](#What-is-the-purpose-of-the-dynamic-keyword)
 41. [What are expression bodied members?](#What-are-expression-bodied-members)
 42. [What are Funcs and lambda expressions?](#What-are-Funcs-and-lambda-expressions)
+43. [What are delegates?](#What-are-delegates)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1310,7 +1311,25 @@ When you write numbers.Where(x => x > 5), the .Where() method accepts a Func<int
 
 ---
 
+### What are delegates?
+- The Core Concept
+A delegate is a type-safe function pointer. It is a reference type that holds a reference to a method with a specific signature and return type, allowing you to pass methods as parameters to other methods or store them in variables.
+- Key Details That Matter
+  - Type Safety: Unlike traditional C/C++ function pointers, C# delegates are completely object-oriented, type-safe, and secure. If a method signature does not match the delegate's signature (parameter types or return type), the C# compiler will raise an error at compile time.
+  - Multicast Capability: Delegates can point to more than one method at a time. By using the += operator, you can chain multiple methods onto a single delegate. When the delegate is invoked, every chained method executes sequentially.
+  - The Foundation for Events: The standard C# event system is built on top of delegates. Events act as encapsulated wrappers around delegates to prevent outside code from clearing or replacing the event handler subscribers.
+  
+    <img width="432" height="206" alt="image" src="https://github.com/user-attachments/assets/405a3e02-3749-483c-9905-c28dfa9ab24e" />
 
+- Standard Built-In Delegates (Modern C# Practice)
+In modern C# development, you rarely need to declare custom delegate types using the delegate keyword. Microsoft provided built-in generic delegates to streamline code:
+  - Func<...>: For methods that return a value.
+  - Action<...>: For methods that return void.
+  - Predicate<T>: For methods that take a type T and return a bool (commonly used for searching/filtering).
+- Why They Matter (The Impact)
+Delegates enable decoupling in software architecture. They allow a high-level component to trigger execution logic without needing to know which specific class or concrete method is fulfilling the request. This is the cornerstone of asynchronous callback handlers, LINQ execution pipelines, and Event-Driven Architecture in .NET.
+
+---
 
 
   
