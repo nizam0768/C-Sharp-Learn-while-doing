@@ -42,6 +42,7 @@
 41. [What are expression bodied members?](#What-are-expression-bodied-members)
 42. [What are Funcs and lambda expressions?](#What-are-Funcs-and-lambda-expressions)
 43. [What are delegates?](#What-are-delegates)
+44. [How does the Garbage Collector decide which objects can be removed from memory?](#How-does-the-Garbage-Collector-decide-which-objects-can-be-removed-from-memory)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1330,6 +1331,45 @@ In modern C# development, you rarely need to declare custom delegate types using
 Delegates enable decoupling in software architecture. They allow a high-level component to trigger execution logic without needing to know which specific class or concrete method is fulfilling the request. This is the cornerstone of asynchronous callback handlers, LINQ execution pipelines, and Event-Driven Architecture in .NET.
 
 ---
+
+### How does the Garbage Collector decide which objects can be removed from memory?
+- The Core Answer
+The .NET Garbage Collector (GC) does not count references to objects. Instead, it determines if an object is safe to remove by checking its reachability. If an object on the heap cannot be reached through a chain of references starting from an active "GC Root," it is marked as garbage and collected.
+
+<img width="824" height="320" alt="image" src="https://github.com/user-attachments/assets/946e3012-03dc-46ce-b1aa-52d55a668b10" />
+
+Step 1: Scanning GC Roots (Reachability)
+When a garbage collection triggers, the engine builds a graph of all live objects by starting from GC Roots.
+
+A GC Root is a reference held by the runtime that is guaranteed to be alive. Common roots include:
+  - Local Variables & Parameters: Variables currently executing inside stack frames.
+  - Static Variables: Global references associated with loaded classes.
+  - CPU Registers: Objects referenced in active CPU instructions.
+  - GC Handles / Interop Pointers: Handles pointing to COM or unmanaged memory.
+  - Finalization Queue: Objects with custom destructors/finalizers waiting to run.
+Step 2: The Collection Phases
+Once the GC pauses application threads (or runs concurrently), it performs three main operations:
+  - Marking Phase: The GC walks the object graph starting from the roots. Every object it encounters is marked as "Live." Any object not reached during this traversal is "Unreachable" (Garbage).
+  - Relocating Phase: The GC updates all valid reference pointers so they point to where live objects will be moved.
+  - Compacting Phase: The GC reclaims memory occupied by unreachable objects and shifts remaining live objects together to contiguous memory spaces, eliminating memory fragmentation.
+Step 3: Generational Optimization
+To avoid scanning every single object in memory every time (which would slow down your app), .NET splits heap memory into 3 Generations:
+
+| Generation | Purpose | Lifespan Expectation |
+|-----------|---------|-----------------------|
+| **Gen 0** | Newly allocated objects (e.g., local variables, short strings). | Collected frequently (milliseconds). Most objects die here. |
+| **Gen 1** | Buffer zone for short‑lived objects that survived a Gen 0 collection. | Serves as a ramp‑up area before promotion. |
+| **Gen 2** | Long‑lived objects (e.g., static data, singletons, application caches). | Collected infrequently because full Gen 2 scans are expensive. |
+
+Note on Large Objects: Objects over 85,000 bytes go directly to the Large Object Heap (LOH). The LOH is treated as part of Gen 2, but historically it was rarely compacted due to the high CPU cost of moving large memory blocks.
+
+Why It Matters (The Impact)
+Understanding reachability explains why circular references aren't a problem in .NET. If Object A references Object B, and Object B references Object A, but neither is reachable from a GC Root, the GC instantly collects both.
+
+However, forgetting to unhook Event Subscriptions or holding onto Static References keeps objects accidentally tied to a GC Root, leading to managed memory leaks.
+
+---
+
 
 
   
