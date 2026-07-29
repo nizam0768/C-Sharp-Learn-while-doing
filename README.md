@@ -1341,18 +1341,18 @@ The .NET Garbage Collector (GC) does not count references to objects. Instead, i
 - Scanning GC Roots (Reachability)
 When a garbage collection triggers, the engine builds a graph of all live objects by starting from GC Roots.
 
-A GC Root is a reference held by the runtime that is guaranteed to be alive. Common roots include:
-  - Local Variables & Parameters: Variables currently executing inside stack frames.
-  - Static Variables: Global references associated with loaded classes.
-  - CPU Registers: Objects referenced in active CPU instructions.
-  - GC Handles / Interop Pointers: Handles pointing to COM or unmanaged memory.
-  - Finalization Queue: Objects with custom destructors/finalizers waiting to run.
-- The Collection Phases
-Once the GC pauses application threads (or runs concurrently), it performs three main operations:
-  - Marking Phase: The GC walks the object graph starting from the roots. Every object it encounters is marked as "Live." Any object not reached during this traversal is "Unreachable" (Garbage).
-  - Relocating Phase: The GC updates all valid reference pointers so they point to where live objects will be moved.
-  - Compacting Phase: The GC reclaims memory occupied by unreachable objects and shifts remaining live objects together to contiguous memory spaces, eliminating memory fragmentation.
-- Generational Optimization
+  - A GC Root is a reference held by the runtime that is guaranteed to be alive. Common roots include:
+    - Local Variables & Parameters: Variables currently executing inside stack frames.
+    - Static Variables: Global references associated with loaded classes.
+    - CPU Registers: Objects referenced in active CPU instructions.
+    - GC Handles / Interop Pointers: Handles pointing to COM or unmanaged memory.
+    - Finalization Queue: Objects with custom destructors/finalizers waiting to run.
+  - The Collection Phases
+    Once the GC pauses application threads (or runs concurrently), it performs three main operations:
+    - Marking Phase: The GC walks the object graph starting from the roots. Every object it encounters is marked as "Live." Any object not reached during this traversal is "Unreachable" (Garbage).
+    - Relocating Phase: The GC updates all valid reference pointers so they point to where live objects will be moved.
+    - Compacting Phase: The GC reclaims memory occupied by unreachable objects and shifts remaining live objects together to contiguous memory spaces, eliminating memory fragmentation.
+  - Generational Optimization
 To avoid scanning every single object in memory every time (which would slow down your app), .NET splits heap memory into 3 Generations:
 
 | Generation | Purpose | Lifespan Expectation |
