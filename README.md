@@ -44,6 +44,7 @@
 43. [What are delegates?](#What-are-delegates)
 44. [How does the Garbage Collector decide which objects can be removed from memory?](#How-does-the-Garbage-Collector-decide-which-objects-can-be-removed-from-memory)
 45. [What are generations?](#What-are-generations)
+46. [What is the difference between Dispose and Finalize methods](#What-is-the-difference-between-Dispose-and-Finalize-methods)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1413,7 +1414,41 @@ Understanding generations helps developers avoid performance degradation—for e
 
 ---
 
-    
+### What is the difference between Dispose and Finalize methods?
+- The Core Difference
+Dispose is called deterministically by your code when you are done using a resource, giving you immediate memory cleanup. Finalize is called indeterministic ally by the Garbage Collector before an object is destroyed, serving as an automatic fallback.
+
+The Details That Matter
+- The Dispose Method
+  - Interface: Part of the IDisposable interface (public void Dispose()).
+  - Execution: Deterministic. You explicitly control when it runs, usually via a using statement or block.
+  - Scope: Can clean up both managed and unmanaged resources.
+  - Performance: High performance because resources are released immediately, preventing system resource starvation.
+- The Finalize Method
+  - Syntax: Written as a class destructor (~MyClass()). The compiler translates this into an overridden Finalize() method.
+  - Execution: Indeterministic. It is called solely by the .NET Garbage Collector on a dedicated finalizer thread. You cannot predict exactly when it will execute.
+  - Scope: Should only clean up unmanaged resources.
+  - Performance: Heavy performance cost. Objects with finalizers require at least two full GC cycles to be cleared from memory because they must sit on a finalization queue first.
+
+## Dispose vs Finalize
+
+| Feature            | Dispose()                                           | Finalize()                                           |
+|--------------------|------------------------------------------------------|-------------------------------------------------------|
+| Triggered By       | Developer code (explicitly or via `using`)          | Garbage Collector (automatically)                    |
+| Timing             | Immediate / Deterministic                            | Delayed / Indeterministic                            |
+| Interface / Syntax | Implements `IDisposable`                             | Declared using destructor syntax `~ClassName()`      |
+| Access Modifier    | public                                               | protected (called internally by runtime)             |
+| Use Case           | Primary mechanism for resource cleanup               | Emergency backup for raw unmanaged handles           |
+
+The Standard Dispose Pattern
+In production C#, if you implement a finalizer as a fallback, you use GC.SuppressFinalize() inside Dispose(). This tells the GC that the object has already been cleaned up, skipping the costly finalization queue:
+
+<img width="285" height="344" alt="image" src="https://github.com/user-attachments/assets/e66fc930-e784-40f0-af1f-0bbccdfd3bae" />
+
+Why It Matters (The Impact)
+Relying on Finalize for resource management locks database connection pools and holds open file handles for unpredictable durations while waiting for a GC cycle. Always expose Dispose() (via IDisposable) and consume it with a using statement to release resources as soon as they are no longer needed.
+
+---
 
 
 
