@@ -45,6 +45,7 @@
 44. [How does the Garbage Collector decide which objects can be removed from memory?](#How-does-the-Garbage-Collector-decide-which-objects-can-be-removed-from-memory)
 45. [What are generations?](#What-are-generations)
 46. [What is the difference between Dispose and Finalize methods](#What-is-the-difference-between-Dispose-and-Finalize-methods)
+47. [What are default implementations in interfaces?](#What-are-default-implementations-in-interfaces)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1447,6 +1448,36 @@ In production C#, if you implement a finalizer as a fallback, you use GC.Suppres
 
 Why It Matters (The Impact)
 Relying on Finalize for resource management locks database connection pools and holds open file handles for unpredictable durations while waiting for a GC cycle. Always expose Dispose() (via IDisposable) and consume it with a using statement to release resources as soon as they are no longer needed.
+
+---
+
+### What are default implementations in interfaces?
+- The Core Concept
+Before C# 8, interfaces could only contain method declarations (contracts). If you added a new method to an existing interface, every single class implementing that interface would fail to compile until updated. Default implementations allow interfaces to provide a fallback body for a method.
+- Syntax Example
+
+  <img width="438" height="155" alt="image" src="https://github.com/user-attachments/assets/5cc8ab16-724c-48b5-82bc-d87ed322f3ae" />
+  
+- How Concrete Classes Interact with DIMs
+A class can choose to use the default implementation or override it with custom logic:
+
+  <img width="388" height="113" alt="image" src="https://github.com/user-attachments/assets/15e21585-4492-4b54-85b2-fe3b5ac31ae2" />
+  
+- The Interview "Gotcha" (Access via Interface Reference)
+Default interface methods are not inherited by the concrete class's class interface. You can only invoke a default implementation through a variable typed as the interface itself:
+
+  <img width="423" height="85" alt="image" src="https://github.com/user-attachments/assets/dc5b2964-40cd-4c55-802a-4efbb7f5448d" />
+
+- Key Capabilities Introduced in Modern C#
+To support default implementations, interfaces in modern C# can also contain:
+  - private or protected Methods: Used to break down complex logic inside interface default implementations without exposing those helper methods publicly.
+  - static Members & Fields: To store state or utility helper functions for default methods.
+- Primary Use Cases
+  - API Evolution / Retrofitting: Adding new capabilities to widely used public libraries without causing breaking changes across existing consumer codebases.
+  - Traits & Mixins: Combining re-usable behavior across completely unrelated class hierarchies without relying on multi-class inheritance.
+
+Why It Matters (The Impact)
+Default Interface Methods bridge the gap between abstract classes and interfaces. While abstract classes allow state and single-class inheritance, default interface methods allow flexible, composable behavioral contracts across unrelated classes without forcing major codebase refactoring when contracts evolve.
 
 ---
 
