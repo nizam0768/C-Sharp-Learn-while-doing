@@ -46,6 +46,7 @@
 45. [What are generations?](#What-are-generations)
 46. [What is the difference between Dispose and Finalize methods](#What-is-the-difference-between-Dispose-and-Finalize-methods)
 47. [What are default implementations in interfaces?](#What-are-default-implementations-in-interfaces)
+48. [What is deconstruction?](#What-is-deconstruction)
 ###  What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1480,6 +1481,32 @@ Why It Matters (The Impact)
 Default Interface Methods bridge the gap between abstract classes and interfaces. While abstract classes allow state and single-class inheritance, default interface methods allow flexible, composable behavioral contracts across unrelated classes without forcing major codebase refactoring when contracts evolve.
 
 ---
+
+### What is deconstruction?
+- The Core Concept
+If construction builds a complex data structure by bundling values together (new Object(...)), deconstruction does the exact opposite: it unpacks a composite object back into separate local variables.
+- Deconstructing Tuples (ValueTuple)
+This is the most common form of deconstruction in modern C# (introduced alongside ValueTuple in C# 7).
+
+<img width="316" height="224" alt="image" src="https://github.com/user-attachments/assets/d2bf78e5-faa3-4689-8bcd-43d9835dbd89" />
+
+- Custom Deconstruction (Deconstruct Method)
+You aren't limited to tuples. You can enable deconstruction for any custom class or struct by defining a public method named Deconstruct with out parameters.
+
+When C# sees a deconstruction pattern applied to your object, the compiler automatically calls this method:
+
+<img width="389" height="329" alt="image" src="https://github.com/user-attachments/assets/532a507f-6ba4-4f39-a968-5f864b25a1ee" />
+
+- Automatic Deconstruction in record Types
+In C# 9+, positional record types automatically generate a built-in Deconstruct method behind the scenes—no manual boilerplate required:
+
+<img width="404" height="84" alt="image" src="https://github.com/user-attachments/assets/80c372df-66e9-4b28-a9ff-e91e68ffc0b5" />
+
+Why It Matters (The Impact)
+Deconstruction dramatically cleans up method returns and data parsing. Instead of forcing you to create intermediate objects or access properties sequentially (var x = point.X; var y = point.Y;), deconstruction creates concise, readable assignments that pair seamlessly with Pattern Matching and LINQ.
+
+---
+
 
 
 
