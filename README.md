@@ -47,7 +47,8 @@
 46. [What is the difference between Dispose and Finalize methods](#What-is-the-difference-between-Dispose-and-Finalize-methods)
 47. [What are default implementations in interfaces?](#What-are-default-implementations-in-interfaces)
 48. [What is deconstruction?](#What-is-deconstruction)
-###  What is the Common Intermediate Language CIL?
+49. [Why is catch Exception almost always a bad idea and when it is not?](#Why-is-catch-Exception-almost-always-a-bad-idea-and-when-it-is-not)
+### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
 
@@ -1507,9 +1508,36 @@ Deconstruction dramatically cleans up method returns and data parsing. Instead o
 
 ---
 
+### Why is catch Exception almost always a bad idea and when it is not?
+- The Core Concept
+Before C# 8, interfaces could only contain method declarations (contracts). If you added a new method to an existing interface, every single class implementing that interface would fail to compile until updated. Default implementations allow interfaces to provide a fallback body for a method.
+- Syntax Example
 
+<img width="409" height="152" alt="image" src="https://github.com/user-attachments/assets/9e553792-ba97-4e06-8e9c-fa3ecd5a82d3" />
 
+- How Concrete Classes Interact with DIMs
+A class can choose to use the default implementation or override it with custom logic:
 
+<img width="373" height="96" alt="image" src="https://github.com/user-attachments/assets/d4417f9a-9e31-4b4c-8dcf-735bd340ab7a" />
+
+- The Interview "Gotcha" (Access via Interface Reference)
+Default interface methods are not inherited by the concrete class's class interface. You can only invoke a default implementation through a variable typed as the interface itself:
+
+<img width="410" height="83" alt="image" src="https://github.com/user-attachments/assets/c6fa3f94-db57-4f21-9bad-ea3bb8b585ab" />
+
+Key Capabilities Introduced in Modern C#
+To support default implementations, interfaces in modern C# can also contain:
+  - private or protected Methods: Used to break down complex logic inside interface default implementations without exposing those helper methods publicly.
+  - static Members & Fields: To store state or utility helper functions for default methods.
+
+Primary Use Cases
+  - API Evolution / Retrofitting: Adding new capabilities to widely used public libraries without causing breaking changes across existing consumer codebases.
+  - Traits & Mixins: Combining re-usable behavior across completely unrelated class hierarchies without relying on multi-class inheritance.
+
+Why It Matters (The Impact)
+Default Interface Methods bridge the gap between abstract classes and interfaces. While abstract classes allow state and single-class inheritance, default interface methods allow flexible, composable behavioral contracts across unrelated classes without forcing major codebase refactoring when contracts evolve.
+
+---
 
 
 
