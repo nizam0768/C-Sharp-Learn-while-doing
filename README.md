@@ -48,6 +48,7 @@
 47. [What are default implementations in interfaces?](#What-are-default-implementations-in-interfaces)
 48. [What is deconstruction?](#What-is-deconstruction)
 49. [Why is catch Exception almost always a bad idea and when it is not?](#Why-is-catch-Exception-almost-always-a-bad-idea-and-when-it-is-not)
+50. [What is the difference between throw and throw ex?](#What-is-the-difference-between-throw-and-throw-ex)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1538,6 +1539,42 @@ Why It Matters (The Impact)
 Default Interface Methods bridge the gap between abstract classes and interfaces. While abstract classes allow state and single-class inheritance, default interface methods allow flexible, composable behavioral contracts across unrelated classes without forcing major codebase refactoring when contracts evolve.
 
 ---
+
+### What is the difference between throw and throw ex?
+The Core Difference
+throw re-throws the current exception while preserving the complete original stack trace. throw ex re-throws the exception but resets the stack trace to the line where throw ex was written, wiping out the history of where the exception originated.
+
+Code Comparison
+Consider a method deep inside your application that fails:
+
+<img width="357" height="230" alt="image" src="https://github.com/user-attachments/assets/e9c23686-eaaf-434b-a604-fb2b4cc749be" />
+
+Option A: throw; (Correct)
+The stack trace stays intact. When you inspect the exception log, it points directly to the actual culprit:
+
+<img width="335" height="51" alt="image" src="https://github.com/user-attachments/assets/d1161cc4-9683-4563-a1bc-dbeb2874d9cd" />
+
+Option B: throw ex; (Anti-Pattern)
+The runtime re-initializes the stack trace starting from the catch block. Line 15 vanishes from the stack trace entirely:
+
+<img width="351" height="40" alt="image" src="https://github.com/user-attachments/assets/6ad1535f-784c-43e3-b340-e103454e8d1c" />
+
+The Problem: You lose all visibility into CalculateRates() line 15. In a complex method with dozens of nested function calls, throw ex forces you to guess where the error actually started.
+
+What If You Want to Wrap the Exception?
+If you need to catch a low-level exception and throw a higher-level or domain-specific exception, pass the original exception as the InnerException. This preserves the original stack trace inside the nested exception:
+
+<img width="400" height="78" alt="image" src="https://github.com/user-attachments/assets/188e99e7-fe8e-45a6-b8e5-49169153c39d" />
+
+| Metric        | throw;        | throw ex; |
+|---------------|---------------|-----------|
+| Stack Trace   | Preserved. Keeps the original line numbers where the error started. | Overwritten. Resets the stack trace to the catch block. |
+| Debugging     | Easy. Points directly to the root cause. | Difficult. Hides the internal method calls. |
+| Best Practice | ✅ Standard Practice for re-throwing. | ❌ Anti-Pattern (Should almost never be used). |
+
+---
+
+
 
 
 
