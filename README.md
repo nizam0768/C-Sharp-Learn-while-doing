@@ -49,6 +49,7 @@
 48. [What is deconstruction?](#What-is-deconstruction)
 49. [Why is catch Exception almost always a bad idea and when it is not?](#Why-is-catch-Exception-almost-always-a-bad-idea-and-when-it-is-not)
 50. [What is the difference between throw and throw ex?](#What-is-the-difference-between-throw-and-throw-ex)
+51. [What is the difference betweent ypeof and GetType?](#What-is-the-difference-betweent-ypeof-and-GetType)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1571,6 +1572,37 @@ If you need to catch a low-level exception and throw a higher-level or domain-sp
 | Stack Trace   | Preserved. Keeps the original line numbers where the error started. | Overwritten. Resets the stack trace to the catch block. |
 | Debugging     | Easy. Points directly to the root cause. | Difficult. Hides the internal method calls. |
 | Best Practice | ✅ Standard Practice for re-throwing. | ❌ Anti-Pattern (Should almost never be used). |
+
+---
+
+### What is the difference betweent ypeof and GetType?
+- The Core Difference
+typeof is a compile-time operator that takes a type name as an argument. GetType() is a runtime method called on an object instance to retrieve its actual runtime type.
+The Details That Matter
+  - The typeof Operator
+    - Execution: Evaluated at compile time.
+    - Input: Takes a type name or keyword directly (e.g., typeof(int), typeof(string), typeof(MyClass)).
+    - Instance Required? No. It does not require an object instance to exist in memory.
+    - Polymorphism: Does not account for inheritance at runtime—it strictly returns the metadata for the exact type name passed to it.
+  - The GetType() Method
+    - Execution: Evaluated at runtime.
+    - Input: Called on an existing object instance (myObject.GetType()). It is a public virtual method inherited from System.Object.
+    - Instance Required? Yes. Calling GetType() on a null variable will throw a NullReferenceException.
+    - Polymorphism: Returns the exact runtime type of the object in memory, even if the variable is cast or stored as a base class or interface reference.
+
+      <img width="403" height="178" alt="image" src="https://github.com/user-attachments/assets/e5563abb-c66d-4f6c-bd7b-c1bb7f6c2d91" />
+
+
+| Feature              | `typeof`                                   | `GetType()`                                      |
+|----------------------|---------------------------------------------|--------------------------------------------------|
+| **Type of Construct**| Operator                                   | Method (inherited from `System.Object`)          |
+| **When Evaluated**   | Compile-time                               | Runtime                                          |
+| **Target Input**     | Type Name / Class Identifier (e.g., `typeof(string)`) | Object Instance Variable (e.g., `str.GetType()`) |
+| **Handles Nulls?**   | Yes (Does not depend on instances).         | No (Throws `NullReferenceException` if variable is null). |
+| **Polymorphism Aware?** | No (Returns type of the specified name). | Yes (Returns true underlying runtime type).      |
+
+Advanced Edge Case: Generics (typeof(T))
+Inside a generic class or method, typeof(T) is often preferred when checking generic constraints. However, if T is an interface or base class, typeof(T) will return the generic type parameter T, whereas param.GetType() will return the actual concrete class passed into the method at runtime.
 
 ---
 
