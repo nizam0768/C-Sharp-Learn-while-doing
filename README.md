@@ -49,7 +49,7 @@
 48. [What is deconstruction?](#What-is-deconstruction)
 49. [Why is catch Exception almost always a bad idea and when it is not?](#Why-is-catch-Exception-almost-always-a-bad-idea-and-when-it-is-not)
 50. [What is the difference between throw and throw ex?](#What-is-the-difference-between-throw-and-throw-ex)
-51. [What is the difference betweent ypeof and GetType?](#What-is-the-difference-betweent-ypeof-and-GetType)
+51. [What is the difference betweent typeof and GetType?](#What-is-the-difference-betweent-typeof-and-GetType)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1575,7 +1575,7 @@ If you need to catch a low-level exception and throw a higher-level or domain-sp
 
 ---
 
-### What is the difference betweent ypeof and GetType?
+### What is the difference betweent typeof and GetType?
 - The Core Difference
 typeof is a compile-time operator that takes a type name as an argument. GetType() is a runtime method called on an object instance to retrieve its actual runtime type.
 The Details That Matter
