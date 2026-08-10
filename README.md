@@ -50,6 +50,7 @@
 49. [Why is catch Exception almost always a bad idea and when it is not?](#Why-is-catch-Exception-almost-always-a-bad-idea-and-when-it-is-not)
 50. [What is the difference between throw and throw ex?](#What-is-the-difference-between-throw-and-throw-ex)
 51. [What is the difference betweent typeof and GetType?](#What-is-the-difference-betweent-typeof-and-GetType)
+52. [What is reflection?](#What-is-reflection)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1606,9 +1607,39 @@ Inside a generic class or method, typeof(T) is often preferred when checking gen
 
 ---
 
+### What is reflection?
 
+Reflection is the capability of a .NET application to inspect its own metadata (assemblies, types, methods, properties, and attributes) at runtime. It allows code to dynamically instantiate objects, invoke methods, and read properties without knowing them at compile time.
+- Key Classes in System.Reflection
+  - Reflection centers around System.Type and the System.Reflection namespace:
+  - Assembly: Represents a compiled .dll or .exe file. Allows you to load assemblies dynamically into memory.
+  - Type: Represents class, interface, or struct declarations.
+  - MethodInfo / PropertyInfo / FieldInfo: Represents individual members inside a type, allowing you to invoke methods or read/write values dynamically.
+  - Attribute: Allows reading custom metadata attributes (e.g., [JsonPropertyName], [Authorize]).
 
+A Sharp Code Example
+Here is how Reflection dynamically loads a type, creates an instance, and invokes a method on the fly:
 
+<img width="371" height="283" alt="image" src="https://github.com/user-attachments/assets/33b2389b-e427-4da4-8643-5c3b0bf9da95" />
+
+- Real-World Use Cases
+You interact with Reflection every day through common .NET frameworks:
+  - Dependency Injection (DI) Containers: ASP.NET Core scans your application assemblies at startup to discover controllers, services, and interfaces.
+  - Serializers (JSON/XML): Libraries like System.Text.Json or Newtonsoft.Json inspect object properties dynamically to map them to JSON payloads.
+  - ORMs (Entity Framework Core): EF Core reads your entity classes and custom attributes to generate database tables and map query results.
+  - Testing Frameworks (xUnit / NUnit): Test runners scan assemblies for classes marked with [Test] or [Fact] attributes and execute them dynamically.
+  - Plugin Architectures: Loading external third-party .dll files at runtime via Assembly.LoadFrom() to extend application features without recompiling.
+
+- The 3 Big Drawbacks of Reflection
+While Reflection is powerful, senior C# developers use it sparingly due to three major trade-offs:
+  - Performance Overhead: Reflection bypasses CPU instructions and JIT compiler optimizations. Calling a method via Reflection is significantly slower than direct execution.
+  - Loss of Compile-Time Safety: Because method names and properties are passed as strings (GetMethod("Multiply")), typos won't cause build errors. Instead, your application will crash at runtime with a NullReferenceException.
+  - AOT & Trimming Compatibility: Modern .NET applications using Native AOT (Ahead-Of-Time compilation) or IL Trimming will strip out unreferenced code during builds. Reflection can fail in AOT environments because the compiler cannot tell that a dynamically called method is actually needed.
+
+Modern Alternative: Source Generators
+To solve Reflection's performance and AOT limitations, modern C# relies heavily on C# Source Generators. Instead of looking up metadata at runtime using Reflection, Source Generators inspect code at compile time and generate high-performance C# code automatically (used extensively in System.Text.Json and EF Core in .NET 8+).
+
+---
 
    
 
