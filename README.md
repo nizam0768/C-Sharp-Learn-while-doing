@@ -51,6 +51,7 @@
 50. [What is the difference between throw and throw ex?](#What-is-the-difference-between-throw-and-throw-ex)
 51. [What is the difference betweent typeof and GetType?](#What-is-the-difference-betweent-typeof-and-GetType)
 52. [What is reflection?](#What-is-reflection)
+53. [What are attributes?](#What-are-attributes)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1641,6 +1642,30 @@ To solve Reflection's performance and AOT limitations, modern C# relies heavily 
 
 ---
 
+### What are attributes?
+Attributes are declarative tags added to C# code elements (classes, methods, properties, parameters, or entire assemblies) that embed additional metadata directly into the compiled assembly without changing the actual code logic.
+
+Instead of hardcoding boilerplate rules into your execution paths, you place attributes in square brackets [Attribute] above or beside code elements to describe how those elements should be treated by the framework, compiler, or runtime.
+
+- Compiler Instructions
+  - [Obsolete]: Generates a compiler warning or error if another developer tries to call a deprecated method.
+  - [Conditional("DEBUG")]: Tells the JIT compiler to omit execution of a method unless a specific build symbol (e.g., DEBUG) is defined.
+- Framework & Routing Logic (ASP.NET Core / Web APIs)
+  - [HttpGet("api/users")]: Maps an HTTP endpoint route to a controller action.
+  - [Authorize(Roles = "Admin")]: Enforces access control before executing an action.
+- Data Validation & Serialization
+  - [Required], [StringLength(50)]: Applied to DTO properties for automatic validation.
+  - [JsonPropertyName("user_id")]: Customizes how property names map to JSON keys during serialization.
+    
+How Attributes Are Consumed
+At Compile Time: The C# compiler or Roslyn Analyzers read attributes to issue warnings, generate extra code (Source Generators), or alter build outputs.
+
+At Runtime (via Reflection): Frameworks like ASP.NET Core, EF Core, or System.Text.Json inspect object attributes at runtime to drive routing, database mapping, and data validation without requiring you to write repetitive if/else checks.
+
+Why It Matters (The Impact)
+Attributes enable Declarative Programming and clean Separation of Concerns. Instead of cluttering business logic with authorization checks, serialization rules, or input validation, you declare what rules apply directly on your data models and controllers, leaving the execution framework to handle how those rules are enforced behind the scenes.
+
+---
    
 
 
