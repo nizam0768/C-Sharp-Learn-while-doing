@@ -52,6 +52,7 @@
 51. [What is the difference betweent typeof and GetType?](#What-is-the-difference-betweent-typeof-and-GetType)
 52. [What is reflection?](#What-is-reflection)
 53. [What are attributes?](#What-are-attributes)
+54. [What is serialization?](#What-is-serialization)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1666,6 +1667,26 @@ Why It Matters (The Impact)
 Attributes enable Declarative Programming and clean Separation of Concerns. Instead of cluttering business logic with authorization checks, serialization rules, or input validation, you declare what rules apply directly on your data models and controllers, leaving the execution framework to handle how those rules are enforced behind the scenes.
 
 ---
+
+### What is serialization?
+Serialization is the process of converting an in-memory object instance into a format that can be easily stored on disk, saved in a database, or transmitted across a network.
+- The Core Concept
+  - In-memory objects exist as complex graphs of pointers and memory addresses unique to a single process. Serialization flattens that live object into a standardized stream of bytes or text (like JSON or XML) so another application or process can read it.
+
+The reverse operation—taking a byte stream or text payload and reconstructing it back into a live object in memory—is called Deserialization.
+
+<img width="328" height="257" alt="image" src="https://github.com/user-attachments/assets/aa3c2ecb-4b09-477e-95c5-d10db646136f" />
+
+- Key Real-World Considerations
+  - Insecure Deserialization Vulnerabilities: Deserializing untrusted data from end users can be dangerous. If a serializer instantiates arbitrary types during deserialization (a common issue with legacy BinaryFormatter), attackers can execute malicious code on your server.
+  - Schema Versioning: As your data models evolve over time, adding or removing properties can break older clients if your serialization settings aren't configured to handle missing or extra fields gracefully.
+  - Performance Optimization: Reflection-heavy serializers can slow down high-throughput APIs. Modern .NET addresses this using C# Source Generators ([JsonSourceGenerationOptions]) to build compile-time serializer code, completely bypassing reflection.
+
+---
+
+
+
+
    
 
 
