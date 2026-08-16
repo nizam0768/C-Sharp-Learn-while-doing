@@ -54,6 +54,7 @@
 53. [What are attributes?](#What-are-attributes)
 54. [What is serialization?](#What-is-serialization)
 55. [What is pattern matching?](#What-is-pattern-matching)
+56. [What is the purpose of the checked keyword?](#What-is-the-purpose-of-the-checked-keyword)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1714,6 +1715,31 @@ Instead of writing multi-line if-else chains with manual type checking and casti
 Pattern matching eliminates fragile type-casting (as keywords followed by null checks) in favor of compile-time type safety. It brings functional programming paradigms into C#, making state validation and complex branching logic much easier to read and maintain.
 
 ---
+
+### What is the purpose of the checked keyword?
+In C#, the checked keyword enables explicit arithmetic overflow checking for integral-type operations and conversions.
+- By default, C# silently allows arithmetic overflow—if an integer exceeds its maximum bounds, it wraps around to its minimum value without raising an error. Wrapping an operation in a checked context forces the runtime to throw a System.OverflowException if the result exceeds the target type's range.
+
+Usage Patterns
+You can use checked as either a statement block or an inline expression:
+
+<img width="441" height="268" alt="image" src="https://github.com/user-attachments/assets/1567f2f9-b3e3-4f05-aeee-0e4efabb939d" />
+
+| Feature            | checked                                   | unchecked                                   |
+|--------------------|-------------------------------------------|---------------------------------------------|
+| Overflow Behavior  | Throws `System.OverflowException`.        | Silently truncates excess bits (wraps around). |
+| Default Context    | Non-default (must be declared explicitly or set globally). | Default behavior in C# for unflagged blocks. |
+| Primary Advantage  | Prevents subtle arithmetic corruption & security bugs. | Higher performance (bypasses CPU overflow checks). |
+
+Important Scope Rules
+  - Types Covered: Applies to integral types (int, long, short, byte, uint, char, etc.) and explicit conversion operations between them.
+  - Types Excluded: Floating-point operations (float, double) do not trigger OverflowException in checked contexts; instead, they evaluate to PositiveInfinity, NegativeInfinity, or NaN.
+  - Method Boundaries: checked blocks are not inherited by methods called inside the block. Overflow checking applies strictly to operations physically located within the lexically scoped checked block.
+
+Integer overflow is a common source of financial calculation errors and security vulnerabilities (such as buffer allocation logic bugs). Use checked when dealing with sensitive domain arithmetic, user-supplied bounds, or casting large integer types down to smaller types (byte, short) where data loss must crash fast rather than corrupt silently.
+
+---
+
 
    
 
