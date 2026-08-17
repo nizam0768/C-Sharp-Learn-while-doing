@@ -55,6 +55,7 @@
 54. [What is serialization?](#What-is-serialization)
 55. [What is pattern matching?](#What-is-pattern-matching)
 56. [What is the purpose of the checked keyword?](#What-is-the-purpose-of-the-checked-keyword)
+57. [What is the difference between double and decimal?](#What-is-the-difference-between-double-and-decimal)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1739,6 +1740,29 @@ Important Scope Rules
 Integer overflow is a common source of financial calculation errors and security vulnerabilities (such as buffer allocation logic bugs). Use checked when dealing with sensitive domain arithmetic, user-supplied bounds, or casting large integer types down to smaller types (byte, short) where data loss must crash fast rather than corrupt silently.
 
 ---
+
+### What is the difference between double and decimal?
+double is a Base-2 binary floating-point type optimized for speed and scientific scale, while decimal is a Base-10 floating-point type optimized for absolute accuracy in financial calculations.
+
+| Feature            | double                                   | decimal                                   |
+|--------------------|-------------------------------------------|-------------------------------------------|
+| Underlying Base    | Base-2 (Binary)                          | Base-10 (Decimal)                         |
+| Memory Size        | 64 bits (8 bytes)                        | 128 bits (16 bytes)                       |
+| Precision          | ~15–17 digits                            | ~28–29 digits                             |
+| Range              | Huge (≈ ±1.7 × 10^308)                   | Smaller (≈ ±7.9 × 10^28)                  |
+| Performance        | Very Fast (Hardware-accelerated by CPU/FPU) | Slower (Calculated in software)           |
+| Literal Suffix     | d / D (or no suffix: 1.5)                | m / M (e.g., 1.5m)                        |
+| Primary Use Case   | Physics, graphics, scientific computing, engineering | Financial, currency, accounting, tax math |
+
+<img width="449" height="179" alt="image" src="https://github.com/user-attachments/assets/31b3b25c-5a87-4bd6-93c1-c75962b1e12e" />
+
+Rule of Thumb
+  - Use decimal whenever counting money, tax rates, inventory, or financial transactions where rounding discrepancies are unacceptable.
+  - Use double (or float) for physics calculations, game coordinates, audio/video processing, or sensor readings where massive numerical range and hardware performance matter more than tiny fractional rounding errors.
+
+---
+
+
 
 
    
