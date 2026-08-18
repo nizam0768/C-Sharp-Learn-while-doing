@@ -56,6 +56,7 @@
 55. [What is pattern matching?](#What-is-pattern-matching)
 56. [What is the purpose of the checked keyword?](#What-is-the-purpose-of-the-checked-keyword)
 57. [What is the difference between double and decimal?](#What-is-the-difference-between-double-and-decimal)
+58. [What is an Array?](#What-is-an-Array?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1762,10 +1763,38 @@ Rule of Thumb
 
 ---
 
+### What is an Array?
+An array is a contiguous, fixed-size collection of elements of the same type stored sequentially in memory. It is one of the most fundamental data structures in computer science and C#.
+- Key Characteristics
+  - Fixed Size: The length of an array is determined when it is created and cannot be resized dynamically.
+  - Contiguous Memory: All elements are stored side-by-side in memory, allowing the system to calculate the exact address of any element instantly.
+  - Zero-Indexed: Array indices start at 0 and go up to Length - 1.
+  - Random Access ($O(1)$ Time Complexity): Accessing or updating an element by its index takes constant time regardless of the array's size.
 
+<img width="447" height="158" alt="image" src="https://github.com/user-attachments/assets/5b37438f-235c-40f3-b95e-c89c7eb2f4e4" />
 
+Memory Layout & Performance
 
-   
+Because array elements sit next to each other in contiguous memory, arrays benefit heavily from CPU Cache Line Locality—making iterating over an array significantly faster than traversing linked nodes or pointer-heavy collections.
+
+| Operation            | Time Complexity | Notes                                                                 |
+|----------------------|-----------------|----------------------------------------------------------------------|
+| Access by Index      | O(1)            | Instant lookup using offset arithmetic (base_address + index * element_size). |
+| Search (Unsorted)    | O(n)            | Requires inspecting elements sequentially.                           |
+| Insertion / Deletion | O(n)            | Requires shifting subsequent elements or reallocating a new array.   |
+
+Types of Arrays in C#
+- Single-Dimensional: A simple linear list (e.g., int[]).
+- Multi-Dimensional (Rectangular): An $N \times M$ grid with uniform rows and columns (e.g., int[,] matrix = new int[3, 3];).
+- Jagged Array: An "array of arrays" where each row can have a different length (e.g., int[][] jagged = new int[3][];).
+
+| Feature             | Array (`T[]`)                          | Generic List (`List<T>`)                  |
+|---------------------|----------------------------------------|-------------------------------------------|
+| Size                | Fixed at creation.                     | Dynamic (grows automatically).             |
+| Underlying Structure| Continuous memory block.               | Uses an internal Array (`T[]`) that doubles in size when full. |
+| Performance         | Slightly lower memory overhead.        | Slight overhead due to capacity resizes.   |
+
+---
 
 
 
