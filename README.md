@@ -57,6 +57,7 @@
 56. [What is the purpose of the checked keyword?](#What-is-the-purpose-of-the-checked-keyword)
 57. [What is the difference between double and decimal?](#What-is-the-difference-between-double-and-decimal)
 58. [What is an Array?](#What-is-an-Array?)
+59. [What is a List?](#What-is-a-List)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1795,6 +1796,29 @@ Types of Arrays in C#
 | Performance         | Slightly lower memory overhead.        | Slight overhead due to capacity resizes.   |
 
 ---
+
+### What is a List?
+A List<T> (found in System.Collections.Generic) is a strongly typed, dynamically sized collection of objects that can be accessed by index. It is the most widely used collection in C#.
+A List<T> is not a linked list—it is a wrapper around a standard C# array (T[]) that automatically resizes itself when you outgrow its current capacity.
+It combines the fast indexed lookup performance of an array with the flexibility of dynamic growth.
+
+How Sizing Works: Count vs. Capacity
+Understanding how List<T> manages memory requires distinguishing between two properties:
+- Count: The number of items currently stored inside the list.
+- Capacity: The size of the underlying array allocated in memory before a resize is triggered.
+
+ <img width="494" height="216" alt="image" src="https://github.com/user-attachments/assets/55001ce8-7b9e-4db4-903b-30c9100b2ae0" />
+
+Performance & Time Complexity
+| Operation                | Time Complexity | Performance Notes                                                   |
+|---------------------------|-----------------|----------------------------------------------------------------------|
+| Index Access (`list[i]`)  | O(1)            | Direct array offset calculation.                                     |
+| Append (Add)              | Amortized O(1)  | Fast O(1) normally; occasionally O(n) when memory reallocation/copying occurs. |
+| Insert / Remove (Middle)  | O(n)            | Requires memory-shifting subsequent items left or right.             |
+| Search (Contains, Find)   | O(n)            | Iterates sequentially through the internal array.                    |
+
+---
+
 
 
 
