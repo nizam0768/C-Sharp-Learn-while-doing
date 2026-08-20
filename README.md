@@ -1836,12 +1836,12 @@ Because ArrayList stores everything as a plain object, it trades away type safet
   ArrayList vs. List<T>
 
   | Feature              | ArrayList                           | List<T>                                   |
-|----------------------|-------------------------------------|-------------------------------------------|
-| Namespace            | System.Collections                  | System.Collections.Generic                 |
-| Type Safety          | ❌ None (stores object)             | ✅ Strong (Compile-time checking)          |
-| Value Type Handling  | Requires Boxing / Unboxing          | Stored natively without allocation         |
-| Casting Required?    | Yes (Manual explicit casts)         | No (Direct typed access)                   |
-| Status               | Legacy (Avoid in modern code)       | Modern Standard (C# 2.0+)                  |
+  |----------------------|-------------------------------------|-------------------------------------------|
+  | Namespace            | System.Collections                  | System.Collections.Generic                |
+  | Type Safety          | ❌ None (stores object)             | ✅ Strong (Compile-time checking)        |
+  | Value Type Handling  | Requires Boxing / Unboxing          | Stored natively without allocation        |
+  | Casting Required?    | Yes (Manual explicit casts)         | No (Direct typed access)                  |
+  | Status               | Legacy (Avoid in modern code)       | Modern Standard (C# 2.0+)                 |
 
 - Rule of Thumb
   Never use ArrayList in modern C# development. Always prefer List<T> (or List<object> if you genuinely need a dynamic list of arbitrary types), as generic collections eliminate performance penalties and catch type mismatches at compile time.
