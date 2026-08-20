@@ -58,6 +58,7 @@
 57. [What is the difference between double and decimal?](#What-is-the-difference-between-double-and-decimal)
 58. [What is an Array?](#What-is-an-Array?)
 59. [What is a List?](#What-is-a-List)
+60. [What is an ArrayList?](#What-is-an-ArrayList)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1818,6 +1819,35 @@ Performance & Time Complexity
 | Search (Contains, Find)   | O(n)            | Iterates sequentially through the internal array.                    |
 
 ---
+
+### What is an ArrayList?
+An ArrayList is a non-generic, dynamically sized collection class in .NET (found in System.Collections) that stores elements as untyped object references. Introduced in .NET 1.0 before generics existed, it is now considered legacy code.
+
+Because ArrayList stores everything as a plain object, it trades away type safety and performance in exchange for dynamic sizing.
+
+- Lack of Type Safety
+  An ArrayList allows you to store entirely unrelated data types in the same instance without compiler warnings. Errors only surface at runtime when attempting to cast the data back:
+  
+  <img width="426" height="143" alt="image" src="https://github.com/user-attachments/assets/86101992-9ce7-4156-bf4c-a26449b08c4e" />
+
+- Severe Performance Hits (Boxing & Unboxing)
+  Every time you store a value type (int, float, bool, struct) in an ArrayList, .NET must wrap it inside an object allocated on the managed heap (boxing). Extracting that value requires unwrapping it (unboxing). This creates unnecessary heap allocations, high CPU overhead, and heavy Garbage Collector pressure.
+
+  ArrayList vs. List<T>
+
+  | Feature              | ArrayList                           | List<T>                                   |
+|----------------------|-------------------------------------|-------------------------------------------|
+| Namespace            | System.Collections                  | System.Collections.Generic                 |
+| Type Safety          | ❌ None (stores object)             | ✅ Strong (Compile-time checking)          |
+| Value Type Handling  | Requires Boxing / Unboxing          | Stored natively without allocation         |
+| Casting Required?    | Yes (Manual explicit casts)         | No (Direct typed access)                   |
+| Status               | Legacy (Avoid in modern code)       | Modern Standard (C# 2.0+)                  |
+
+- Rule of Thumb
+  Never use ArrayList in modern C# development. Always prefer List<T> (or List<object> if you genuinely need a dynamic list of arbitrary types), as generic collections eliminate performance penalties and catch type mismatches at compile time.
+
+---
+
 
 
 
