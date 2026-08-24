@@ -59,6 +59,7 @@
 58. [What is an Array?](#What-is-an-Array?)
 59. [What is a List?](#What-is-a-List)
 60. [What is an ArrayList?](#What-is-an-ArrayList)
+61. [What is the purpose of the GetHashCode method?](#What-is-the-purpose-of-the-GetHashCode-method)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1847,6 +1848,36 @@ Because ArrayList stores everything as a plain object, it trades away type safet
   Never use ArrayList in modern C# development. Always prefer List<T> (or List<object> if you genuinely need a dynamic list of arbitrary types), as generic collections eliminate performance penalties and catch type mismatches at compile time.
 
 ---
+
+### What is the purpose of the GetHashCode method?
+The primary purpose of the GetHashCode() method (inherited by every type from System.Object) is to generate an integer hash code that allows an object to be stored, grouped, and looked up rapidly inside hash-based data structures like Dictionary<TKey, TValue>, HashSet<T>, and Hashtable.
+
+How It Works (The Core Concept)Hash-based collections use hash codes as an index to bucket objects. Instead of scanning through every element sequentially ($O(n)$ time complexity), the collection calls GetHashCode() on a key to calculate its target bucket instantly, providing $O(1)$ constant-time lookups.
+
+Object -> GetHashCode() -> Integer Value -> (Modulo Bucket Array Size) -> Target Bucket Location
+
+The Unbreakable Contract (GetHashCode and Equals)
+Whenever you override Equals(), you must also override GetHashCode(). If you fail to do so, hash collections will break in subtle ways.
+
+The Golden Rules:
+  - Equal Objects $\rightarrow$ Equal Hash Codes: If A.Equals(B) is true, then A.GetHashCode() MUST return the exact same integer as B.GetHashCode().
+  - Unequal Objects $\rightarrow$ Can Share Hash Codes (Collisions): If two objects return the same hash code, they are not guaranteed to be equal—this is called a hash collision. The collection handles collisions by calling Equals() to verify the exact match.
+  - Immutability: The return value of GetHashCode() must remain constant as long as the object is used as a key in a hash collection. If an object's properties change while stored in a dictionary, its hash code changes, making the object "lost" inside the wrong bucket.
+
+  <img width="383" height="262" alt="image" src="https://github.com/user-attachments/assets/06670bf9-bcfd-43dd-9ba6-d5680ed587df" />
+
+What Happens Without a Proper Override:
+
+  <img width="524" height="152" alt="image" src="https://github.com/user-attachments/assets/1e55b4e7-aada-49a3-83f3-a19d3dfc7c14" />
+
+C# Modern Best Practice: HashCode.Combine
+In .NET Core / .NET 5+, manual bit-shifting or multiplying prime numbers (e.g., hash * 23 + field.GetHashCode()) is obsolete. Always use the built-in HashCode.Combine() helper:
+
+  <img width="398" height="83" alt="image" src="https://github.com/user-attachments/assets/668a2493-8ba5-4484-bd72-424813b1cb43" />
+
+---
+
+
 
 
 
