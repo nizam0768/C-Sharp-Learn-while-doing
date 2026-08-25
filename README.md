@@ -60,6 +60,7 @@
 59. [What is a List?](#What-is-a-List)
 60. [What is an ArrayList?](#What-is-an-ArrayList)
 61. [What is the purpose of the GetHashCode method?](#What-is-the-purpose-of-the-GetHashCode-method)
+62. [What is a Dictionary?](#What-is-a-Dictionary?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1877,8 +1878,34 @@ In .NET Core / .NET 5+, manual bit-shifting or multiplying prime numbers (e.g., 
 
 ---
 
+### What is a Dictionary?
 
+A Dictionary<TKey, TValue> (found in System.Collections.Generic) is a hash-based collection that stores data in key-value pairs. It provides near-instantaneous lookups, insertions, and deletions based on a unique key rather than an integer index.
 
+A Dictionary maps unique keys to values by running each key through its GetHashCode() method to determine its storage bucket, enabling near constant-time ($O(1)$) operations.
+
+- Key CharacteristicsUnique Keys:
+  - Duplicate keys are not allowed. Attempting to add a duplicate key via .Add() throws an ArgumentException.
+  - Fast Lookups: Locating a value by its key takes $O(1)$ time on average.
+  - Unordered Collection: The order of elements is not guaranteed to remain stable as elements are added or removed.
+
+  <img width="525" height="271" alt="image" src="https://github.com/user-attachments/assets/d7cfdb7c-b335-49d9-94da-e3cad30b1cc5" />
+
+| Operation            | Average        | Worst Case | Notes                                                            | 
+|----------------------|----------------|------------|------------------------------------------------------------------|
+| Lookup (`dict[key]`) | O(1)           | O(n)       | Worst case occurs if high hash collisions degrade buckets to linked lists. |
+| Insertion (Add)      | O(1)           | O(n)       | Reallocates and resizes internal arrays when capacity is reached.|
+| Deletion (Remove)    | O(1)           | O(n)       | Clears the bucket reference and entry node.                      |
+
+Dictionary vs. Hashtable
+
+| Feature             | Dictionary<TKey, TValue>              | Hashtable                                   |
+|---------------------|---------------------------------------|---------------------------------------------|
+| Type Safety         | Strongly Typed (Generics).            | Non-generic (Stores object keys/values).     |
+| Performance         | High (No boxing for value types).     | Lower (Requires boxing/unboxing for value types). |
+| Status              | Modern standard (C# 2.0+).            | Legacy (Avoid in modern code).               |
+
+---
 
 
 
