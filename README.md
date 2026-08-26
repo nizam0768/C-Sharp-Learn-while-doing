@@ -61,6 +61,7 @@
 60. [What is an ArrayList?](#What-is-an-ArrayList)
 61. [What is the purpose of the GetHashCode method?](#What-is-the-purpose-of-the-GetHashCode-method)
 62. [What is a Dictionary?](#What-is-a-Dictionary?)
+63. [What are indexers?](#What-are-indexers?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1906,6 +1907,38 @@ Dictionary vs. Hashtable
 | Status              | Modern standard (C# 2.0+).            | Legacy (Avoid in modern code).               |
 
 ---
+
+### What are indexers?
+Indexers allow instances of a class or struct to be indexed just like an array, using array access syntax ([]).
+
+An indexer acts as a parameterized property that enables access to a collection or list contained inside an object, shielding consumers from needing to call explicit getter or setter methods like GetAt(index) or SetAt(index, value).
+
+Instead of accessing internal collections directly (myObject.Items[0]), indexers allow consumers to index the parent object directly (myObject[0]).
+
+Syntax & Usage
+Indexers are defined using the this keyword along with parameters inside square brackets:
+
+<img width="518" height="241" alt="image" src="https://github.com/user-attachments/assets/2e15e0bb-327d-4fb6-8c7e-0fd8ca02e125" />
+
+Key Capabilities
+- Non-Integer & Multiple Parameters
+  Indexers are not restricted to int indices. You can use any data type, including string, Guid, or multiple parameters (similar to a 2D matrix):
+
+  <img width="460" height="211" alt="image" src="https://github.com/user-attachments/assets/8bf76e97-1b25-42f7-a233-c9c3efa6f558" />
+
+- Overloading Indexers
+  Just like standard methods, indexers can be overloaded by varying parameter types:
+
+  <img width="374" height="66" alt="image" src="https://github.com/user-attachments/assets/85ba9607-e8e9-4f59-a9c9-ac573ca3993e" />
+
+Indexers vs. Properties
+
+| Feature           | Regular Property                          | Indexer                                   |
+|-------------------|-------------------------------------------|-------------------------------------------|
+| Identifier        | Named explicitly (e.g., Count, Name).     | Unnamed; uses the `this` keyword.          |
+| Parameters        | Accepts no parameters.                    | Must accept at least one index parameter.  |
+| Access Syntax     | Dot notation (`obj.PropertyName`).        | Bracket notation (`obj[index]`).           |
+| Static Support    | Can be static.                            | Must be an instance member.                |
 
 
 
