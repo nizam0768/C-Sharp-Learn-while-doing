@@ -62,6 +62,7 @@
 61. [What is the purpose of the GetHashCode method?](#What-is-the-purpose-of-the-GetHashCode-method)
 62. [What is a Dictionary?](#What-is-a-Dictionary?)
 63. [What are indexers?](#What-are-indexers?)
+64. [What is caching?](#What-is-caching)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1940,8 +1941,32 @@ Indexers vs. Properties
 | Access Syntax     | Dot notation (`obj.PropertyName`).        | Bracket notation (`obj[index]`).           |
 | Static Support    | Can be static.                            | Must be an instance member.                |
 
+---
 
+### What is caching?
+Caching is the practice of storing copies of frequently accessed data in a high-speed temporary storage layer (a cache) so future requests for that data can be served much faster than fetching it from the primary, slower source.
 
+How It Works
+  - Cache Hit: The requested data is found in the cache. It is returned instantly, bypassing the slow primary storage.
+  - Cache Miss: The requested data is not in the cache. The system reads it from the primary store (database, disk, API), writes a copy to the cache, and returns it to the user.
+
+Common Caching Layers
+  - Caching happens at almost every level of modern software architecture:
+  - In-Memory Caching (Application Level): Storing database query results or API payloads in application memory (e.g., using IMemoryCache in .NET) or distributed caches like Redis / Memcached.
+  - Browser / Client Caching: Web browsers store static assets (CSS, JS, images) locally on your hard drive so web pages load faster on repeat visits.
+  - Content Delivery Networks (CDNs): Edge servers worldwide (e.g., Cloudflare) cache static images, videos, and HTML near users geographically to reduce network latency.
+  - Database Caching: Database engines store frequently executed queries and indexes in RAM to avoid expensive disk reads.
+  - Hardware / CPU Caching: CPUs use ultra-fast SRAM chips (L1, L2, L3 caches) to store instructions and data close to the processor core rather than reading directly from main system RAM (DRAM).
+
+Caching Strategies in Software Design
+
+| Strategy                | How It Works                                                                 | Best Use Case                                                                 |
+|----------------------------|-----------------------------------------------------------------------------|-------------------------------------------------|
+| Cache-Aside (Lazy Loading) | The application checks the cache first. If a miss occurs, it loads data from the DB, populates the cache, and returns it. | Read-heavy workloads with dynamic queries.                                    |
+| Write-Through              | Data is written to the cache and database simultaneously before returning success. | Consistency-critical data where stale cache reads are unacceptable.           |
+| Write-Behind (Write-Back)  | Data is written instantly to the cache, and asynchronously flushed to the database in batches later. | High-throughput write workloads (e.g., logging, metrics).                     |
+
+---
 
 
 
