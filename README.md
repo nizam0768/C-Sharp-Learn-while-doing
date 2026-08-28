@@ -63,6 +63,7 @@
 62. [What is a Dictionary?](#What-is-a-Dictionary?)
 63. [What are indexers?](#What-are-indexers?)
 64. [What is caching?](#What-is-caching)
+65. [What are immutable types and what’s their purpose?](#What-are-immutable-types-and-what’s-their-purpose?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1968,8 +1969,34 @@ Caching Strategies in Software Design
 
 ---
 
+### What are immutable types and what’s their purpose?
+An immutable type is a class or struct whose state (data) cannot be modified after it is instantiated.
 
+Once an immutable object is created, its internal fields or properties remain fixed for the rest of its lifecycle. Any operation that appears to modify an immutable object actually returns a brand new instance containing the updated values.
 
+<img width="1031" height="297" alt="image" src="https://github.com/user-attachments/assets/067072d0-1cd9-4e86-9645-ae94b7159a64" />
+
+C# Example: string vs. Custom Classes
+System.String is C#'s most famous built-in immutable type:
+
+<img width="482" height="103" alt="image" src="https://github.com/user-attachments/assets/9ef6cc37-8612-49a9-aebd-7034d0858eee" />
+
+Creating Custom Immutable Types
+Modern C# provides features like init-only properties, readonly fields, and record types designed specifically to enforce immutability:
+
+<img width="538" height="250" alt="image" src="https://github.com/user-attachments/assets/35c0e0bd-49b7-47c6-a021-c9f810032061" />
+
+The Purpose of Immutable Types
+- Immutability solves several critical software design challenges:
+Inherent Thread Safety: Multi-threaded apps often crash or corrupt data when multiple threads try to read and write shared state simultaneously (race conditions). Because immutable objects cannot be modified, threads can safely read them in parallel without locks (lock, Monitor, or mutexes).
+
+- Safe Dictionary & Set Keys: As covered in GetHashCode(), modifying an object's properties while it is stored in a Dictionary or HashSet breaks hash calculations. Immutable objects guarantee that hash codes stay fixed permanently.
+
+- Side-Effect Elimination & Predictability: Passing a mutable object into a third-party method creates the risk that the method alters your object's internal state without your knowledge. Immutable objects guarantee that state remains untouched.
+
+- Simplified Equality Comparisons: Types like C# record types automatically implement value-based equality rather than reference equality, making them ideal for Value Objects in Domain-Driven Design (DDD) or Data Transfer Objects (DTOs).
+
+---
 
 
    
