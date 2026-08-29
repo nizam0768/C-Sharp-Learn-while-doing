@@ -64,6 +64,7 @@
 63. [What are indexers?](#What-are-indexers?)
 64. [What is caching?](#What-is-caching)
 65. [What are immutable types and what’s their purpose?](#What-are-immutable-types-and-what’s-their-purpose?)
+66. [What are records and record structs?](#What-are-records-and-record-structs)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -1997,6 +1998,42 @@ Inherent Thread Safety: Multi-threaded apps often crash or corrupt data when mul
 - Simplified Equality Comparisons: Types like C# record types automatically implement value-based equality rather than reference equality, making them ideal for Value Objects in Domain-Driven Design (DDD) or Data Transfer Objects (DTOs).
 
 ---
+
+### What are records and record structs?
+Introduced in C# 9 and C# 10, records and record structs are lightweight constructs designed primarily for data-centric objects where equality is defined by values rather than memory addresses.
+
+<img width="678" height="452" alt="image" src="https://github.com/user-attachments/assets/78713d64-3ba0-454a-996b-7c4cb8724910" />
+
+What is a record (Record Class)?
+By default, writing record declares a reference type allocated on the managed heap (equivalent to record class).
+- Value-Based Equality: Two separate instances with identical property values evaluate as equal (== and .Equals() return true), unlike standard classes which use reference equality.
+- Built-in Immutability: Positional declaration auto-generates init-only properties.
+- Non-Destructive Mutation: Supports the with expression to create modified copies.
+- Built-in Formatting: Automatically overrides .ToString() to output formatted property names and values.
+
+  <img width="437" height="170" alt="image" src="https://github.com/user-attachments/assets/3896c2fa-0ed3-4a09-aecc-7334b1ad8f36" />
+
+What is a record struct?
+A record struct combines record features with C# struct mechanics, creating a value type allocated on the stack (or inline within containing objects).
+- Memory Allocation: Stack-allocated value type (avoids heap allocations and Garbage Collection overhead).
+- Mutability Difference: Unlike record class (which defaults to immutable init properties), positional parameters in a record struct generate mutable read-write properties (get; set;) by default.
+- Explicit Immutability: Declare it as readonly record struct to enforce immutability.
+
+  <img width="422" height="140" alt="image" src="https://github.com/user-attachments/assets/e1dc86b0-76f1-4fdc-9545-183f1d68876b" />
+
+Key Differences
+
+| Feature              | record (record class)                                   | record struct                                      |
+|----------------------|----------------------------------------------------------|----------------------------------------------------|
+| Type Category        | Reference Type (Heap)                                   | Value Type (Stack / Inline)                        |
+| Default Immutability | Immutable (init-only properties)                        | Mutable (set properties)                           |
+| Forced Immutability  | Immutable by default                                    | Requires readonly record struct                    |
+| Inheritance          | Supports class inheritance hierarchies                  | Does not support inheritance (can implement interfaces) |
+| Nullability          | Can be null                                             | Cannot be null (unless wrapped in Nullable<T>)     |
+| Best Used For        | DTOs, API payloads, Domain Entities                     | High-throughput, short-lived math/vector/coordinate data |
+
+---
+
 
 
    
