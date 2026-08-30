@@ -65,6 +65,7 @@
 64. [What is caching?](#What-is-caching)
 65. [What are immutable types and what’s their purpose?](#What-are-immutable-types-and-what’s-their-purpose?)
 66. [What are records and record structs?](#What-are-records-and-record-structs)
+67. [Why does string behave like a value type even though it is a reference type?](#Why-does-string-behave-like-a-value-type-even-though-it-is-a-reference-type)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2034,8 +2035,40 @@ Key Differences
 
 ---
 
+### Why does string behave like a value type even though it is a reference type?
 
+In C#, string (System.String) is fundamentally a reference type—it lives on the managed heap, inherits directly from System.Object, and can hold null references.
 
-   
+However, C# intentionally designs string to feel and behave like a value type due to three specific core design choices:
+
+- Immutability
+  Once a string object is instantiated on the heap, its internal character array cannot be modified.
+
+  With standard mutable reference types, if two variables point to the same object in memory, modifying one variable alters the other. With string, any modification operation (like .Replace(), .Substring(), or +=) leaves the original string intact and allocates an entirely new string object on the heap.
+
+  <img width="564" height="92" alt="image" src="https://github.com/user-attachments/assets/a12f4057-a14f-4687-9423-d4ac1ce02224" />
+
+- Overridden Equality Operators (== and .Equals())
+  For standard reference types, the == operator compares references (whether both variables point to the exact same memory address on the heap).
+
+  C# explicitly overrides == and .Equals() for string to perform value comparison instead. It compares the actual character contents of the strings rather than their memory locations:
+
+<img width="597" height="95" alt="image" src="https://github.com/user-attachments/assets/e93c0009-94a8-4429-a18a-5503d28207ab" />
+
+- String Interning & Literal Syntax
+  Value types have literals (like 42 or 3.14). C# gives string literal support ("Hello") instead of forcing you to write new string(...).
+
+  Under the hood, the .NET CLR maintains an internal table called the Intern Pool. When compiling string literals, the CLR reuses a single instance in memory across your application to save heap space:
+
+  <img width="557" height="68" alt="image" src="https://github.com/user-attachments/assets/1e177076-9ca0-4d96-bbe3-f279511c8adb" />
+
+Why Not Just Make string a Value Type (struct)?
+If language designers wanted string to behave like a value type, why didn't they make it a struct?
+
+- Variable Size: Value types (int, Guid) must have a fixed size known at compile time so they can sit cleanly on the call stack. Strings vary in length from 0 characters to gigabytes of text.
+- Stack Overflow Risks: If massive strings were value types passed by value on the stack, passing a 10MB text file into a method would force the stack to copy all 10 million characters on every method call, instantly crashing the app with a StackOverflowException.
+- Heap + Pointer Efficiency: Storing the text payload once on the heap and passing a lightweight 64-bit reference pointer around gives you performance for large text while immutability gives you the safety of a value type.
+
+---
 
 
