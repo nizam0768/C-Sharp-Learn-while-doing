@@ -66,6 +66,7 @@
 65. [What are immutable types and what’s their purpose?](#What-are-immutable-types-and-what’s-their-purpose?)
 66. [What are records and record structs?](#What-are-records-and-record-structs)
 67. [Why does string behave like a value type even though it is a reference type?](#Why-does-string-behave-like-a-value-type-even-though-it-is-a-reference-type)
+68. [What is the difference between string and StringBuilder?](#What-is-the-difference-between-string-and-StringBuilder?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2071,4 +2072,38 @@ If language designers wanted string to behave like a value type, why didn't they
 
 ---
 
+### What is the difference between string and StringBuilder?
+string is immutable—modifying it creates a brand-new object on the heap every single time. StringBuilder is mutable—it manages an expandable internal buffer, allowing you to modify characters and append text in-place without reallocating memory.
+
+<img width="739" height="415" alt="image" src="https://github.com/user-attachments/assets/f6b62e8a-ba7b-4fd8-9d80-a333be5277c6" />
+
+Comparison Matrix
+
+| Feature            | string (System.String)                                                                 | StringBuilder (System.Text)                                                   |
+|--------------------|-----------------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| Mutability         | Immutable (Cannot be changed after creation).                                           | Mutable (Can be modified in-place).                                           |
+| Modification Cost  | Allocates a new heap object for every operation ($O(n)$ per modification).              | Modifies internal character buffer in-place (Amortized $O(1)$).               |
+| Memory Impact      | Causes Garbage Collection (GC) pressure when updated in loops.                          | Reuses memory buffer, minimizing GC overhead.                                 |
+| Thread Safety      | Inherently Thread-Safe (Read-only data).                                                | Not Thread-Safe (Requires synchronization).                                   |
+| Best For           | Few modifications, constant text, string formatting, simple operations.                 | Heavy string concatenation, large text construction, tight loops.             |
+
+Code & Performance Comparison
+Bad Pattern: Concatenating string in a Loop
+
+<img width="604" height="80" alt="image" src="https://github.com/user-attachments/assets/629866bd-59aa-4916-b0b0-aac005b81dda" />
+
+  The Cost: For 10,000 iterations, this approach allocates roughly 50 MB of temporary heap memory and takes hundreds of milliseconds because it copies the expanding string over and over.
+
+Good Pattern: Using StringBuilder
+
+<img width="477" height="93" alt="image" src="https://github.com/user-attachments/assets/c1a15f6c-3a1a-4b2b-997a-12ae01beb4ed" />
+
+  The Cost: Allocates a tiny fraction of memory, executes in a fraction of a millisecond, and generates near-zero Garbage Collector pressure.
+
+Rule of Thumb
+- Use string when performing 1 to 3 simple operations, working with constants, or concatenating known literal values (e.g., $"Hello {name}"—which the C# compiler optimizes automatically).
+
+- Use StringBuilder when constructing complex text inside loops, building massive documents/JSON payloads manually, or performing extensive text manipulation where the number of modifications is unpredictable.
+
+---
 
