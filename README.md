@@ -67,6 +67,7 @@
 66. [What are records and record structs?](#What-are-records-and-record-structs)
 67. [Why does string behave like a value type even though it is a reference type?](#Why-does-string-behave-like-a-value-type-even-though-it-is-a-reference-type)
 68. [What is the difference between string and StringBuilder?](#What-is-the-difference-between-string-and-StringBuilder?)
+69. [What is operator overloading?](#What-is-operator-overloading?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2104,6 +2105,34 @@ Rule of Thumb
 - Use string when performing 1 to 3 simple operations, working with constants, or concatenating known literal values (e.g., $"Hello {name}"—which the C# compiler optimizes automatically).
 
 - Use StringBuilder when constructing complex text inside loops, building massive documents/JSON payloads manually, or performing extensive text manipulation where the number of modifications is unpredictable.
+
+---
+
+### What is operator overloading?
+Operator overloading is a feature in C# (and other object-oriented languages) that allows you to redefine or custom-implement the behavior of standard built-in operators (like +, -, ==, *) for custom classes or structs.
+
+It lets your custom domain objects interact using natural mathematical or logical syntax instead of requiring verbose method calls.
+
+Basic Syntax & Example
+Operator overloading in C# is accomplished by defining a public static method on your class or struct using the operator keyword:
+
+<img width="509" height="314" alt="image" src="https://github.com/user-attachments/assets/a22593a5-49fd-4fdd-b866-962696b7a3b5" />
+
+Overloadable vs. Non-Overloadable Operators
+
+| Category                  | Operators                                      | Overloadable?        | Notes                                                                 |
+|----------------------------|-----------------------------------------------|----------------------|----------------------------------------------------------------------|
+| Unary                      | +, -, !, ~, ++, --, true, false               | Yes                  | —                                                                    |
+| Binary Arithmetic          | +, -, *, /, %, &, \|, ^, <<, >>               | Yes                  | —                                                                    |
+| Comparison                 | ==, !=, <, >, <=, >=                          | Yes (in pairs)       | Must overload == and != together; must overload < and > together.    |
+| Assignment                 | =, +=, -=, *=, /=                             | No                   | Compound operators (+=) are implicitly created when you overload +.  |
+| Member Access / Special    | ., ?, ??, =>, new, typeof, nameof, sizeof     | No                   | Reserved strictly by the language runtime.                          |
+
+Important Rules & Best Practices
+
+- Comparison Operators Must Be Overloaded in Pairs: If you overload ==, you must also overload !=. The same rule applies to < and > as well as <= and >=.
+- Override Equals() and GetHashCode(): Overloading == without overriding object.Equals() and object.GetHashCode() generates a compiler warning because it breaks consistency between operator evaluation and collection indexing/lookups.
+- Keep It Intuitive: Only overload operators when the behavior is natural and universally understood for your type (e.g., adding two Vector3 or Money objects). Avoid overloading operators if the resulting syntax becomes ambiguous or surprising to other developers.
 
 ---
 
