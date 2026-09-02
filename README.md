@@ -68,6 +68,7 @@
 67. [Why does string behave like a value type even though it is a reference type?](#Why-does-string-behave-like-a-value-type-even-though-it-is-a-reference-type)
 68. [What is the difference between string and StringBuilder?](#What-is-the-difference-between-string-and-StringBuilder?)
 69. [What is operator overloading?](#What-is-operator-overloading?)
+70. [What are anonymous types?](#What-are-anonymous-types)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2133,6 +2134,45 @@ Important Rules & Best Practices
 - Comparison Operators Must Be Overloaded in Pairs: If you overload ==, you must also overload !=. The same rule applies to < and > as well as <= and >=.
 - Override Equals() and GetHashCode(): Overloading == without overriding object.Equals() and object.GetHashCode() generates a compiler warning because it breaks consistency between operator evaluation and collection indexing/lookups.
 - Keep It Intuitive: Only overload operators when the behavior is natural and universally understood for your type (e.g., adding two Vector3 or Money objects). Avoid overloading operators if the resulting syntax becomes ambiguous or surprising to other developers.
+
+---
+
+### What are anonymous types?
+Anonymous types provide a convenient way to encapsulate a set of read-only properties into a single object without needing to explicitly define a formal class first.
+
+They are created dynamically at compile-time using the new keyword combined with object initializer syntax, and their types are inferred by the compiler.
+
+Basic Syntax & Example
+To create an anonymous type, declare a variable using var (because you don't know the generated class name) and assign it a property set:
+
+<img width="504" height="140" alt="image" src="https://github.com/user-attachments/assets/5a1386ed-ff47-4c71-a179-def18660c49b" />
+
+Primary Use Case: LINQ Projections
+Anonymous types are used heavily in LINQ queries when you want to transform (project) data from a larger data model or database entity into a temporary structure containing only the exact fields you need:
+
+<img width="491" height="213" alt="image" src="https://github.com/user-attachments/assets/ab1b9e72-bf1e-42f0-89cd-f8f6c70be1db" />
+
+Key Characteristics & Mechanics
+- Immutable Properties: Every property generated on an anonymous type is read-only (init-only). You cannot modify property values after instantiation (product.Price = 99.99; causes a compile error).
+- Compiler-Generated Name: The C# compiler creates a generic class name in Intermediate Language (IL) that is invisible to your code (e.g., '<>f__AnonymousType0<int, string, double>').
+- Value-Based Equality: The compiler automatically overrides .Equals() and .GetHashCode() on the generated class. Two instances of an anonymous type with identical properties and values evaluate as equal (.Equals() returns true).
+- Inferred Property Names: If you pass existing variables or properties without explicitly naming them, the anonymous type inherits those names automatically:
+
+<img width="451" height="26" alt="image" src="https://github.com/user-attachments/assets/b6edf67f-3853-40f7-9123-f20a7cc067be" />
+
+Limitations
+- Local Scope Only: Anonymous types cannot be easily returned from methods or passed as parameters because their type name is unreachable in code. Returning an anonymous type requires returning object or dynamic, which destroys type safety and performance.
+- No Methods or Interfaces: They can only contain public properties—no methods, events, or interface implementations.
+
+Anonymous Types vs. Tuples (ValueTuple)
+Modern C# features like ValueTuples ((int Id, string Name)) have largely replaced anonymous types when passing temporary data across method boundaries:
+
+| Feature        | Anonymous Type (Heap-allocated class)                  | ValueTuple (ValueTuple<...>, Stack-allocated struct) |
+|----------------|--------------------------------------------------------|------------------------------------------------------|
+| Type Category  | Reference Type (Heap-allocated class)                  | Value Type (Stack-allocated struct)                  |
+| Scope          | Restricted to local method bodies                      | Can be returned from methods cleanly                 |
+| Mutability     | Immutable (Read-only properties)                       | Mutable (Fields can be reassigned)                   |
+| Performance    | Heap allocation overhead                               | Zero-allocation stack storage                        |
 
 ---
 
