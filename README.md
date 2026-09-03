@@ -69,6 +69,7 @@
 68. [What is the difference between string and StringBuilder?](#What-is-the-difference-between-string-and-StringBuilder?)
 69. [What is operator overloading?](#What-is-operator-overloading?)
 70. [What are anonymous types?](#What-are-anonymous-types)
+71. [What is cohesion?](#What-is-cohesion)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2175,4 +2176,38 @@ Modern C# features like ValueTuples ((int Id, string Name)) have largely replace
 | Performance    | Heap allocation overhead                               | Zero-allocation stack storage                        |
 
 ---
+
+### What is cohesion?
+Cohesion refers to the degree to which elements within a module, class, or function belong together and work toward a single, well-defined purpose.
+
+In object-oriented design and software architecture, cohesion measures how focused a single software unit is on its specific responsibilities.
+
+High Cohesion vs. Low Cohesion
+The golden rule of software design is to aim for High Cohesion and Low Coupling.
+- High Cohesion (Good): A class or module does one core job and does it thoroughly. All of its fields and methods are closely related to that central objective.
+- Low Cohesion (Bad): A class attempts to handle multiple, unrelated responsibilities (often referred to as a "God Object"). The methods inside have little to do with one another.
+
+Practical Example in C#
+Low Cohesion (Anti-Pattern)
+This class handles user validation, database operations, and email notifications all at once:
+
+<img width="529" height="129" alt="image" src="https://github.com/user-attachments/assets/5495195e-5fd2-4ff0-bc43-933eb64c9186" />
+
+High Cohesion (Refactored)
+Refactoring breaks the responsibilities down into specialized, highly focused classes:
+
+<img width="578" height="368" alt="image" src="https://github.com/user-attachments/assets/3304a405-a042-4e23-936a-bd81c20953c8" />
+
+Benefits of High Cohesion
+- Maintainability: Changes to a specific feature (e.g., changing how emails are sent) are contained within a single class rather than scattered across multi-purpose classes.
+- Reusability: Highly focused modules like EmailService can easily be reused across different parts of the application without pulling in unneeded database or domain logic.
+- Testability: Mocking dependencies and writing unit tests is significantly simpler when classes have single responsibilities and fewer side effects.
+- Readability: Developers can quickly understand what a small, focused class does without sifting through hundreds of lines of unrelated code.
+
+Relationship to SOLID Principles
+Cohesion directly aligns with the Single Responsibility Principle (SRP)—the "S" in SOLID—which states that a class should have one, and only one, reason to change. High cohesion is the primary mechanism for achieving SRP.
+
+---
+
+
 
