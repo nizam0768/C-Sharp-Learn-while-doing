@@ -71,6 +71,7 @@
 70. [What are anonymous types?](#What-are-anonymous-types)
 71. [What is cohesion?](#What-is-cohesion)
 72. [What is coupling?](#What-is-coupling?)
+73. [What is the Strategy design pattern?](#What-is-the-Strategy-design-pattern)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2242,3 +2243,40 @@ Cohesion directly aligns with the Single Responsibility Principle (SRP)—the "S
 
 ---
 
+### What is the Strategy design pattern?
+The Strategy pattern is a behavioral design pattern that defines a family of algorithms, encapsulates each one into a separate class, and makes them interchangeable at runtime.
+
+It lets the algorithm vary independently from the clients that use it, adhering directly to the Open/Closed Principle (classes should be open for extension, but closed for modification).
+
+The Core Problem It Solves
+Without the Strategy pattern, applications often rely on massive switch statements or conditional if/else chains to choose different variations of a business rule.
+
+<img width="496" height="143" alt="image" src="https://github.com/user-attachments/assets/93c45351-12de-4536-a8bf-043cdc334095" />
+
+How Strategy Works (C# Example)
+The pattern replaces conditional logic with composition by introducing three components:
+
+- Strategy Interface: Defines the contract for all concrete algorithms.
+- Concrete Strategies: Separate classes implementing the distinct variations.
+- Context Class: Holds a reference to a strategy interface and delegates work to it.
+
+  <img width="419" height="389" alt="image" src="https://github.com/user-attachments/assets/2f43257b-ab73-4547-8490-8d0e9ab28be0" />
+  <img width="410" height="250" alt="image" src="https://github.com/user-attachments/assets/08cf9cf7-70ae-4364-9d23-1d803e1bae9e" />
+
+Key Benefits
+- Clean Separation of Concerns: Isolates complex algorithmic logic into dedicated classes.
+- Elimination of Conditional Logic: Replaces messy if/else or switch blocks with polymorphism.
+- Dynamic Behavior Swapping: Algorithms can be altered at runtime based on user configuration or state.
+- Seamless Dependency Injection: Fits naturally into modern .NET DI containers (IServiceCollection).
+
+Functional C# Alternative: Using Delegates
+In modern C#, you don't always need to create interfaces and class hierarchies for simple strategies. You can use standard delegates like Action or Func<T>:
+
+<img width="566" height="155" alt="image" src="https://github.com/user-attachments/assets/14218eff-b7da-4c34-87f7-ec7f0e977478" />
+
+Functional C# Alternative: Using Delegates
+In modern C#, you don't always need to create interfaces and class hierarchies for simple strategies. You can use standard delegates like Action or Func<T>:
+
+<img width="566" height="158" alt="image" src="https://github.com/user-attachments/assets/f8c666e5-514a-4262-ae5e-3ed9bccf7953" />
+
+---
