@@ -72,6 +72,7 @@
 71. [What is cohesion?](#What-is-cohesion)
 72. [What is coupling?](#What-is-coupling?)
 73. [What is the Strategy design pattern?](#What-is-the-Strategy-design-pattern)
+74. [What is the Dependency Injection design pattern?](#What-is-the-Dependency-Injection-design-pattern)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2280,3 +2281,43 @@ In modern C#, you don't always need to create interfaces and class hierarchies f
 <img width="566" height="158" alt="image" src="https://github.com/user-attachments/assets/f8c666e5-514a-4262-ae5e-3ed9bccf7953" />
 
 ---
+
+### What is the Dependency Injection design pattern?
+Dependency Injection (DI) is a software design pattern used to achieve Inversion of Control (IoC) between classes and their dependencies.
+
+Instead of a class creating its own required objects internally (using new), the dependencies are "injected" or provided from the outside—typically by an IoC container or framework.
+
+The Problem DI Solves (Hard Coupling)
+Without DI, a class is tightly coupled to specific implementations. This makes testing, modifying, or swapping components difficult.
+
+<img width="605" height="168" alt="image" src="https://github.com/user-attachments/assets/65e43725-9020-4ad1-9765-b99bca5370de" />
+
+The Solution (Dependency Injection)
+With DI, the class relies on interfaces (abstractions) and delegates object creation to an external caller or framework.
+
+<img width="470" height="302" alt="image" src="https://github.com/user-attachments/assets/87f8ce6a-cf92-4d27-852d-a624e3ff61eb" />
+
+Types of Dependency Injection
+
+| Injection Type       | Description                                           | Best Use Case                                           |
+|----------------------|-------------------------------------------------------|---------------------------------------------------------|
+| Constructor Injection| Dependencies passed into the class constructor.       | Preferred Standard (Ensures dependencies are non-null at instantiation). |
+| Property Injection   | Dependencies assigned via public get/set properties.  | Optional dependencies with fallback defaults.           |
+| Method Injection     | Dependency passed as a parameter to a specific method.| Single-method execution dependencies.                   |
+
+Built-in .NET Service Lifetimes
+Modern .NET features a built-in IoC container (IServiceCollection). When registering dependencies, you define their lifecycle:
+
+- Transient (AddTransient): A new instance is created every time it is requested. Best for lightweight, stateless components.
+- Scoped (AddScoped): A single instance is created once per HTTP request (or scope). Standard for database contexts (DbContext).
+- Singleton (AddSingleton): A single instance is created once for the lifetime of the application and shared everywhere. Best for thread-safe caches or configuration settings.
+
+Key Benefits
+- Testability: Allows mocking or stubbing dependencies in unit tests without touching actual databases or external APIs.
+- Low Coupling & High Cohesion: Classes focus entirely on their own business logic rather than how to instantiate infrastructure dependencies.
+- Flexibility: Swapping an implementation (e.g., switching from SqlDatabase to MongoDatabase) requires changing a single registration line in your startup config.
+
+---
+
+
+
