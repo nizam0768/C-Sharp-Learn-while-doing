@@ -73,6 +73,7 @@
 72. [What is coupling?](#What-is-coupling?)
 73. [What is the Strategy design pattern?](#What-is-the-Strategy-design-pattern)
 74. [What is the Dependency Injection design pattern?](#What-is-the-Dependency-Injection-design-pattern)
+75. [What is the Decorator design pattern?](#What-is-the-Decorator-design-pattern)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2316,6 +2317,41 @@ Key Benefits
 - Testability: Allows mocking or stubbing dependencies in unit tests without touching actual databases or external APIs.
 - Low Coupling & High Cohesion: Classes focus entirely on their own business logic rather than how to instantiate infrastructure dependencies.
 - Flexibility: Swapping an implementation (e.g., switching from SqlDatabase to MongoDatabase) requires changing a single registration line in your startup config.
+
+---
+
+### What is the Decorator design pattern?
+The Decorator pattern is a structural design pattern that allows you to dynamically attach new behaviors or responsibilities to an object at runtime without altering its existing code or breaking inheritance hierarchies.
+
+It works by wrapping the target object inside a special "decorator" class that implements the same interface, allowing you to chain multiple behaviors together layer-by-layer like an onion.
+
+The Problem It Solves
+Suppose you have a message sender and want to add optional features like Encryption and Compression.
+
+Using standard class inheritance creates an exponential class explosion (EncryptedSender, CompressedSender, EncryptedAndCompressedSender, etc.). Inherited behaviors are also locked in at compile time—you cannot toggle encryption on or off dynamically for a single object.
+
+How Decorator Works (C# Example)
+
+<img width="322" height="410" alt="image" src="https://github.com/user-attachments/assets/579334e2-bcac-4f49-a9ae-c088ed29acfa" />
+
+Dynamic Wrapping in Action
+Because each decorator implements INotifier and accepts an INotifier in its constructor, you can compose behaviors in any order:
+
+<img width="370" height="168" alt="image" src="https://github.com/user-attachments/assets/8c03d8ab-bced-4688-8ada-8507ee1e01a5" />
+
+Real-World .NET Examples
+The Decorator pattern is used extensively across the .NET runtime:
+
+- Streams (System.IO): FileStream or MemoryStream wrapped in GZipStream (compression) or CryptoStream (encryption) or BufferedStream (performance).
+- ASP.NET Core Middleware: Request pipelines wrap handlers to add cross-cutting concerns like logging, authentication, and caching sequentially.
+
+Decorator vs. Strategy vs. Proxy
+
+| Pattern    | Intent                                                                 | 
+|------------|-------------------------------------------------------------------------|
+| Decorator  | Dynamically adds responsibilities by wrapping the original object from the outside. |
+| Strategy   | Swaps out an internal algorithm entirely from within the context class. |
+| Proxy      | Wraps an object to control access (lazy loading, security) rather than adding functional features. |
 
 ---
 
