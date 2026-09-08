@@ -74,6 +74,7 @@
 73. [What is the Strategy design pattern?](#What-is-the-Strategy-design-pattern)
 74. [What is the Dependency Injection design pattern?](#What-is-the-Dependency-Injection-design-pattern)
 75. [What is the Decorator design pattern?](#What-is-the-Decorator-design-pattern)
+76. [What is the Observer design pattern?](#What-is-the-Observer-design-pattern)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2352,6 +2353,41 @@ Decorator vs. Strategy vs. Proxy
 | Decorator  | Dynamically adds responsibilities by wrapping the original object from the outside. |
 | Strategy   | Swaps out an internal algorithm entirely from within the context class. |
 | Proxy      | Wraps an object to control access (lazy loading, security) rather than adding functional features. |
+
+---
+
+### What is the Observer design pattern?
+The Observer pattern is a behavioral design pattern that defines a one-to-many dependency between objects. When the state of one object (the Subject or Publisher) changes, all of its registered dependents (the Observers or Subscribers) are notified and updated automatically.
+
+The Problem It Solves
+
+Without the Observer pattern, a component that needs to react to state changes in another component must constantly poll for updates ($O(n)$ polling loops), wasting CPU cycles and coupling components tightly.
+
+<img width="562" height="30" alt="image" src="https://github.com/user-attachments/assets/16f5ab79-10b9-4964-b034-65ce28c76fb2" />
+
+Modern C# Implementation: Built-in event Keyword
+While classical design patterns implement explicit ISubject and IObserver interfaces, C# provides native support for the Observer pattern using Delegates and Events.
+
+<img width="332" height="395" alt="image" src="https://github.com/user-attachments/assets/040e2450-3064-43f5-ac37-3393384699af" />
+
+Classic Interface-Based Approach (IObservable<T> / IObserver<T>)
+
+For reactive, event-driven streaming frameworks (like Reactive Extensions / Rx.NET), .NET provides built-in generic interfaces:
+
+- IObservable<T> (Publisher): Exposes a .Subscribe(IObserver<T> observer) method.
+- IObserver<T> (Subscriber): Implements OnNext(T value), OnError(Exception ex), and OnCompleted().
+
+Critical Trap: The Memory Leak (Lapsed Listener Problem)
+Subscribing to an event creates a strong reference from the Publisher to the Subscriber. If the publisher outlives the subscriber, the Garbage Collector (GC) cannot clean up the subscriber object, causing memory leaks.
+
+<img width="344" height="48" alt="image" src="https://github.com/user-attachments/assets/026dc786-3f0e-4f01-896c-174b5ce1b5e2" />
+
+Observer vs. Publish-Subscribe (Pub/Sub)
+
+| Feature    | Observer Pattern                                              | Publish-Subscribe (Pub/Sub)                                                                 |
+|------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| Coupling   | Direct: Subject knows its list of Observers.                  | Decoupled: Publisher and Subscriber don't know each other; communicate via a Message Broker (e.g., RabbitMQ, MediatR). |
+| Execution  | Typically In-Process & Synchronous.                           | Often Cross-Process & Asynchronous.                                                         |
 
 ---
 
