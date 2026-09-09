@@ -75,6 +75,7 @@
 74. [What is the Dependency Injection design pattern?](#What-is-the-Dependency-Injection-design-pattern)
 75. [What is the Decorator design pattern?](#What-is-the-Decorator-design-pattern)
 76. [What is the Observer design pattern?](#What-is-the-Observer-design-pattern)
+77. [What are events?](#What-are-events)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2391,5 +2392,39 @@ Observer vs. Publish-Subscribe (Pub/Sub)
 
 ---
 
+### What are events?
+In C#, an event is a language feature built on top of delegates that enables a class (a publisher) to send notifications to other classes (subscribers) when something noteworthy happens.
+
+Events implement the Observer design pattern directly at the language level, providing a encapsulated mechanism for event-driven programming.
+
+The Event Keyword as a Encapsulation Wrapper
+Think of an event as a special protection modifier for delegates—much like how a C# property controls access to a backing field:
+
+- Public Delegate: Any external code can invoke delegate(), overwrite delegate = null, or replace all subscribers.
+- Public Event: External code can only add (+=) or remove (-=) subscriptions. Only the declaring class can raise (Invoke) the event or clear its execution chain.
+
+Standard C# Event Pattern
+The standard C# idiom uses the generic EventHandler<TEventArgs> delegate:
+
+<img width="283" height="171" alt="image" src="https://github.com/user-attachments/assets/bbb8f6ca-db69-45d2-a02f-297342dd10a3" />
+
+Consuming the Event
+
+<img width="311" height="157" alt="image" src="https://github.com/user-attachments/assets/b831d924-6674-454f-bcc8-0292ea101943" />
+
+Events vs. Delegates
+
+| Feature     | Delegate                                                     | Event                                                                 |
+|-------------|--------------------------------------------------------------|----------------------------------------------------------------------|
+| Role        | Type definition representing a method signature / pointer.   | Encapsulated member wrapping a delegate.                             |
+| Invocation  | Can be invoked by any class with access to the delegate.     | Can only be invoked from inside the declaring class.                  |
+| Assignment  | Supports direct assignment (=) which can overwrite previous handlers. | Supports only subscription (+=) and unsubscription (-=).             |
+
+Key Memory Management Rule
+Events create strong references from the Publisher to the Subscriber.
+
+If a long-lived publisher object holds an event subscription to a short-lived subscriber, the Garbage Collector (GC) cannot reclaim the subscriber object from memory. Always detach event handlers (-=) when a subscriber object is disposed or no longer needed.
+
+---
 
 
