@@ -76,6 +76,7 @@
 75. [What is the Decorator design pattern?](#What-is-the-Decorator-design-pattern)
 76. [What is the Observer design pattern?](#What-is-the-Observer-design-pattern)
 77. [What are events?](#What-are-events)
+78. [What is Inversion of Control?](#What-is-Inversion-of-Control)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2424,6 +2425,52 @@ Key Memory Management Rule
 Events create strong references from the Publisher to the Subscriber.
 
 If a long-lived publisher object holds an event subscription to a short-lived subscriber, the Garbage Collector (GC) cannot reclaim the subscriber object from memory. Always detach event handlers (-=) when a subscriber object is disposed or no longer needed.
+
+---
+
+### What is Inversion of Control?
+Inversion of Control (IoC) is a core software design principle where the custom code you write forfeits control of its execution flow, object creation, or dependency lifetime to an external framework or container.
+
+Instead of your code driving the execution flow or instantiating dependencies directly, an external entity steps in and calls your code when appropriate—a concept often summarized as the "Don't call us, we'll call you" principle (The Hollywood Principle).
+
+Inverted Control vs. Traditional Control
+
+<img width="323" height="24" alt="image" src="https://github.com/user-attachments/assets/e4935199-2d9c-4228-900d-5016a4ec8550" />
+
+- Traditional Control: Your Main() method or class explicitly instantiates objects (var db = new SqlDatabase()), manages their lifecycles, and dictates when execution jumps from one method to another.
+
+- Inverted Control: You configure abstract components or handlers, and an overarching framework (like ASP.NET Core) manages instantiations, manages lifecycles, and executes your handlers automatically when specific events occur.
+
+Concrete Examples of IoC in Action
+Inversion of Control is an umbrella principle realized through several distinct design techniques:
+
+1. Framework Callbacks & Web Handlers
+In a simple console program, your code calls Console.ReadLine() to pause execution and wait for input.
+
+In an ASP.NET Core Web API, IoC is at work: you write a Controller method, but you never call new Controller().Get(). The ASP.NET Core runtime handles HTTP parsing, route matching, instantiates your controller, and invokes your method automatically when a matching request arrives.
+
+2. Dependency Injection (DI)
+Dependency Injection is the most common design pattern used to achieve IoC for object dependencies:
+
+<img width="359" height="138" alt="image" src="https://github.com/user-attachments/assets/b0645281-3a34-4917-9e66-068125aead2b" />
+
+3. Template Method & Strategy Patterns
+Design patterns use polymorphism to invert control over algorithms. The base framework executes a high-level algorithm structure, but delegates specific step behaviors to your overridden concrete methods.
+
+Key Relationships
+
+| Concept                  | Relationship                                                                 |
+|---------------------------|------------------------------------------------------------------------------|
+| Inversion of Control (IoC)| The high-level design principle ("Don't call us, we'll call you").           |
+| Dependency Injection (DI) | A specific design pattern used to implement IoC for dependencies.            |
+| IoC / DI Container        | A framework tool (like .NET `IServiceProvider` or Autofac) that automates DI.|
+
+Primary Benefits
+Decoupling: Modules depend on abstractions rather than concrete implementations, making components interchangeable.
+
+Modular Testability: Classes can be unit tested in isolation by swapping production dependencies with mock implementations.
+
+Standardized Infrastructure: Boilerplate concerns (like managing database connections or thread pooling) are delegated to proven frameworks.
 
 ---
 
