@@ -77,6 +77,7 @@
 76. [What is the Observer design pattern?](#What-is-the-Observer-design-pattern)
 77. [What are events?](#What-are-events)
 78. [What is Inversion of Control?](#What-is-Inversion-of-Control)
+79. [What is the “composition over inheritance” principle?](What-is-the-composition-over-inheritance-principle?)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2474,4 +2475,33 @@ Standardized Infrastructure: Boilerplate concerns (like managing database connec
 
 ---
 
+### What is the “composition over inheritance” principle?
+The Composition over Inheritance principle (also known as the Composite Reuse Principle) is a fundamental software design guideline that states classes should achieve polymorphic behavior and code reuse by containing other objects that implement desired functionality (composition) rather than inheriting from a base class (inheritance).
 
+In short: favor a "has-a" relationship over an "is-a" relationship.
+
+The Core Problem with Inheritance
+Inheritance creates tight coupling between a child class and its parent class, often leading to fragile codebases:
+
+- The Fragile Base Class Problem: Changes made to a base class can silently break child classes throughout the system.
+- Class Explosion & Rigidity: In C# (which supports single class inheritance), forcing shared behavior through class hierarchies leads to deep, unnatural inheritance trees.
+- Static Behavior: Inheritance is set at compile-time. You cannot change an object's inherited base class behavior dynamically at runtime.
+
+The Inheritance Trap Example
+Imagine designing an RPG game with characters that move and attack:
+
+<img width="390" height="71" alt="image" src="https://github.com/user-attachments/assets/292ace33-1465-49ee-bb4a-b20ae4cb5764" />
+
+The Composition Solution
+With composition, complex functionality is broken down into small, focused interfaces and classes. The main object holds references to these behaviors and delegates work to them.
+
+<img width="355" height="410" alt="image" src="https://github.com/user-attachments/assets/f0da5ca6-9d45-40af-9ac1-5b726936efa9" />
+
+When Should You Still Use Inheritance?
+Composition does not mean inheritance should never be used. Inheritance remains ideal when:
+
+- An unmistakable, stable "Is-A" relationship exists that will never change over time (e.g., Dog is a Mammal).
+- You are building a framework base class designed specifically for extension (such as CustomControl : Control in UI frameworks).
+- You want to share core implementation code across a very shallow, tightly controlled 1-level hierarchy.
+
+---
