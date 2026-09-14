@@ -78,6 +78,7 @@
 77. [What are events?](#What-are-events)
 78. [What is Inversion of Control?](#What-is-Inversion-of-Control)
 79. [What is the “composition over inheritance” principle?](What-is-the-composition-over-inheritance-principle?)
+80. [What are mocks?](What-are-mocks)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2505,3 +2506,34 @@ Composition does not mean inheritance should never be used. Inheritance remains 
 - You want to share core implementation code across a very shallow, tightly controlled 1-level hierarchy.
 
 ---
+
+### What are mocks?
+In automated unit testing, mocks are simulated objects that mimic the behavior of real dependencies (such as databases, web APIs, file systems, or external services) in a controlled way.
+
+Mocks allow you to isolate the System Under Test (SUT) so you can test its logic without executing slow, unpredictable, or out-of-process external infrastructure.
+
+<img width="376" height="265" alt="image" src="https://github.com/user-attachments/assets/777a7ea9-6f03-40d0-bdb1-48f3dce4f8e3" />
+
+Key Capabilities of Mocks
+- Stubbing (Pre-programmed Behavior): Instructing the mock to return specific canned values when a particular method is called.
+- Behavior Verification: Asserting that the SUT actually invoked specific methods on the mock with expected arguments and frequency (e.g., verifying SendEmail() was called exactly once with a specific address).
+
+C# Example: Using Moq / NSubstitute
+Suppose OrderService depends on an IPaymentGateway interface. Using a mocking framework like Moq, you can test OrderService without executing a real payment processing network:
+
+<img width="401" height="228" alt="image" src="https://github.com/user-attachments/assets/ae0bbc56-7e66-4bc6-a75f-3c611a73f3a4" />
+
+Test Doubles: Mocks vs. Stubs vs. Fakes
+Developers often use "mock" as a umbrella term for any test double, but software architecture distinguishes between them:
+
+| Test Double | Definition & Behavior                                                                 |
+|-------------|----------------------------------------------------------------------------------------|
+| Dummy       | An object passed in purely to satisfy method signature parameters (never used or called). |
+| Stub        | Provides simple pre-programmed hardcoded responses to method calls during the test.    |
+| Spy         | A stub that silently records information about how it was called (e.g., counting invocations). |
+| Mock        | An object with pre-configured expectations that verifies interactions and method calls. |
+| Fake        | A working, lightweight implementation of a dependency (e.g., an InMemoryDatabase).     |
+
+---
+
+
