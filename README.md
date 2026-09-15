@@ -77,8 +77,9 @@
 76. [What is the Observer design pattern?](#What-is-the-Observer-design-pattern)
 77. [What are events?](#What-are-events)
 78. [What is Inversion of Control?](#What-is-Inversion-of-Control)
-79. [What is the “composition over inheritance” principle?](What-is-the-composition-over-inheritance-principle?)
-80. [What are mocks?](What-are-mocks)
+79. [What is the “composition over inheritance” principle?](#What-is-the-composition-over-inheritance-principle?)
+80. [What are mocks?](#What-are-mocks)
+81. [What are NuGet packages?](#What-are-NuGet-packages)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2536,4 +2537,18 @@ Developers often use "mock" as a umbrella term for any test double, but software
 
 ---
 
+### What are NuGet packages?
+NuGet packages are the standard unit of code sharing and distribution in the .NET ecosystem.
+
+A NuGet package is a single ZIP-compressed file with a .nupkg extension that contains compiled code (DLLs), associated files, and a manifest file (.nuspec) describing metadata like versioning, author details, and dependencies.
+
+What Problem Do They Solve?
+Before package managers, incorporating third-party libraries required manually downloading DLL files, adding them to your project folder, referencing them manually, and tracking down every sub-dependency required by that library.
+
+NuGet automates this entire lifecycle:
+- Automated Dependency Resolution: Installing a package automatically downloads and references all secondary dependencies that package requires.
+- Version Management: Easily upgrade, downgrade, or lock specific library versions across team projects.
+- Centralized Registry: The official repository, NuGet.org, hosts over hundreds of thousands of free, open-source, and community-maintained packages (such as Newtonsoft.Json, Serilog, or Entity Framework Core).
+
+---
 
