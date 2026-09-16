@@ -80,6 +80,7 @@
 79. [What is the “composition over inheritance” principle?](#What-is-the-composition-over-inheritance-principle?)
 80. [What are mocks?](#What-are-mocks)
 81. [What are NuGet packages?](#What-are-NuGet-packages)
+82. [What is the difference between Debug and Release builds?](#What-is-the-difference-between-Debug-and-Release-builds)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2549,6 +2550,37 @@ NuGet automates this entire lifecycle:
 - Automated Dependency Resolution: Installing a package automatically downloads and references all secondary dependencies that package requires.
 - Version Management: Easily upgrade, downgrade, or lock specific library versions across team projects.
 - Centralized Registry: The official repository, NuGet.org, hosts over hundreds of thousands of free, open-source, and community-maintained packages (such as Newtonsoft.Json, Serilog, or Entity Framework Core).
+
+---
+
+### What is the difference between Debug and Release builds?
+The fundamental difference between Debug and Release builds in .NET comes down to developer diagnostics versus runtime performance.
+
+When you compile in Debug mode, the C# compiler (Roslyn) and Just-In-Time (JIT) compiler prioritize making the code readable, step-through debuggable, and transparent. In Release mode, they prioritize maximizing execution speed and minimizing memory usage.
+
+Key Technical Differences
+
+| Feature              | Debug Build                                                                 | Release Build                                                                 |
+|-----------------------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| Compiler Optimization | Disabled (`/optimize-`)                                                     | Enabled (`/optimize+`)                                                        |
+| PDB (Symbol) Files    | Full debug symbols generated for line-by-line debugging.                     | Stripped or light symbols (maps stack traces without bloating code).           |
+| Code Execution Speed  | Slower (extra instructions retained for breakpoints).                        | Significantly faster (JIT eliminates unused variables and reorders instructions). |
+| Method Inlining       | Disabled (every method call maintains a full stack frame).                   | Enabled (small methods are expanded directly at call sites to remove call overhead). |
+| Debug Class & Logs    | Statements like `Debug.WriteLine()` execute normally.                        | `[Conditional("DEBUG")]` code is stripped out completely at compile time.      |
+| Memory Footprint      | Larger binary size and unoptimized local variable lifespans.                 | Smaller binary size and optimized variable cleanup for faster Garbage Collection. |
+
+Inlining Methods: Small methods are replaced directly with their body code, eliminating the CPU overhead of creating a new stack frame:
+
+<img width="191" height="64" alt="image" src="https://github.com/user-attachments/assets/06478bfb-4ea3-453a-95af-dd9998c1ec1c" />
+
+- Dead Code & Variable Elimination: Unused variables or code paths that can never be reached are completely removed from the compiled IL.
+- Loop Unrolling & Vectorization: Loops are rewritten to process multiple items per instruction cycle using SIMD (Single Instruction, Multiple Data) CPU registers.
+- Instruction Reordering: Instructions are reordered to maximize CPU pipeline efficiency, provided execution logic remains identical.
+
+The DEBUG Preprocessor Symbol
+In C#, you can write code that compiles only when building under the Debug configuration using preprocessor directives:
+
+<img width="395" height="86" alt="image" src="https://github.com/user-attachments/assets/f2baac50-a1f3-46b4-a53a-83ae71fb5d82" />
 
 ---
 
