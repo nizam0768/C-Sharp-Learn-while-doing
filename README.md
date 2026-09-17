@@ -81,6 +81,7 @@
 80. [What are mocks?](#What-are-mocks)
 81. [What are NuGet packages?](#What-are-NuGet-packages)
 82. [What is the difference between Debug and Release builds?](#What-is-the-difference-between-Debug-and-Release-builds)
+83. [What are preprocessor directives?](#What-are-preprocessor-directives)
 ### What is the Common Intermediate Language CIL?
 
 ## Common Intermediate Language (CIL)
@@ -2583,4 +2584,12 @@ In C#, you can write code that compiles only when building under the Debug confi
 <img width="395" height="86" alt="image" src="https://github.com/user-attachments/assets/f2baac50-a1f3-46b4-a53a-83ae71fb5d82" />
 
 ---
+
+### What are preprocessor directives?
+Preprocessor directives are special instructions written in C# source code that give commands to the compiler before the actual compilation process begins.
+
+Unlike standard C# statements, preprocessor directives do not compile into Intermediate Language (IL) instructions or become part of your executable code. Instead, they control conditional compilation, suppress warnings, organize code, and configure compiler behavior.
+
+---
+
 
