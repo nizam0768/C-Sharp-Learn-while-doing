@@ -82,6 +82,7 @@
 81. [What are NuGet packages?](#What-are-NuGet-packages)
 82. [What is the difference between Debug and Release builds?](#What-is-the-difference-between-Debug-and-Release-builds)
 83. [What are preprocessor directives?](#What-are-preprocessor-directives)
+84. [What are nullable reference types?](#What-are-nullable-reference-types)
     
 ### What is the Common Intermediate Language CIL?
 
@@ -2593,5 +2594,8 @@ Unlike standard C# statements, preprocessor directives do not compile into Inter
 
 ---
 
+### What are nullable reference types?
+Nullable reference types is a feature introduced with C# 8, that enables explicit declaration of a reference type as nullable or not. The compiler will issue a warning when it recognizes the code in which a non-nullable object has a chance of being null, or when we use nullable reference types without null check, risking the NullReferenceException. This feature doesn’t change the actual way of executing C# code; it only changes the generated warnings.
 
+---
 
